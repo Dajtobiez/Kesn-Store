@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - KD18 EIBL EP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/CTSP.css">
+    <script defer src="js/CTSP.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-white font-sans">
+    <!-- Phần đầu trang -->
+    <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+        <a href="/" class="mb-2 md:mb-0">
+            <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+        </a>
+        <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+            <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
+            </div>
+            <div class="flex items-center space-x-2 w-full md:w-auto">
+                <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
+                <div class="flex space-x-2">
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Nội dung chính - Phần trên -->
+    <div class="container mx-auto p-6 md:p-8">
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Container cho hình ảnh (phụ và chính) -->
+            <div class="sticky-container md:w-1/2">
+                <!-- Hình ảnh phụ -->
+                <div class="w-full md:w-1/3">
+                    <div class="thumbnail-scroll flex flex-col gap-4">
+                        <img src="images/KD18EP0.png" alt="KD18 EIBL EP Thumbnail 1" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP1.png" alt="KD18 EIBL EP Thumbnail 2" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP2.png" alt="KD18 EIBL EP Thumbnail 3" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP3.png" alt="KD18 EIBL EP Thumbnail 4" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP4.png" alt="KD18 EIBL EP Thumbnail 5" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP5.png" alt="KD18 EIBL EP Thumbnail 6" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP6.png" alt="KD18 EIBL EP Thumbnail 6" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP7.png" alt="KD18 EIBL EP Thumbnail 6" class="w-full h-20 object-contain">
+                        <img src="images/KD18EP8.png" alt="KD18 EIBL EP Thumbnail 6" class="w-full h-20 object-contain">
+                    </div>
+                </div>
+                <!-- Hình ảnh chính -->
+                <div class="w-full md:w-2/3 relative">
+                    <img src="images/KD18EP0.png" alt="KD18 EIBL EP" class="main-image w-full h-auto object-cover">
+                    <!-- Nút chuyển hình -->
+                    <div class="absolute bottom-4 right-4 flex space-x-2">
+                        <button id="prev-image" class="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button id="next-image" class="bg-gray-800 text-white p-2 rounded-full hover:bg-gray-600 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Thông tin sản phẩm -->
+            <div class="w-full md:w-1/2">
+                <h1 class="text-3xl font-bold mb-2">KD18 EIBL EP</h1>
+                <p class="text-gray-600 text-lg mb-3">Giày bóng rổ</p>
+                <p class="text-2xl font-bold mb-4">4,000,000VND</p>
+                <p class="font-semibold text-sm mb-2">Kích thước</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button class="size-button">36</button>
+                    <button class="size-button">37</button>
+                    <button class="size-button">38</button>
+                    <button class="size-button">39</button>
+                    <button class="size-button">40</button>
+                    <button class="size-button">41</button>
+                    <button class="size-button">42</button>
+                    <button class="size-button">43</button>
+                    <button class="size-button">44</button>
+                    <button class="size-button">45</button>
+                    <button class="size-button">46</button>
+                    <button class="size-button">47</button>
+                </div>
+                <div class="flex flex-col gap-3 mb-6">
+                    <button class="action-button add-to-bag">Thêm vào giỏ</button>
+                    <button class="action-button favourite">Yêu thích</button>
+                </div>
+                <h2 class="font-semibold text-sm mb-2">Thông tin sản phẩm:</h2>
+                <p class="text-gray-700 text-sm mb-6">
+                    Thiết kế tối đa với đế giày: Nike KD18 EIBL EP (IF2518-001) là phiên bản đặc biệt từ dòng giày bóng rổ Kevin Durant. Thiết kế tối ưu dành cho cầu thủ bóng rổ với đế giày EIBL (Elite Youth Basketball League). Vẻ ngoài trẻ trung, thiết kế hỗ trợ tối đa cho hoạt động chơi bóng rổ chuyên nghiệp.
+                </p>
+
+                <!-- Phần đánh giá -->
+                <div class="mb-6">
+                    <h2 class="font-semibold text-sm mb-2">Đánh giá sản phẩm:</h2>
+                    <div class="flex items-center mb-2">
+                        <div class="star-rating">
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-600">4.0 (25 đánh giá)</span>
+                    </div>
+
+                    <!-- Dropdown các comment -->
+                    <div id="reviews-toggle" class="flex justify-between items-center font-semibold text-sm mb-2">
+                        <span>Xem các nhận xét</span>
+                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div id="reviews-content">
+                        <div class="review-item">
+                            <div class="flex items-center mb-1">
+                                <span class="font-semibold text-sm">Nguyễn Văn A</span>
+                                <div class="star-rating ml-2">
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm">Giày rất đẹp, đế êm, chơi bóng rổ rất thoải mái. Đúng với mô tả, giao hàng nhanh!</p>
+                            <p class="text-gray-500 text-xs mt-1">Ngày 01/06/2025</p>
+                        </div>
+                        <div class="review-item">
+                            <div class="flex items-center mb-1">
+                                <span class="font-semibold text-sm">Trần Thị B</span>
+                                <div class="star-rating ml-2">
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm">Chất lượng tốt, nhưng hơi chật ở phần mũi giày. Mình nghĩ nên chọn size lớn hơn một chút.</p>
+                            <p class="text-gray-500 text-xs mt-1">Ngày 30/05/2025</p>
+                        </div>
+                        <div class="review-item">
+                            <div class="flex items-center mb-1">
+                                <span class="font-semibold text-sm">Lê Văn C</span>
+                                <div class="star-rating ml-2">
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-4 h-4 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3 .921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784 .57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm">Màu sắc đẹp, thiết kế hiện đại. Rất đáng tiền, mình sẽ mua thêm đôi nữa!</p>
+                            <p class="text-gray-500 text-xs mt-1">Ngày 28/05/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Phần Bạn có thể quan tâm -->
+        <section class="container related-products">
+    <h2 class="text-lg font-bold mb-4 mt-8">Bạn có thể quan tâm</h2>
+    <div class="items related-items relative">
+        <div class="item related-item active">
+            <img src="images/bannertest51.png" alt="Sản phẩm liên quan 1">
+        </div>
+        <div class="item related-item next">
+            <img src="images/bannertest3.png" alt="Sản phẩm liên quan 2">
+        </div>
+        <div class="item related-item">
+            <img src="images/bannertest4.png" alt="Sản phẩm liên quan 3">
+        </div>
+        <div class="item related-item">
+            <img src="images/bannertest2.png" alt="Sản phẩm liên quan 4">
+        </div>
+        <div class="item related-item prev">
+            <img src="images/bannertest6.png" alt="Sản phẩm liên quan 5">
+        </div>
+        <div class="button-container related-buttons">
+            <div class="button related-button"><i class="fas fa-angle-left"></i></div>
+            <div class="button related-button"><i class="fas fa-angle-right"></i></div>
+        </div>
+    </div>
+</section>
+<!-- Phần giày dép khác -->
+<div id="like-slider-wrapper" class="mt-8 min-h-[320px] relative">
+  <h2 class="text-lg font-bold mb-4">Bạn cũng có thể thích</h2>
+  <div class="relative">
+    <button onclick="scrollLikeSlider(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow z-10 hover:bg-gray-200">
+      &#8592;
+    </button>
+
+    <div id="like-slider" class="flex flex-nowrap overflow-x-auto scroll-smooth snap-x snap-mandatory gap-4 px-10 py-4">
+      <!-- Sản phẩm 1 -->
+      <div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div>
+      <div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div>
+      <div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div>
+      <div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div>
+      <div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div><div class="min-w-[300px] flex-shrink-0 snap-start bg-white p-4 shadow-md rounded hover:scale-105 transition">
+        <img src="images/KD18EP.png" class="w-full h-64 object-cover mb-2" alt="">
+        <h3 class="font-semibold">Giày thể thao</h3>
+        <p>3 màu</p>
+        <p class="text-lg font-bold">400,000VND</p>
+      </div>
+      
+    </div>
+
+    <button onclick="scrollLikeSlider(1)" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow z-10 hover:bg-gray-200">
+      &#8594;
+    </button>
+  </div>
+</div>
+
+
+    </div>
+<footer class="bg-gray-100 text-gray-700 mt-16">
+  <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+    <!-- Cột 1 -->
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-3">GIÚP ĐỠ</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-black">Tình trạng đơn hàng</a></li>
+        <li><a href="#" class="hover:text-black">Vận chuyển & giao hàng</a></li>
+        <li><a href="#" class="hover:text-black">Trả hàng</a></li>
+        <li><a href="#" class="hover:text-black">Chính sách bảo hành</a></li>
+      </ul>
+    </div>
+    <!-- Cột 2 -->
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-3">VỀ CHÚNG TÔI</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-black">Tin tức</a></li>
+        <li><a href="#" class="hover:text-black">Tuyển dụng</a></li>
+        <li><a href="#" class="hover:text-black">Hợp tác</a></li>
+        <li><a href="#" class="hover:text-black">Cửa hàng</a></li>
+      </ul>
+    </div>
+    <!-- Cột 3 -->
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-3">TÀI KHOẢN</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:text-black">Đăng nhập</a></li>
+        <li><a href="#" class="hover:text-black">Đăng ký</a></li>
+        <li><a href="#" class="hover:text-black">Danh sách yêu thích</a></li>
+        <li><a href="#" class="hover:text-black">Theo dõi đơn hàng</a></li>
+      </ul>
+    </div>
+    <!-- Cột 4 -->
+    <div>
+      <h3 class="font-semibold text-gray-900 mb-3">KẾT NỐI</h3>
+      <div class="flex space-x-4 text-xl">
+        <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-gray-300 text-center py-4 text-xs text-gray-500">
+    &copy; 2025 KesnStore. Design by Dajtobiez.
+  </div>
+</footer>
+
+
+    
+</body>
+</html>
