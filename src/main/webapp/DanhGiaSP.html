@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đánh Giá Sản Phẩm</title>
+  
+  <!-- Bootstrap & Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    .star-rating span {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: lightgray;
+    }
+    .star-rating .selected,
+    .star-rating .hovered {
+      color: gold;
+    }
+  </style>
+</head>
+<body class="bg-light font-sans">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+    <a href="/" class="mb-2 md:mb-0">
+      <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer" />
+    </a>
+    <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+      <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+        <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+        <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+        <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
+      </div>
+      <div class="flex items-center space-x-2 w-full md:w-auto">
+        <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black" />
+        <div class="flex space-x-2">
+          <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Nội dung đánh giá -->
+  <div class="container py-5">
+    <div class="bg-white p-4 shadow rounded">
+      <h3 class="mb-4 border-bottom pb-2">Đánh giá sản phẩm</h3>
+      
+      <div class="d-flex align-items-center mb-3">
+        <h1 class="display-5 mb-0 me-3">4.5</h1>
+        <div>
+          <div class="text-warning fs-4">★★★★☆</div>
+          <small class="text-muted">124 lượt đánh giá</small>
+        </div>
+      </div>
+
+      <!-- Biểu đồ đánh giá -->
+      <div class="mb-4">
+        <div class="d-flex align-items-center mb-1">
+          <span class="me-2">5 sao</span>
+          <div class="progress flex-fill" style="height: 8px;">
+            <div class="progress-bar bg-warning" style="width: 60%;"></div>
+          </div>
+          <span class="ms-2">60%</span>
+        </div>
+      </div>
+
+      <!-- Danh sách đánh giá -->
+      <h4 class="mt-4 mb-3 border-bottom pb-2">Nhận xét từ khách hàng</h4>
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <h6 class="card-title">Nguyễn Văn A <small class="text-muted">· 2 ngày trước</small></h6>
+          <div class="text-warning mb-2">★★★★★</div>
+          <p class="card-text">Giày rất đẹp và êm chân. Đóng gói kỹ càng.</p>
+          <img src="https://via.placeholder.com/200" class="img-fluid mb-2 rounded border" alt="Ảnh thực tế">
+          <div>
+            <button class="btn btn-outline-primary btn-sm me-2">👍 Hữu ích</button>
+            <button class="btn btn-outline-danger btn-sm">⚠️ Báo cáo</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form đánh giá -->
+      <h4 class="mt-5 mb-3 border-bottom pb-2">Gửi đánh giá của bạn</h4>
+      <form id="reviewForm" class="p-3 bg-light border rounded shadow-sm">
+        <div class="mb-3">
+          <label class="form-label">Số sao</label>
+          <div class="star-rating" id="starRating">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+          <input type="hidden" id="selectedRating" name="rating" value="0">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Nội dung đánh giá</label>
+          <textarea class="form-control" name="comment" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Hình ảnh thực tế</label>
+          <input type="file" class="form-control" multiple>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script xử lý -->
+  <script src="js/review.js"></script>
+</body>
+</html>
