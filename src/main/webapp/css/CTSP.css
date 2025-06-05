@@ -1,0 +1,223 @@
+/* CTSP.css - Tối ưu khoảng cách phần slider để thêm phần "Bạn cũng có thể thích" */
+
+/* Nút chuyển hình */
+.relative {
+    position: relative;
+}
+
+/* Thanh cuộn cho hình ảnh phụ */
+.thumbnail-scroll {
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.thumbnail-scroll::-webkit-scrollbar {
+    display: none;
+}
+.thumbnail-scroll img {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    opacity: 0.8;
+    width: 100%;
+    height: 50px;
+    object-fit: contain;
+}
+.thumbnail-scroll img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Hiệu ứng hình ảnh chính */
+.main-image {
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    aspect-ratio: 4 / 5;
+    object-fit: contain;
+    background-color: #f9f9f9;
+}
+.main-image:hover {
+    transform: scale(1.02);
+}
+
+/* Container cho hình ảnh để sticky */
+.sticky-container {
+    position: sticky;
+    top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Container chính */
+.container {
+    min-height: 100vh;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+/* Nút kích cỡ */
+.size-button {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.size-button:hover {
+    border-color: #000;
+    background-color: #f3f4f6;
+}
+.size-button.selected {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+}
+
+/* Nút hành động */
+.action-button {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.action-button.add-to-bag {
+    background-color: #000;
+    color: #fff;
+}
+.action-button.add-to-bag:hover {
+    background-color: #333;
+}
+.action-button.favourite {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+}
+.action-button.favourite:hover {
+    background-color: #f3f4f6;
+}
+
+/* Đánh giá sao */
+.star-rating {
+    display: flex;
+    gap: 2px;
+}
+
+/* Dropdown đánh giá */
+#reviews-toggle {
+    cursor: pointer;
+}
+#reviews-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+#reviews-content.open {
+    max-height: 500px;
+}
+.review-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 0;
+}
+
+/* Phần Bạn có thể quan tâm */
+.related-products {
+    padding: 0 0 1rem 0; /* bỏ bớt khoảng dưới */
+    margin-bottom: 0;
+}
+.related-items {
+    position: relative;
+    width: 100%;
+    height: 500px; /* giảm chiều cao để bớt dư thừa */
+    overflow: hidden;
+}
+.related-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 450px;#like-slider {
+    display: flex;
+    flex-wrap: nowrap; /* Ngăn item xuống hàng */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+}
+    
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 0;
+    opacity: 0;
+}
+.related-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f9f9f9;
+}
+.related-item.active {
+    opacity: 1;
+    z-index: 99;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0px 0px 105px -35px rgba(0, 0, 0, 0.75);
+}
+.related-item.prev {
+    z-index: 2;
+    opacity: 0.25;
+    transform: translate(-125%, -50%);
+}
+.related-item.next {
+    z-index: 2;
+    opacity: 0.25;
+    transform: translate(25%, -50%);
+}
+.related-item.prev2 {
+    z-index: 1;
+    opacity: 0.1;
+    transform: translate(-200%, -50%) scale(0.85) rotate(-2deg);
+    border-radius: 50px;
+}
+.related-item.next2 {
+    z-index: 1;
+    opacity: 0.1;
+    transform: translate(100%, -50%) scale(0.85) rotate(2deg);
+    border-radius: 50px;
+}
+
+/* Nút điều hướng slider */
+.related-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    z-index: 100;
+}
+.related-button {
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.75;
+    transition: all 300ms ease-in-out;
+}
+.related-button:hover {
+    opacity: 1;
+}
+.related-button:nth-child(1) {
+    float: left;
+}
+.related-button:nth-child(2) {
+    float: right;
+}
+
+footer a {
+    transition: color 0.3s ease;
+}
+
