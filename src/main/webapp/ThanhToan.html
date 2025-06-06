@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thanh Toán - KesnStore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+  <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+    <a href="/" class="mb-2 md:mb-0">
+      <img src="images/logo.png" alt="KesnStore" class="h-10 md:h-12">
+    </a>
+    <nav class="flex items-center gap-4">
+      <a href="#" class="text-gray-600 hover:text-black">Sản phẩm</a>
+      <a href="#" class="text-gray-600 hover:text-black">Giới thiệu</a>
+      <a href="#" class="text-gray-600 hover:text-black">Liên hệ</a>
+    </nav>
+  </header>
+
+  <main class="max-w-6xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Thông tin giao hàng</h2>
+      <form class="space-y-4">
+        <input type="text" id="fullName" placeholder="Họ và tên" class="w-full border rounded px-4 py-2">
+        <input type="tel" id="phone" placeholder="Số điện thoại" class="w-full border rounded px-4 py-2">
+        <input type="email" id="email" placeholder="Email (nếu có)" class="w-full border rounded px-4 py-2">
+        <select id="province" class="w-full border rounded px-4 py-2 mt-2"></select>
+        <select id="district" class="w-full border rounded px-4 py-2 mt-2" disabled></select>
+        <select id="ward" class="w-full border rounded px-4 py-2 mt-2" disabled></select>
+        <div class="relative">
+          <input type="text" id="autocomplete-input" placeholder="Nhập địa chỉ (số nhà, tên đường, phường/xã...)" class="w-full border rounded px-4 py-2 mt-2">
+          <div id="autocomplete" class="hidden"></div>
+        </div>
+        <textarea id="note" placeholder="Ghi chú (tùy chọn)" class="w-full border rounded px-4 py-2" rows="3"></textarea>
+        <h2 class="text-xl font-semibold mt-6 mb-2">Phương thức thanh toán</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+  <label class="border rounded-lg p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-md transition group">
+    <input type="radio" name="payment" value="cod" class="hidden peer" checked>
+    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-gray-200">
+      💵
+    </div>
+    <span class="text-sm font-semibold peer-checked:text-green-600">Thanh toán khi nhận hàng</span>
+  </label>
+
+  <label class="border rounded-lg p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-md transition group">
+    <input type="radio" name="payment" value="bank" class="hidden peer">
+    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-gray-200">
+      🏦
+    </div>
+    <span class="text-sm font-semibold peer-checked:text-green-600">Chuyển khoản ngân hàng</span>
+  </label>
+
+  <label class="border rounded-lg p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-md transition group">
+    <input type="radio" name="payment" value="wallet" class="hidden peer">
+    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-gray-200">
+      📱
+    </div>
+    <span class="text-sm font-semibold peer-checked:text-green-600">Ví điện tử (Momo, ZaloPay)</span>
+  </label>
+</div>
+
+      </form>
+    </section>
+    <section class="bg-gray-50 p-6 rounded-lg border flex flex-col">
+      <h2 class="text-2xl font-semibold mb-4">Tóm tắt đơn hàng</h2>
+      <div class="text-right mb-6">
+        <div class="flex justify-between text-sm text-gray-600">
+          <span>Tạm tính</span><span id="subtotal">0₫</span>
+        </div>
+        <div class="flex justify-between text-sm text-gray-600">
+          <span>Phí vận chuyển</span><span>Miễn phí</span>
+        </div>
+        <div class="flex justify-between text-sm text-green-600 font-semibold hidden" id="discount-row">
+          <span>Giá sau giảm</span>
+          <span id="discounted-total">0₫</span>
+        </div>
+        <div class="flex justify-between font-bold text-lg mt-2">
+          <span>Tổng cộng</span>
+          <span id="total">0₫</span>
+        </div>
+      </div>
+      <div class="space-y-4 overflow-y-auto max-h-64 mb-4" id="product-list"></div>
+      <div class="flex gap-2 mt-4">
+        <input type="text" placeholder="Mã giảm giá" id="voucher-code" class="flex-1 border rounded px-3 py-2">
+        <button onclick="applyVoucher()" class="bg-gray-800 text-white px-4 rounded hover:bg-gray-700">Áp dụng</button>
+      </div>
+      <button onclick="placeOrder()" class="mt-6 w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition">
+        Đặt hàng
+      </button>
+    </section>
+  </main>
+
+  <footer class="mt-10 text-center text-sm text-gray-500 pb-6">
+    © 2025 KesnStore. Design by Dajtobiez.
+  </footer>
+
+   <script>
+    const products = [
+      { name: "JA 2 EP", price: 4100000, qty: 2, size: "44.5", color: "Đỏ", image: "images/sanpham1.png" },
+      { name: "KD18 EP", price: 3600000, qty: 1, size: "43", color: "Đen", image: "images/sanpham2.png" },
+    ];
+
+    let streetAddress = "";
+
+    function initAutocomplete() {
+      const input = document.getElementById("autocomplete-input");
+      const autocomplete = new google.maps.places.Autocomplete(input, {
+        componentRestrictions: { country: "vn" },
+        fields: ["address_components", "formatted_address"],
+        types: ["geocode"],
+      });
+
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.address_components) {
+          alert("Vui lòng chọn địa chỉ hợp lệ.");
+          return;
+        }
+
+        let street = "", ward = "", district = "", province = "";
+        place.address_components.forEach(component => {
+          const types = component.types;
+          if (types.includes("route") || types.includes("street_number")) street += component.long_name + " ";
+          else if (types.includes("sublocality") || types.includes("sublocality_level_1")) ward = component.long_name;
+          else if (types.includes("locality") || types.includes("administrative_area_level_2")) district = component.long_name;
+          else if (types.includes("administrative_area_level_1")) province = component.long_name;
+        });
+
+        streetAddress = street.trim();
+        input.value = streetAddress || place.formatted_address;
+        updateDropdowns(province, district, ward);
+      });
+    }
+
+    function renderProducts() {
+      const container = document.getElementById("product-list");
+      let subtotal = 0;
+      container.innerHTML = "";
+      products.forEach(p => {
+        const item = document.createElement("div");
+        item.className = "flex gap-4 items-center";
+        item.innerHTML = `
+          <img src="${p.image}" class="w-16 h-16 rounded object-cover">
+          <div class="flex-1">
+            <p class="font-semibold">${p.name}</p>
+            <p class="text-sm text-gray-500">Size: ${p.size} | Màu: ${p.color}</p>
+            <p class="text-sm text-gray-500">Số lượng: ${p.qty}</p>
+          </div>
+          <p class="font-bold text-right">${(p.price * p.qty).toLocaleString()}₫</p>
+        `;
+        container.appendChild(item);
+        subtotal += p.price * p.qty;
+      });
+      document.getElementById("subtotal").innerText = subtotal.toLocaleString() + "₫";
+      document.getElementById("total").innerText = subtotal.toLocaleString() + "₫";
+    }
+
+    function applyVoucher() {
+      const code = document.getElementById("voucher-code").value.trim();
+      const discount = code === "GIAM10" ? 0.1 : 0;
+      const subtotal = products.reduce((sum, p) => sum + p.price * p.qty, 0);
+      if (discount > 0) {
+        const discountedTotal = subtotal * (1 - discount);
+        document.getElementById("subtotal").innerText = subtotal.toLocaleString() + "₫";
+        document.getElementById("subtotal").classList.add("line-through", "text-red-500");
+        document.getElementById("discounted-total").innerText = discountedTotal.toLocaleString() + "₫";
+        document.getElementById("discount-row").classList.remove("hidden");
+        document.getElementById("total").innerText = discountedTotal.toLocaleString() + "₫";
+        alert("Áp dụng mã thành công!");
+      } else {
+        alert("Mã không hợp lệ.");
+      }
+    }
+
+    function placeOrder() {
+      const fullName = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const province = document.getElementById("province").value;
+      const district = document.getElementById("district").value;
+      const ward = document.getElementById("ward").value;
+      const note = document.getElementById("note").value.trim();
+
+      if (!fullName) return alert("Vui lòng nhập họ và tên.");
+      if (!phone || !/^\d{10}$/.test(phone)) return alert("Vui lòng nhập số điện thoại hợp lệ (10 chữ số).");
+      if (!streetAddress) return alert("Vui lòng chọn địa chỉ (số nhà, tên đường).");
+      if (!province || !district || !ward) return alert("Vui lòng chọn đầy đủ Tỉnh/Thành, Quận/Huyện, Phường/Xã.");
+
+      const orderData = {
+        fullName,
+        phone,
+        email,
+        address: {
+          street: streetAddress,
+          ward: document.getElementById("ward").options[document.getElementById("ward").selectedIndex]?.text || "",
+          district: document.getElementById("district").options[document.getElementById("district").selectedIndex]?.text || "",
+          province: document.getElementById("province").options[document.getElementById("province").selectedIndex]?.text || ""
+        },
+        note,
+        payment: document.querySelector("input[name='payment']:checked").value || "",
+        products
+      };
+      console.log("Đơn hàng:", JSON.stringify(orderData));
+      alert("Đơn hàng đã được đặt. Cảm ơn bạn!");
+    }
+
+    function normalizeName(name) {
+      return name?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace("thanh pho ", "").replace("tinh ", "") || "";
+    }
+
+    async function fetchProvinces() {
+      try {
+        const res = await fetch("https://provinces.open-api.vn/api/p/");
+        const provinces = await res.json();
+        const select = document.getElementById("province");
+        select.innerHTML = "<option disabled selected>-- Chọn Tỉnh/Thành --</option>";
+        provinces.forEach(p => select.innerHTML += `<option value="${p.code}">${p.name}</option>`);
+        select.disabled = false;
+      } catch (error) {
+        alert("Lỗi lấy danh sách tỉnh/thành.");
+      }
+    }
+
+    async function fetchDistricts(provinceId) {
+      try {
+        const res = await fetch(`https://provinces.open-api.vn/api/p/${provinceId}?depth=2`);
+        const data = await res.json();
+        const districts = data.districts;
+        const select = document.getElementById("district");
+        select.innerHTML = "<option disabled selected>-- Chọn Quận/Huyện --</option>";
+        districts.forEach(d => select.innerHTML += `<option value="${d.code}">${d.name}</option>`);
+        select.disabled = false;
+      } catch (error) {
+        alert("Lỗi lấy danh sách quận/huyện.");
+      }
+    }
+
+    async function fetchWards(districtId) {
+      try {
+        const res = await fetch(`https://provinces.open-api.vn/api/d/${districtId}?depth=2`);
+        const data = await res.json();
+        const wards = data.wards;
+        const select = document.getElementById("ward");
+        select.innerHTML = "<option disabled selected>-- Chọn Phường/Xã --</option>";
+        wards.forEach(w => select.innerHTML += `<option value="${w.code}">${w.name}</option>`);
+        select.disabled = false;
+      } catch (error) {
+        alert("Lỗi lấy danh sách phường/xã.");
+      }
+    }
+
+    async function updateDropdowns(provinceName, districtName, wardName) {
+      try {
+        const res = await fetch("https://provinces.open-api.vn/api/p/");
+        const provinces = await res.json();
+        const provinceSelect = document.getElementById("province");
+        provinceSelect.innerHTML = "<option disabled selected>-- Chọn Tỉnh/Thành --</option>";
+        provinces.forEach(p => {
+          const option = document.createElement("option");
+          option.value = p.code;
+          option.text = p.name;
+          if (normalizeName(p.name) === normalizeName(provinceName)) option.selected = true;
+          provinceSelect.appendChild(option);
+        });
+        provinceSelect.disabled = false;
+
+        if (provinceName) {
+          const selectedProvince = provinces.find(p => normalizeName(p.name) === normalizeName(provinceName));
+          if (selectedProvince) {
+            const res = await fetch(`https://provinces.open-api.vn/api/p/${selectedProvince.code}?depth=2`);
+            const data = await res.json();
+            const districts = data.districts;
+            const districtSelect = document.getElementById("district");
+            districtSelect.innerHTML = "<option disabled selected>-- Chọn Quận/Huyện --</option>";
+            districts.forEach(d => {
+              const option = document.createElement("option");
+              option.value = d.code;
+              option.text = d.name;
+              if (normalizeName(d.name) === normalizeName(districtName)) option.selected = true;
+              districtSelect.appendChild(option);
+            });
+            districtSelect.disabled = false;
+
+            if (districtName) {
+              const selectedDistrict = districts.find(d => normalizeName(d.name) === normalizeName(districtName));
+              if (selectedDistrict) {
+                const res = await fetch(`https://provinces.open-api.vn/api/d/${selectedDistrict.code}?depth=2`);
+                const data = await res.json();
+                const wards = data.wards;
+                const wardSelect = document.getElementById("ward");
+                wardSelect.innerHTML = "<option disabled selected>-- Chọn Phường/Xã --</option>";
+                wards.forEach(w => {
+                  const option = document.createElement("option");
+                  option.value = w.code;
+                  option.text = w.name;
+                  if (normalizeName(w.name) === normalizeName(wardName)) option.selected = true;
+                  wardSelect.appendChild(option);
+                });
+                wardSelect.disabled = false;
+              }
+            }
+          }
+        }
+      } catch (error) {
+        alert("Lỗi cập nhật địa chỉ.");
+      }
+    }
+
+    document.getElementById("province").addEventListener("change", e => {
+      fetchDistricts(e.target.value);
+      document.getElementById("ward").innerHTML = "";
+      document.getElementById("ward").disabled = true;
+    });
+
+    document.getElementById("district").addEventListener("change", e => {
+      fetchWards(e.target.value);
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      fetchProvinces();
+      renderProducts();
+    });
+  </script>
+
+  <!-- ✅ Nhúng Google Maps API bằng callback -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeY4BfFKd71LsawFoCkPZZSPogULaLzEE&libraries=places&callback=initAutocomplete"></script>
+
+</body>
+</html>
