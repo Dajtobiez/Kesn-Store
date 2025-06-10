@@ -49,11 +49,11 @@
         <div class="row justify-content-center">
             <div class="register-container">
                 <div class="text-center">
-                    <img src="/images/KesnStore.png" alt="Kesn Store Logo" class="logo">
+                    <img src="images/logo.png" alt="Kesn Store Logo" class="logo">
                     <h2 class="mb-4">ĐĂNG KÝ</h2>
                 </div>
                 <form th:action="@{/register}" method="post">
-                    <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div>
+                    <!-- <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div> -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Nhập gmail *</label>
                         <input type="email" class="form-control" id="email" name="email" value="" required>
