@@ -1,135 +1,196 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cửa hàng giày</title>
+    <title>Quản lý Sản phẩm - KesnStore</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/TKSP.css">
-    <script defer src="js/TKSP.js"></script>
+    <link rel="stylesheet" href="css/QuanLySanPham.css">
+    <script defer src="js/QuanLySanPham.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-
 </head>
-
-<body class="bg-gray-100 font-sans">
-    <!-- Phần đầu trang với điều hướng -->
+<body class="bg-white font-sans">
     <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
         <a href="/" class="mb-2 md:mb-0">
             <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
         </a>
         <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
             <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
-                <a href="#" class="text-gray-600 hover:text-blue-500 w-full md:w-auto text-center">Sản phẩm</a>
-                <a href="#" class="text-gray-600 hover:text-blue-500 w-full md:w-auto text-center">Giới thiệu</a>
-                <a href="#" class="text-gray-600 hover:text-blue-500 w-full md:w-auto text-center">Liên hệ</a>
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
             </div>
             <div class="flex items-center space-x-2 w-full md:w-auto">
-                <input type="text" placeholder="Tìm kiếm..."
-                    class="border rounded px-2 py-1 w-full md:w-auto hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
                 <div class="flex space-x-2">
-                    <svg class="w-6 h-6 text-gray-600 hover:text-blue-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-blue-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                        </path>
-                    </svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-blue-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                        </path>
-                    </svg>
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0"></path></svg>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="container mx-auto p-6 md:p-8">
+        <div class="main-container bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+            <h1 class="text-2xl font-bold mb-2">Quản lý Sản phẩm</h1>
+            <p class="text-sm text-gray-600 mb-6">Theo dõi và quản lý danh sách sản phẩm của cửa hàng.</p>
 
-    <section class="max-w-7xl mx-auto px-4 py-8">
-        <h2 class="text-2xl font-bold mb-6">Quản lý sản phẩm</h2>
-        <div class="mb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <input type="text" placeholder="Tìm sản phẩm..." class="border px-3 py-2 rounded w-full md:w-1/3">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+ Thêm sản phẩm</button>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h3 class="text-sm font-semibold text-gray-600">Tổng sản phẩm</h3>
+                    <p class="text-2xl font-bold text-blue-600">100</p>
+                    <p class="text-xs text-gray-500">Cập nhật: 06/06/2025</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h3 class="text-sm font-semibold text-gray-600">Sản phẩm sắp hết</h3>
+                    <p class="text-2xl font-bold text-blue-600">10</p>
+                    <p class="text-xs text-gray-500">Dưới 10 đơn vị</p>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <h3 class="text-sm font-semibold text-gray-600">Số danh mục</h3>
+                    <p class="text-2xl font-bold text-blue-600">5</p>
+                    <p class="text-xs text-gray-500">Loại sản phẩm</p>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6">
+                <h3 class="text-sm font-semibold mb-4">Tìm kiếm & Lọc</h3>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="text" id="search-product" placeholder="Tìm kiếm theo Mã sản phẩm hoặc Tên sản phẩm" class="border rounded px-2 py-1 text-sm flex-1">
+                    <select id="filter-danhmuc" class="border rounded px-2 py-1 text-sm">
+                        <option value="">Tất cả danh mục</option>
+                        <option value="DM001">Giày bóng rổ</option>
+                        <option value="DM002">Giày thể thao</option>
+                        <option value="DM003">Giày da</option>
+                        <option value="DM004">Phụ kiện</option>
+                    </select>
+                    <select id="filter-thuonghieu" class="border rounded px-2 py-1 text-sm">
+                        <option value="">Tất cả thương hiệu</option>
+                        <option value="TH001">Nike</option>
+                        <option value="TH002">Adidas</option>
+                        <option value="TH003">Puma</option>
+                        <option value="TH004">Converse</option>
+                    </select>
+                    <button id="add-product" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Thêm sản phẩm</button>
+                </div>
+            </div>
+
+            <div class="bg-white border border-gray-200 rounded-lg overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th class="p-3 text-sm font-semibold">STT</th>
+                            <th class="p-3 text-sm font-semibold">Mã sản phẩm</th>
+                            <th class="p-3 text-sm font-semibold">Tên sản phẩm</th>
+                            <th class="p-3 text-sm font-semibold">Danh mục</th>
+                            <th class="p-3 text-sm font-semibold">Thương hiệu</th>
+                            <th class="p-3 text-sm font-semibold">Số màu</th>
+                            <th class="p-3 text-sm font-semibold">Phạm vi kích thước</th>
+                            <th class="p-3 text-sm font-semibold">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-list"></tbody>
+                </table>
+            </div>
         </div>
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white rounded shadow">
-                <thead class="bg-gray-100 text-gray-700 text-left">
-                    <tr>
-                        <th class="p-3">STT</th>
-                        <th class="p-3">Tên sản phẩm</th>
-                        <th class="p-3">Giá</th>
-                        <th class="p-3">Tồn kho</th>
-                        <th class="p-3">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-t">
-                        <td class="p-3">1</td>
-                        <td class="p-3">Nike Air Max</td>
-                        <td class="p-3">2.500.000đ</td>
-                        <td class="p-3">25</td>
-                        <td class="p-3 space-x-2">
-                            <button class="text-blue-500 hover:underline">Sửa</button>
-                            <button class="text-red-500 hover:underline">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="border-t">
-                        <td class="p-3">2</td>
-                        <td class="p-3">Adidas Ultraboost</td>
-                        <td class="p-3">3.000.000đ</td>
-                        <td class="p-3">15</td>
-                        <td class="p-3 space-x-2">
-                            <button class="text-blue-500 hover:underline">Sửa</button>
-                            <button class="text-red-500 hover:underline">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="border-t">
-                        <td class="p-3">3</td>
-                        <td class="p-3">Converse Chuck Taylor</td>
-                        <td class="p-3">1.200.000đ</td>
-                        <td class="p-3">40</td>
-                        <td class="p-3 space-x-2">
-                            <button class="text-blue-500 hover:underline">Sửa</button>
-                            <button class="text-red-500 hover:underline">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="border-t">
-                        <td class="p-3">4</td>
-                        <td class="p-3">Puma RS-X</td>
-                        <td class="p-3">2.200.000đ</td>
-                        <td class="p-3">30</td>
-                        <td class="p-3 space-x-2">
-                            <button class="text-blue-500 hover:underline">Sửa</button>
-                            <button class="text-red-500 hover:underline">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="border-t">
-                        <td class="p-3">5</td>
-                        <td class="p-3">Vans Old Skool</td>
-                        <td class="p-3">1.000.000đ</td>
-                        <td class="p-3">20</td>
-                        <td class="p-3 space-x-2">
-                            <button class="text-blue-500 hover:underline">Sửa</button>
-                            <button class="text-red-500 hover:underline">Xóa</button>
-                        </td>
-                    </tr>
-                </tbody>
 
-
-            </table>
+        <div id="product-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="modal-title" class="text-xl font-bold mb-2">Thêm sản phẩm</h2>
+                <form id="product-form">
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Mã sản phẩm:</label>
+                        <input type="text" id="masp" class="w-full border rounded px-2 py-1 text-sm" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Tên sản phẩm:</label>
+                        <input type="text" id="tensp" class="w-full border rounded px-2 py-1 text-sm" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Danh mục:</label>
+                        <select id="madm" class="w-full border rounded px-2 py-1 text-sm" required>
+                            <option value="DM001">Giày bóng rổ</option>
+                            <option value="DM002">Giày thể thao</option>
+                            <option value="DM003">Giày da</option>
+                            <option value="DM004">Phụ kiện</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Thương hiệu:</label>
+                        <select id="math" class="w-full border rounded px-2 py-1 text-sm" required>
+                            <option value="TH001">Nike</option>
+                            <option value="TH002">Adidas</option>
+                            <option value="TH003">Puma</option>
+                            <option value="TH004">Converse</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Mô tả:</label>
+                        <textarea id="mota" class="w-full border rounded px-2 py-1 text-sm" rows="4" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Ảnh sản phẩm (URL, cách nhau bằng dấu phẩy):</label>
+                        <input type="text" id="anhsanpham" class="w-full border rounded px-2 py-1 text-sm" placeholder="URL1,URL2,URL3">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Chi tiết sản phẩm:</label>
+                        <div id="chitietsanpham" class="border rounded p-2">
+                            <div class="mau-item mb-4">
+                                <select class="mamau w-full border rounded px-2 py-1 text-sm mb-2" required>
+                                    <option value="MAU001">Đen</option>
+                                    <option value="MAU002">Trắng</option>
+                                    <option value="MAU003">Xanh</option>
+                                    <option value="MAU004">Đỏ</option>
+                                </select>
+                                <div class="size-chitiet-container mb-2">
+                                    <div class="size-chitiet mb-2">
+                                        <select class="masize w-full border rounded px-2 py-1 text-sm mb-1" required>
+                                            <option value="SIZE001">36</option>
+                                            <option value="SIZE002">37</option>
+                                            <option value="SIZE003">38</option>
+                                            <option value="SIZE004">39</option>
+                                            <option value="SIZE005">40</option>
+                                            <option value="SIZE006">41</option>
+                                            <option value="SIZE007">42</option>
+                                            <option value="SIZE008">43</option>
+                                            <option value="SIZE009">44</option>
+                                            <option value="SIZE010">45</option>
+                                            <option value="SIZE011">46</option>
+                                            <option value="SIZE012">47</option>
+                                        </select>
+                                        <input type="number" class="gia w-full border rounded px-2 py-1 text-sm mb-1" placeholder="Giá" min="0" required>
+                                        <input type="number" class="soluong w-full border rounded px-2 py-1 text-sm mb-1" placeholder="Số lượng" min="0" required>
+                                        <button type="button" class="remove-size bg-red-600 text-white rounded px-2 py-1 text-sm">Xóa kích thước</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="add-size bg-blue-600 text-white rounded px-2 py-1 text-sm">Thêm kích thước</button>
+                                <button type="button" class="remove-mau bg-red-600 text-white rounded px-2 py-1 text-sm">Xóa màu</button>
+                            </div>
+                            <button type="button" id="add-mau" class="bg-blue-600 text-white rounded px-4 py-1 text-sm mt-2">Thêm màu</button>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" id="cancel-modal" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Hủy</button>
+                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Lưu</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </section>
 
+        <div id="delete-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
+                <p class="text-sm text-gray-600 mb-4">Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                <div class="flex gap-3">
+                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">Hủy</button>
+                    <button id="confirm-delete" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer class="bg-gray-100 text-gray-700 mt-16">
         <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-            <!-- Cột 1 -->
             <div>
                 <h3 class="font-semibold text-gray-900 mb-3">GIÚP ĐỠ</h3>
                 <ul class="space-y-2">
@@ -139,7 +200,6 @@
                     <li><a href="#" class="hover:text-black">Chính sách bảo hành</a></li>
                 </ul>
             </div>
-            <!-- Cột 2 -->
             <div>
                 <h3 class="font-semibold text-gray-900 mb-3">VỀ CHÚNG TÔI</h3>
                 <ul class="space-y-2">
@@ -149,7 +209,6 @@
                     <li><a href="#" class="hover:text-black">Cửa hàng</a></li>
                 </ul>
             </div>
-            <!-- Cột 3 -->
             <div>
                 <h3 class="font-semibold text-gray-900 mb-3">TÀI KHOẢN</h3>
                 <ul class="space-y-2">
@@ -159,22 +218,19 @@
                     <li><a href="#" class="hover:text-black">Theo dõi đơn hàng</a></li>
                 </ul>
             </div>
-            <!-- Cột 4 -->
             <div>
                 <h3 class="font-semibold text-gray-900 mb-3">KẾT NỐI</h3>
                 <div class="flex space-x-4 text-xl">
                     <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
-        <div class="border-t border-gray-300 text-center py-4 text-xs text-gray-500">
-            &copy; 2025 KesnStore. Design by Dajtobiez.
+        <div class="border-t border-gray-200 text-center py-4 text-xs text-gray-500">
+            © 2025 KesnStore. Design by DajtoMoi.
         </div>
     </footer>
-
 </body>
-
 </html>

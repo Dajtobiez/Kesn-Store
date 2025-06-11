@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Tài khoản - KesnStore</title>
+    <title>Quản lý Hóa đơn - KesnStore</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/QuanLyTaiKhoan.css">
-    <script defer src="js/QuanLyTaiKhoan.js"></script>
+    <link rel="stylesheet" href="css/QuanLyHoaDon.css">
+    <script defer src="js/QuanLyHoaDon.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="bg-white font-sans">
@@ -32,94 +32,121 @@
         </nav>
     </header>
 
+    <!-- Nội dung chính -->
     <div class="container mx-auto p-6 md:p-8">
         <div class="main-container bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h1 class="text-2xl font-bold mb-2">Quản lý Tài khoản</h1>
-            <p class="text-sm text-gray-600 mb-6">Theo dõi và quản lý tài khoản của quản trị viên, nhân viên và khách hàng.</p>
+            <h1 class="text-2xl font-bold mb-2">Quản lý Hóa đơn</h1>
+            <p class="text-gray-600 mb-6">Theo dõi và quản lý hóa đơn, thanh toán và vận chuyển của cửa hàng.</p>
 
+            <!-- Thống kê -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Tổng tài khoản</h3>
+                    <h3 class="text-sm font-semibold text-gray-600">Tổng hóa đơn</h3>
                     <p class="text-2xl font-bold text-blue-600">50</p>
                     <p class="text-xs text-gray-500">Cập nhật: 06/06/2025</p>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Số quản trị viên</h3>
+                    <h3 class="text-sm font-semibold text-gray-600">Hóa đơn chưa thanh toán</h3>
                     <p class="text-2xl font-bold text-blue-600">5</p>
-                    <p class="text-xs text-gray-500">Quản lý hệ thống</p>
+                    <p class="text-xs text-gray-500">Cần xử lý</p>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Số khách hàng</h3>
-                    <p class="text-2xl font-bold text-blue-600">40</p>
-                    <p class="text-xs text-gray-500">Người mua hàng</p>
+                    <h3 class="text-sm font-semibold text-gray-600">Hóa đơn đang giao</h3>
+                    <p class="text-2xl font-bold text-blue-600">10</p>
+                    <p class="text-xs text-gray-500">Đang vận chuyển</p>
                 </div>
             </div>
 
+            <!-- Tìm kiếm & Lọc -->
             <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6">
                 <h3 class="text-sm font-semibold mb-4">Tìm kiếm & Lọc</h3>
                 <div class="flex flex-col md:flex-row gap-4">
-                    <input type="text" id="search-account" placeholder="Tìm kiếm theo Mã tài khoản hoặc Tên đăng nhập" class="border rounded px-2 py-1 text-sm flex-1">
-                    <select id="filter-vai-tro" class="border rounded px-2 py-1 text-sm">
-                        <option value="">Tất cả vai trò</option>
-                        <option value="Quản trị viên">Quản trị viên</option>
-                        <option value="Nhân viên">Nhân viên</option>
-                        <option value="Khách hàng">Khách hàng</option>
+                    <input type="text" id="search-invoice" placeholder="Tìm kiếm theo Mã Hóa đơn hoặc Mã Khách hàng" class="border rounded px-2 py-1 text-sm flex-1">
+                    <select id="filter-trangthai-thanhtoan" class="border rounded px-2 py-1 text-sm">
+                        <option value="">Tất cả trạng thái thanh toán</option>
+                        <option value="Đã thanh toán">Đã thanh toán</option>
+                        <option value="Chưa thanh toán">Chưa thanh toán</option>
                     </select>
-                    <button id="add-account" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Thêm tài khoản</button>
+                    <select id="filter-trangthai-vanchuyen" class="border rounded px-2 py-1 text-sm">
+                        <option value="">Tất cả trạng thái vận chuyển</option>
+                        <option value="Chờ xử lý">Chờ xử lý</option>
+                        <option value="Đang giao">Đang giao</option>
+                        <option value="Đã giao">Đã giao</option>
+                        <option value="Hủy">Hủy</option>
+                    </select>
+                    <button id="add-invoice" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Thêm hóa đơn</button>
                 </div>
             </div>
 
+            <!-- Danh sách hóa đơn -->
             <div class="bg-white border border-gray-200 rounded-lg overflow-x-auto">
                 <table class="w-full text-left">
                     <thead>
-                        <tr class="bg-gray-50">
-                            <th class="p-3 text-sm font-semibold">STT</th>
-                            <th class="p-3 text-sm font-semibold">Mã tài khoản</th>
-                            <th class="p-3 text-sm font-semibold">Tên đăng nhập</th>
-                            <th class="p-3 text-sm font-semibold">Vai trò</th>
+                        <tr class="bg-gray-100">
+                            <th class="p-3 text-sm font-semibold">Mã Hóa đơn</th>
+                            <th class="p-3 text-sm font-semibold">Mã Khách hàng</th>
+                            <th class="p-3 text-sm font-semibold">Trạng thái Thanh toán</th>
+                            <th class="p-3 text-sm font-semibold">Phương thức Thanh toán</th>
+                            <th class="p-3 text-sm font-semibold">Trạng thái Vận chuyển</th>
+                            <th class="p-3 text-sm font-semibold">Ngày giao dự kiến</th>
                             <th class="p-3 text-sm font-semibold">Hành động</th>
                         </tr>
                     </thead>
-                    <tbody id="account-list"></tbody>
+                    <tbody id="invoice-list">
+                        <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                    </tbody>
                 </table>
             </div>
         </div>
 
-        <div id="account-modal" class="modal hidden">
+        <!-- Modal thêm/chỉnh sửa hóa đơn -->
+        <div id="invoice-modal" class="modal hidden">
             <div class="modal-content">
-                <h2 id="modal-title" class="text-xl font-bold mb-2">Thêm tài khoản</h2>
-                <form id="account-form">
+                <h2 id="modal-title" class="text-xl font-bold mb-4">Thêm Hóa đơn</h2>
+                <form id="invoice-form">
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mã tài khoản:</label>
-                        <input type="text" id="matk" class="w-full border rounded px-2 py-1 text-sm" required>
+                        <label class="block text-sm font-semibold mb-1">Mã Hóa đơn:</label>
+                        <input type="text" id="mahd" class="w-full border rounded px-2 py-1 text-sm" required>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Tên đăng nhập:</label>
-                        <input type="text" id="tendangnhap" class="w-full border rounded px-2 py-1 text-sm" required>
-                    </div>
-                    <div id="password-field" class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mật khẩu:</label>
-                        <input type="password" id="matkhau" class="w-full border rounded px-2 py-1 text-sm" required>
+                        <label class="block text-sm font-semibold mb-1">Mã Khách hàng:</label>
+                        <input type="text" id="makh" class="w-full border rounded px-2 py-1 text-sm" required>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Vai trò:</label>
-                        <select id="vaitro" class="w-full border rounded px-2 py-1 text-sm" required>
-                            <option value="Quản trị viên">Quản trị viên</option>
-                            <option value="Nhân viên">Nhân viên</option>
-                            <option value="Khách hàng">Khách hàng</option>
+                        <label class="block text-sm font-semibold mb-1">Trạng thái Thanh toán:</label>
+                        <select id="trangthai-thanhtoan" class="w-full border rounded px-2 py-1 text-sm">
+                            <option value="Đã thanh toán">Đã thanh toán</option>
+                            <option value="Chưa thanh toán">Chưa thanh toán</option>
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Họ và tên:</label>
-                        <input type="text" id="hoten" class="w-full border rounded px-2 py-1 text-sm" required>
+                        <label class="block text-sm font-semibold mb-1">Phương thức Thanh toán:</label>
+                        <select id="phuongthuc-thanhtoan" class="w-full border rounded px-2 py-1 text-sm">
+                            <option value="Tiền mặt">Tiền mặt</option>
+                            <option value="Chuyển khoản">Chuyển khoản</option>
+                            <option value="Thẻ tín dụng">Thẻ tín dụng</option>
+                        </select>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Email:</label>
-                        <input type="email" id="email" class="w-full border rounded px-2 py-1 text-sm" required>
+                        <label class="block text-sm font-semibold mb-1">Trạng thái Vận chuyển:</label>
+                        <select id="trangthai-vanchuyen" class="w-full border rounded px-2 py-1 text-sm">
+                            <option value="Chờ xử lý">Chờ xử lý</option>
+                            <option value="Đang giao">Đang giao</option>
+                            <option value="Đã giao">Đã giao</option>
+                            <option value="Hủy">Hủy</option>
+                        </select>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Số điện thoại:</label>
-                        <input type="tel" id="sodienthoai" class="w-full border rounded px-2 py-1 text-sm" required>
+                        <label class="block text-sm font-semibold mb-1">Phương thức Vận chuyển:</label>
+                        <select id="phuongthuc-vanchuyen" class="w-full border rounded px-2 py-1 text-sm">
+                            <option value="Giao hàng nhanh">Giao hàng nhanh</option>
+                            <option value="Giao hàng tiết kiệm">Giao hàng tiết kiệm</option>
+                            <option value="Giao hàng tiêu chuẩn">Giao hàng tiêu chuẩn</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold mb-1">Ngày giao dự kiến:</label>
+                        <input type="date" id="ngaygiaodukien" class="w-full border rounded px-2 py-1 text-sm" required>
                     </div>
                     <div class="flex gap-3">
                         <button type="button" id="cancel-modal" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Hủy</button>
@@ -128,19 +155,9 @@
                 </form>
             </div>
         </div>
-
-        <div id="delete-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
-                <p class="text-sm text-gray-600 mb-4">Bạn có chắc chắn muốn xóa tài khoản này?</p>
-                <div class="flex gap-3">
-                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">Hủy</button>
-                    <button id="confirm-delete" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Xóa</button>
-                </div>
-            </div>
-        </div>
     </div>
 
+    <!-- Phần chân trang -->
     <footer class="bg-gray-100 text-gray-700 mt-16">
         <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
             <div>
@@ -174,13 +191,13 @@
                 <h3 class="font-semibold text-gray-900 mb-3">KẾT NỐI</h3>
                 <div class="flex space-x-4 text-xl">
                     <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
         </div>
-        <div class="border-t border-gray-200 text-center py-4 text-xs text-gray-500">
+        <div class="border-t border-gray-300 text-center py-4 text-xs text-gray-500">
             © 2025 KesnStore. Design by Dajtobiez.
         </div>
     </footer>
