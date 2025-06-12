@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Kesn Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .change-password-container { 
+	        max-width: 400px; 
+	        margin: 50px auto; 
+	        padding: 20px; 
+        }
+        .logo { 
+	        max-width: 200px; 
+	        height: auto; 
+	        margin-bottom: 20px; 
+        }
+        .form-control { 
+	        border-radius: 20px; 
+	        padding: 10px; 
+        }
+        .change-password-btn { 
+	        background: #000; 
+	        color: #fff; 
+	        padding: 10px 30px; 
+	        border: none; 
+	        border-radius: 25px; 
+	        width: 100%; 
+        }
+        .change-password-btn:hover { 
+        	background: #333; 
+        }
+        .link-btn { 
+	        color: #000; 
+	        text-decoration: none; 
+        }
+        .link-btn:hover { 
+        	text-decoration: underline; 
+        }
+        .input-group-text { 
+	        background: transparent; 
+	        border: none; 
+	        cursor: pointer; 
+        }
+        .error-message { 
+	        color: red; 
+	        font-size: 0.9em; 
+	        display: none; 
+        }
+        .success-message { 
+	        color: green; 
+	        font-size: 0.9em; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="change-password-container">
+                <div class="text-center">
+                    <img src="/images/KesnStore.png" alt="Kesn Store Logo" class="logo">
+                    <h2 class="mb-4">ĐỔI MẬT KHẨU</h2>
+                </div>
+                <form id="changePasswordForm" th:action="@{/change-password}" method="post" onsubmit="return handleChangePassword(event)">
+                    <div id="formMessage" class="alert text-center" style="display: none;"></div>
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Nhập mật khẩu cũ *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" value="" required>
+                            <span class="input-group-text toggle-password">
+                                <i class="bi bi-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Nhập mật khẩu mới *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" value="" required>
+                            <span class="input-group-text toggle-password">
+                                <i class="bi bi-eye"></i>
+                            </span>
+                        </div>
+                        <div id="newPasswordError" class="error-message">Mật khẩu mới phải có ít nhất 6 ký tự</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới *</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="" required>
+                            <span class="input-group-text toggle-password">
+                                <i class="bi bi-eye"></i>
+                            </span>
+                        </div>
+                        <div id="confirmPasswordError" class="error-message">Mật khẩu xác nhận không khớp</div>
+                    </div>
+                    <button type="submit" class="change-password-btn mb-3">Xác nhận</button>
+                    <div class="text-center">
+                        <a href="/login" class="link-btn">Đăng nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Xử lý đổi mật khẩu
+        function handleChangePassword(event) {
+            event.preventDefault();
+
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const newPasswordError = document.getElementById('newPasswordError');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            const formMessage = document.getElementById('formMessage');
+
+            newPasswordError.style.display = 'none';
+            confirmPasswordError.style.display = 'none';
+            formMessage.style.display = 'none';
+
+            if (!currentPassword || currentPassword.length < 6) {
+                alert('Mật khẩu cũ phải có ít nhất 6 ký tự');
+                return false;
+            }
+            if (!newPassword || newPassword.length < 6) {
+                newPasswordError.style.display = 'block';
+                return false;
+            }
+            if (newPassword !== confirmPassword) {
+                confirmPasswordError.style.display = 'block';
+                return false;
+            }
+
+            const formData = new FormData();
+            formData.append('currentPassword', currentPassword);
+            formData.append('newPassword', newPassword);
+            formData.append('confirmPassword', confirmPassword);
+
+            fetch('/change-password', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').content
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                formMessage.style.display = 'block';
+                if (data.success) {
+                    formMessage.classList.remove('alert-danger');
+                    formMessage.classList.add('alert-success');
+                    formMessage.textContent = data.message || 'Mật khẩu đã được đổi thành công!';
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 2000);
+                } else {
+                    formMessage.classList.remove('alert-success');
+                    formMessage.classList.add('alert-danger');
+                    formMessage.textContent = data.message || 'Đổi mật khẩu thất bại. Vui lòng thử lại.';
+                }
+            })
+            .catch(error => {
+                formMessage.style.display = 'block';
+                formMessage.classList.remove('alert-success');
+                formMessage.classList.add('alert-danger');
+                formMessage.textContent = 'Có lỗi xảy ra. Vui lòng thử lại sau.';
+                console.error('Error:', error);
+            });
+
+            return false;
+        }
+
+        // Chức năng ẩn/hiện mật khẩu
+        document.querySelectorAll('.toggle-password').forEach(item => {
+            item.addEventListener('click', function () {
+                const input = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

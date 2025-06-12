@@ -3,234 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Sản phẩm - KesnStore</title>
+    <title>Quản lý Sản phẩm</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/QuanLySanPham.css">
-    <script defer src="js/QuanLySanPham.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/QuanLySanPham.css">
 </head>
-<body class="bg-white font-sans">
-    <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
-        <a href="/" class="mb-2 md:mb-0">
-            <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
-        </a>
-        <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
-            <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
-            </div>
-            <div class="flex items-center space-x-2 w-full md:w-auto">
-                <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
-                <div class="flex space-x-2">
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0"></path></svg>
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+            <a href="/" class="mb-2 md:mb-0">
+                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+            </a>
+            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
                 </div>
-            </div>
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
+                    <div class="flex space-x-2">
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+        <nav>
+            <ul class="space-y-2">
+                <li>
+                    <a href="QuanLySanPham.html" class="flex items-center p-2 bg-gray-700 rounded">
+                        <i class="fas fa-box w-5 h-5 mr-2"></i>
+                        <span>Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-chart-bar w-5 h-5 mr-2"></i>
+                        <span>Dashboard thống kê</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyKhoHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-warehouse w-5 h-5 mr-2"></i>
+                        <span>Quản lý kho hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-shopping-cart w-5 h-5 mr-2"></i>
+                        <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-file-invoice w-5 h-5 mr-2"></i>
+                        <span>Quản lý hóa đơn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-users w-5 h-5 mr-2"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-star w-5 h-5 mr-2"></i>
+                        <span>Quản lý đánh giá</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-tags w-5 h-5 mr-2"></i>
+                        <span>Quản lý thương hiệu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-headset w-5 h-5 mr-2"></i>
+                        <span>Quản lý yêu cầu hỗ trợ</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </header>
-    <div class="container mx-auto p-6 md:p-8">
-        <div class="main-container bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h1 class="text-2xl font-bold mb-2">Quản lý Sản phẩm</h1>
-            <p class="text-sm text-gray-600 mb-6">Theo dõi và quản lý danh sách sản phẩm của cửa hàng.</p>
+    </div>
+</aside>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Tổng sản phẩm</h3>
-                    <p class="text-2xl font-bold text-blue-600">100</p>
-                    <p class="text-xs text-gray-500">Cập nhật: 06/06/2025</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Sản phẩm sắp hết</h3>
-                    <p class="text-2xl font-bold text-blue-600">10</p>
-                    <p class="text-xs text-gray-500">Dưới 10 đơn vị</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Số danh mục</h3>
-                    <p class="text-2xl font-bold text-blue-600">5</p>
-                    <p class="text-xs text-gray-500">Loại sản phẩm</p>
-                </div>
-            </div>
+            <!-- Main Content -->
+            <div class="ml-64 p-6 w-full container">
+                <h1 class="text-3xl font-bold mb-6">Quản lý Sản phẩm</h1>
+                <p class="text-gray-600 mb-6">Theo dõi và quản lý danh sách sản phẩm của cửa hàng.</p>
 
-            <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6">
-                <h3 class="text-sm font-semibold mb-4">Tìm kiếm & Lọc</h3>
-                <div class="flex flex-col md:flex-row gap-4">
-                    <input type="text" id="search-product" placeholder="Tìm kiếm theo Mã sản phẩm hoặc Tên sản phẩm" class="border rounded px-2 py-1 text-sm flex-1">
-                    <select id="filter-danhmuc" class="border rounded px-2 py-1 text-sm">
-                        <option value="">Tất cả danh mục</option>
-                        <option value="DM001">Giày bóng rổ</option>
-                        <option value="DM002">Giày thể thao</option>
-                        <option value="DM003">Giày da</option>
-                        <option value="DM004">Phụ kiện</option>
-                    </select>
-                    <select id="filter-thuonghieu" class="border rounded px-2 py-1 text-sm">
-                        <option value="">Tất cả thương hiệu</option>
-                        <option value="TH001">Nike</option>
-                        <option value="TH002">Adidas</option>
-                        <option value="TH003">Puma</option>
-                        <option value="TH004">Converse</option>
-                    </select>
-                    <button id="add-product" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Thêm sản phẩm</button>
-                </div>
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-lg overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="p-3 text-sm font-semibold">STT</th>
-                            <th class="p-3 text-sm font-semibold">Mã sản phẩm</th>
-                            <th class="p-3 text-sm font-semibold">Tên sản phẩm</th>
-                            <th class="p-3 text-sm font-semibold">Danh mục</th>
-                            <th class="p-3 text-sm font-semibold">Thương hiệu</th>
-                            <th class="p-3 text-sm font-semibold">Số màu</th>
-                            <th class="p-3 text-sm font-semibold">Phạm vi kích thước</th>
-                            <th class="p-3 text-sm font-semibold">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="product-list"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="product-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2 id="modal-title" class="text-xl font-bold mb-2">Thêm sản phẩm</h2>
-                <form id="product-form">
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mã sản phẩm:</label>
-                        <input type="text" id="masp" class="w-full border rounded px-2 py-1 text-sm" required>
+                <!-- Thống kê -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Tổng sản phẩm</h3>
+                        <p class="text-2xl font-bold">100</p>
+                        <p class="text-sm text-gray-500">Cập nhật: 06/06/2025</p>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Tên sản phẩm:</label>
-                        <input type="text" id="tensp" class="w-full border rounded px-2 py-1 text-sm" required>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Sản phẩm sắp hết</h3>
+                        <p class="text-2xl font-bold">10</p>
+                        <p class="text-sm text-gray-500">Dưới 10 đơn vị</p>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Danh mục:</label>
-                        <select id="madm" class="w-full border rounded px-2 py-1 text-sm" required>
-                            <option value="DM001">Giày bóng rổ</option>
-                            <option value="DM002">Giày thể thao</option>
-                            <option value="DM003">Giày da</option>
-                            <option value="DM004">Phụ kiện</option>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Số danh mục</h3>
+                        <p class="text-2xl font-bold">5</p>
+                        <p class="text-sm text-gray-500">Loại sản phẩm</p>
+                    </div>
+                </div>
+
+                <!-- Tìm kiếm & Lọc -->
+                <div class="main-container mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Tìm kiếm & Lọc</h3>
+                    <div class="flex flex-col md:flex-row md:space-x-4">
+                        <input type="text" id="search-product" placeholder="Tìm kiếm mã sản phẩm, tên sản phẩm..." class="border rounded px-2 py-1 text-sm flex-1">
+                        <select id="filter-danhmuc" class="mb-2 md:mb-0 w-full md:w-auto">
+                            <option value="">Tất cả danh mục</option>
+                            <option value="Giày bóng rổ">Giày bóng rổ</option>
+                            <option value="Giày thể thao">Giày thể thao</option>
+                            <option value="Giày da">Giày da</option>
+                            <option value="Phụ kiện">Phụ kiện</option>
                         </select>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Thương hiệu:</label>
-                        <select id="math" class="w-full border rounded px-2 py-1 text-sm" required>
-                            <option value="TH001">Nike</option>
-                            <option value="TH002">Adidas</option>
-                            <option value="TH003">Puma</option>
-                            <option value="TH004">Converse</option>
+                        <select id="filter-thuonghieu" class="mb-2 md:mb-0 w-full md:w-auto">
+                            <option value="">Tất cả thương hiệu</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Puma">Puma</option>
+                            <option value="Converse">Converse</option>
                         </select>
+                        <button id="add-product" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Thêm sản phẩm</button>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mô tả:</label>
-                        <textarea id="mota" class="w-full border rounded px-2 py-1 text-sm" rows="4" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Ảnh sản phẩm (URL, cách nhau bằng dấu phẩy):</label>
-                        <input type="text" id="anhsanpham" class="w-full border rounded px-2 py-1 text-sm" placeholder="URL1,URL2,URL3">
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Chi tiết sản phẩm:</label>
-                        <div id="chitietsanpham" class="border rounded p-2">
-                            <div class="mau-item mb-4">
-                                <select class="mamau w-full border rounded px-2 py-1 text-sm mb-2" required>
-                                    <option value="MAU001">Đen</option>
-                                    <option value="MAU002">Trắng</option>
-                                    <option value="MAU003">Xanh</option>
-                                    <option value="MAU004">Đỏ</option>
+                </div>
+
+                <!-- Table -->
+                <div class="main-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Danh mục</th>
+                                <th>Thương hiệu</th>
+                                <th>Số màu</th>
+                                <th>Phạm vi kích thước</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-list">
+                            <!-- Dữ liệu sẽ được render bởi JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal Thêm/Sửa -->
+                <div id="product-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="text-xl font-bold mb-4">Thêm sản phẩm</h2>
+                        <form id="product-form">
+                            <div class="mb-4">
+                                <label class="block mb-1">Mã sản phẩm:</label>
+                                <input type="text" id="masp" class="w-full" placeholder="Nhập mã sản phẩm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Tên sản phẩm:</label>
+                                <input type="text" id="tensp" class="w-full" placeholder="Nhập tên sản phẩm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Danh mục:</label>
+                                <select id="danhmuc" class="w-full" required>
+                                    <option value="Giày bóng rổ">Giày bóng rổ</option>
+                                    <option value="Giày thể thao">Giày thể thao</option>
+                                    <option value="Giày da">Giày da</option>
+                                    <option value="Phụ kiện">Phụ kiện</option>
                                 </select>
-                                <div class="size-chitiet-container mb-2">
-                                    <div class="size-chitiet mb-2">
-                                        <select class="masize w-full border rounded px-2 py-1 text-sm mb-1" required>
-                                            <option value="SIZE001">36</option>
-                                            <option value="SIZE002">37</option>
-                                            <option value="SIZE003">38</option>
-                                            <option value="SIZE004">39</option>
-                                            <option value="SIZE005">40</option>
-                                            <option value="SIZE006">41</option>
-                                            <option value="SIZE007">42</option>
-                                            <option value="SIZE008">43</option>
-                                            <option value="SIZE009">44</option>
-                                            <option value="SIZE010">45</option>
-                                            <option value="SIZE011">46</option>
-                                            <option value="SIZE012">47</option>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Thương hiệu:</label>
+                                <select id="thuonghieu" class="w-full" required>
+                                    <option value="Nike">Nike</option>
+                                    <option value="Adidas">Adidas</option>
+                                    <option value="Puma">Puma</option>
+                                    <option value="Converse">Converse</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Mô tả:</label>
+                                <textarea id="mota" class="w-full" placeholder="Nhập mô tả sản phẩm"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Ảnh sản phẩm (URL, cách nhau bằng dấu phẩy):</label>
+                                <input type="text" id="anh" class="w-full" placeholder="Nhập URL ảnh">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Chi tiết sản phẩm:</label>
+                                <div id="chitiet-container">
+                                    <div class="mau-item">
+                                        <select class="mau" required>
+                                            <option value="Đen">Đen</option>
+                                            <option value="Trắng">Trắng</option>
+                                            <option value="Xanh">Xanh</option>
+                                            <option value="Đỏ">Đỏ</option>
                                         </select>
-                                        <input type="number" class="gia w-full border rounded px-2 py-1 text-sm mb-1" placeholder="Giá" min="0" required>
-                                        <input type="number" class="soluong w-full border rounded px-2 py-1 text-sm mb-1" placeholder="Số lượng" min="0" required>
-                                        <button type="button" class="remove-size bg-red-600 text-white rounded px-2 py-1 text-sm">Xóa kích thước</button>
+                                        <div class="size-details">
+                                            <div class="size-chitiet-container">
+                                                <div class="size-chitiet">
+                                                    <select class="size">
+                                                        <option value="36">36</option>
+                                                        <option value="37">37</option>
+                                                        <option value="38">38</option>
+                                                        <option value="39">39</option>
+                                                        <option value="40">40</option>
+                                                        <option value="41">41</option>
+                                                        <option value="42">42</option>
+                                                        <option value="43">43</option>
+                                                        <option value="44">44</option>
+                                                        <option value="45">45</option>
+                                                        <option value="46">46</option>
+                                                        <option value="47">47</option>
+                                                    </select>
+                                                    <input type="number" class="soluong" placeholder="Số lượng" required>
+                                                    <input type="number" class="gia" placeholder="Giá" required>
+                                                    <button type="button" class="delete-size bg-red-600 text-white px-2 py-1 rounded">Xóa kích thước</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="add-size bg-blue-600 text-white px-2 py-1 rounded">Thêm kích thước</button>
+                                        <button type="button" class="delete-mau bg-red-600 text-white px-2 py-1 rounded">Xóa màu</button>
                                     </div>
                                 </div>
-                                <button type="button" class="add-size bg-blue-600 text-white rounded px-2 py-1 text-sm">Thêm kích thước</button>
-                                <button type="button" class="remove-mau bg-red-600 text-white rounded px-2 py-1 text-sm">Xóa màu</button>
+                                <button type="button" id="add-mau" class="bg-blue-600 text-white px-2 py-1 rounded">Thêm màu</button>
                             </div>
-                            <button type="button" id="add-mau" class="bg-blue-600 text-white rounded px-4 py-1 text-sm mt-2">Thêm màu</button>
+                            <div class="flex justify-end space-x-2">
+                                <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal Xóa -->
+                <div id="delete-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
+                        <p class="mb-4">Bạn có chắc chắn muốn xóa sản phẩm này?</p>
+                        <div class="flex justify-end space-x-2">
+                            <button id="cancel-delete" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                            <button id="confirm-delete" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Xóa</button>
                         </div>
                     </div>
-                    <div class="flex gap-3">
-                        <button type="button" id="cancel-modal" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Hủy</button>
-                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div id="delete-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
-                <p class="text-sm text-gray-600 mb-4">Bạn có chắc chắn muốn xóa sản phẩm này?</p>
-                <div class="flex gap-3">
-                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">Hủy</button>
-                    <button id="confirm-delete" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Xóa</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="bg-gray-100 text-gray-700 mt-16">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">GIÚP ĐỠ</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Tình trạng đơn hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Vận chuyển & giao hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Trả hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Chính sách bảo hành</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">VỀ CHÚNG TÔI</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Tin tức</a></li>
-                    <li><a href="#" class="hover:text-black">Tuyển dụng</a></li>
-                    <li><a href="#" class="hover:text-black">Hợp tác</a></li>
-                    <li><a href="#" class="hover:text-black">Cửa hàng</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">TÀI KHOẢN</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Đăng nhập</a></li>
-                    <li><a href="#" class="hover:text-black">Đăng ký</a></li>
-                    <li><a href="#" class="hover:text-black">Danh sách yêu thích</a></li>
-                    <li><a href="#" class="hover:text-black">Theo dõi đơn hàng</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">KẾT NỐI</h3>
-                <div class="flex space-x-4 text-xl">
-                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-gray-200 text-center py-4 text-xs text-gray-500">
-            © 2025 KesnStore. Design by DajtoMoi.
-        </div>
-    </footer>
+    <script src="js/QuanLySanPham.js"></script>
 </body>
 </html>

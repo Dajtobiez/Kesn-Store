@@ -1,36 +1,65 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const elements = {
-        accountList: document.getElementById('account-list'),
-        addAccountBtn: document.getElementById('add-account'),
-        accountModal: document.getElementById('account-modal'),
-        cancelModalBtn: document.getElementById('cancel-modal'),
-        accountForm: document.getElementById('account-form'),
-        modalTitle: document.getElementById('modal-title'),
-        passwordField: document.getElementById('password-field'),
-        searchInput: document.getElementById('search-account'),
-        filterVaiTro: document.getElementById('filter-vai-tro'),
-        deleteModal: document.getElementById('delete-modal'),
-        cancelDeleteBtn: document.getElementById('cancel-delete'),
-        confirmDeleteBtn: document.getElementById('confirm-delete')
-    };
+document.addEventListener('DOMContentLoaded', function () {
+    const accountList = document.getElementById('account-list');
+    const addAccountBtn = document.getElementById('add-account');
+    const accountModal = document.getElementById('account-modal');
+    const cancelModal = document.getElementById('cancel-modal');
+    const accountForm = document.getElementById('account-form');
+    const modalTitle = document.getElementById('modal-title');
+    const filterVaiTro = document.getElementById('filter-vaitro');
+    const searchAccount = document.getElementById('search-account');
+    const deleteModal = document.getElementById('delete-modal');
+    const cancelDelete = document.getElementById('cancel-delete');
+    const confirmDelete = document.getElementById('confirm-delete');
 
+    // Dữ liệu mẫu
     let accounts = [
-        { MaTK: 'TK001', TenDangNhap: 'admin1', MatKhau: 'pass123', VaiTro: 'Quản trị viên', HoTen: 'Nguyễn Văn A', Email: 'admin1@example.com', SoDienThoai: '0901234567' },
-        { MaTK: 'TK002', TenDangNhap: 'nhanvien1', MatKhau: 'pass456', VaiTro: 'Nhân viên', HoTen: 'Trần Thị B', Email: 'nhanvien1@example.com', SoDienThoai: '0907654321' },
-        { MaTK: 'TK003', TenDangNhap: 'khach1', MatKhau: 'pass789', VaiTro: 'Khách hàng', HoTen: 'Lê Văn C', Email: 'khach1@example.com', SoDienThoai: '0912345678' },
-        { MaTK: 'TK004', TenDangNhap: 'nhanvien2', MatKhau: 'pass101', VaiTro: 'Nhân viên', HoTen: 'Phạm Thị D', Email: 'nhanvien2@example.com', SoDienThoai: '0923456789' },
-        { MaTK: 'TK005', TenDangNhap: 'khach2', MatKhau: 'pass202', VaiTro: 'Khách hàng', HoTen: 'Hoàng Văn E', Email: 'khach2@example.com', SoDienThoai: '0934567890' },
-        { MaTK: 'TK006', TenDangNhap: 'admin2', MatKhau: 'pass303', VaiTro: 'Quản trị viên', HoTen: 'Trần Văn F', Email: 'admin2@example.com', SoDienThoai: '0945678901' },
-        { MaTK: 'TK007', TenDangNhap: 'khach3', MatKhau: 'pass404', VaiTro: 'Khách hàng', HoTen: 'Nguyễn Thị G', Email: 'khach3@example.com', SoDienThoai: '0956789012' },
-        { MaTK: 'TK008', TenDangNhap: 'nhanvien3', MatKhau: 'pass505', VaiTro: 'Nhân viên', HoTen: 'Lê Thị H', Email: 'nhanvien3@example.com', SoDienThoai: '0967890123' },
-        { MaTK: 'TK009', TenDangNhap: 'khach4', MatKhau: 'pass606', VaiTro: 'Khách hàng', HoTen: 'Phạm Văn I', Email: 'khach4@example.com', SoDienThoai: '0978901234' },
-        { MaTK: 'TK010', TenDangNhap: 'admin3', MatKhau: 'pass707', VaiTro: 'Quản trị viên', HoTen: 'Hoàng Thị K', Email: 'admin3@example.com', SoDienThoai: '0989012345' }
+        {
+            MaTK: 'TK001',
+            TenDangNhap: 'admin1',
+            MatKhau: '123456',
+            VaiTro: 'Quản trị viên',
+            HoTen: 'Nguyễn Văn A',
+            Email: 'admin1@example.com',
+            Sdt: '0901234567'
+        },
+        {
+            MaTK: 'TK002',
+            TenDangNhap: 'nhanvien1',
+            MatKhau: '123456',
+            VaiTro: 'Quản trị viên',
+            HoTen: 'Trần Thị B',
+            Email: 'admin2@example.com',
+            Sdt: '0907654321'
+        },
+        {
+            MaTK: 'TK003',
+            TenDangNhap: 'khach1',
+            MatKhau: '123456',
+            VaiTro: 'Khách hàng',
+            HoTen: 'Lê Văn C',
+            Email: 'khach1@example.com',
+            Sdt: '0912345678'
+        }
     ];
 
-    let accountToDelete = null;
+    let deleteMaTK = null;
+
+    // Kiểm tra phần tử
+    if (!accountList) console.error('Không tìm thấy account-list');
+    if (!addAccountBtn) console.error('Không tìm thấy add-account');
+    if (!accountModal) console.error('Không tìm thấy account-modal');
+    if (!cancelModal) console.error('Không tìm thấy cancel-modal');
+    if (!accountForm) console.error('Không tìm thấy account-form');
+    if (!modalTitle) console.error('Không tìm thấy modal-title');
+    if (!filterVaiTro) console.error('Không tìm thấy filter-vaitro');
+    if (!searchAccount) console.error('Không tìm thấy search-account');
+    if (!deleteModal) console.error('Không tìm thấy delete-modal');
+    if (!cancelDelete) console.error('Không tìm thấy cancel-delete');
+    if (!confirmDelete) console.error('Không tìm thấy confirm-delete');
 
     function renderAccounts(filteredAccounts) {
-        elements.accountList.innerHTML = '';
+        if (!accountList) return;
+        accountList.innerHTML = '';
         filteredAccounts.forEach((account, index) => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -39,113 +68,103 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="p-3">${account.TenDangNhap}</td>
                 <td class="p-3">${account.VaiTro}</td>
                 <td class="p-3">
-                    <button class="action-button edit" data-matk="${account.MaTK}">Sửa</button>
+                    <button class="action-button edit" data-matk="${account.MaTK}">Chỉnh sửa</button>
                     <button class="action-button delete" data-matk="${account.MaTK}">Xóa</button>
                 </td>
             `;
-            elements.accountList.appendChild(row);
+            accountList.appendChild(row);
         });
     }
 
     function filterAccounts() {
-        const searchTerm = elements.searchInput.value.toLowerCase();
-        const vaiTro = elements.filterVaiTro.value;
+        const vaiTro = filterVaiTro?.value;
+        const searchTerm = searchAccount?.value.toLowerCase();
         let filteredAccounts = accounts;
 
+        if (vaiTro) filteredAccounts = filteredAccounts.filter(a => a.VaiTro === vaiTro);
         if (searchTerm) {
-            filteredAccounts = filteredAccounts.filter(account =>
-                account.TenDangNhap.toLowerCase().includes(searchTerm) ||
-                account.MaTK.toLowerCase().includes(searchTerm)
+            filteredAccounts = filteredAccounts.filter(a => 
+                a.MaTK.toLowerCase().includes(searchTerm) || 
+                a.TenDangNhap.toLowerCase().includes(searchTerm)
             );
-        }
-        if (vaiTro) {
-            filteredAccounts = filteredAccounts.filter(account => account.VaiTro === vaiTro);
         }
 
         renderAccounts(filteredAccounts);
     }
 
-    function openAccountModal(mode, account = null) {
-        elements.modalTitle.textContent = mode === 'add' ? 'Thêm tài khoản' : 'Sửa tài khoản';
+    function openModal(mode, account = null) {
+        if (!modalTitle || !accountForm || !accountModal) return;
+        modalTitle.textContent = mode === 'add' ? 'Thêm tài khoản' : 'Chỉnh sửa tài khoản';
         if (mode === 'edit' && account) {
-            document.getElementById('matk').value = account.MaTK;
-            document.getElementById('matk').disabled = true;
-            document.getElementById('tendangnhap').value = account.TenDangNhap;
-            document.getElementById('vaitro').value = account.VaiTro;
-            document.getElementById('hoten').value = account.HoTen || '';
-            document.getElementById('email').value = account.Email || '';
-            document.getElementById('sodienthoai').value = account.SoDienThoai || '';
-            elements.passwordField.classList.add('hidden');
-            document.getElementById('matkhau').required = false;
+            document.getElementById('maTK').value = account.MaTK;
+            document.getElementById('maTK').disabled = true;
+            document.getElementById('tenDangNhap').value = account.TenDangNhap;
+            document.getElementById('matKhau').value = '';
+            document.getElementById('vaiTro').value = account.VaiTro;
+            document.getElementById('hoTen').value = account.HoTen;
+            document.getElementById('email').value = account.Email;
+            document.getElementById('sdt').value = account.Sdt;
         } else {
-            elements.accountForm.reset();
-            document.getElementById('matk').disabled = false;
-            elements.passwordField.classList.remove('hidden');
-            document.getElementById('matkhau').required = true;
+            accountForm.reset();
+            document.getElementById('maTK').disabled = false;
         }
-        elements.accountModal.classList.remove('hidden');
+        accountModal.classList.remove('hidden');
     }
 
-    function openDeleteModal(matk) {
-        accountToDelete = matk;
-        elements.deleteModal.classList.remove('hidden');
+    if (addAccountBtn) addAccountBtn.addEventListener('click', () => openModal('add'));
+    if (cancelModal) cancelModal.addEventListener('click', () => accountModal?.classList.add('hidden'));
+
+    if (accountList) {
+        accountList.addEventListener('click', function (e) {
+            const matk = e.target.getAttribute('data-matk');
+            if (e.target.classList.contains('edit')) {
+                const account = accounts.find(a => a.MaTK === matk);
+                if (account) openModal('edit', account);
+            } else if (e.target.classList.contains('delete')) {
+                deleteMaTK = matk;
+                deleteModal?.classList.remove('hidden');
+            }
+        });
     }
 
-    elements.addAccountBtn.addEventListener('click', () => openAccountModal('add'));
-
-    elements.cancelModalBtn.addEventListener('click', () => {
-        elements.accountModal.classList.add('hidden');
-    });
-
-    elements.cancelDeleteBtn.addEventListener('click', () => {
-        elements.deleteModal.classList.add('hidden');
-        accountToDelete = null;
-    });
-
-    elements.confirmDeleteBtn.addEventListener('click', () => {
-        if (accountToDelete) {
-            accounts = accounts.filter(account => account.MaTK !== accountToDelete);
+    if (cancelDelete) cancelDelete.addEventListener('click', () => deleteModal?.classList.add('hidden'));
+    if (confirmDelete) confirmDelete.addEventListener('click', () => {
+        if (deleteMaTK) {
+            accounts = accounts.filter(a => a.MaTK !== deleteMaTK);
             filterAccounts();
-            elements.deleteModal.classList.add('hidden');
-            accountToDelete = null;
+            deleteModal?.classList.add('hidden');
+            deleteMaTK = null;
         }
     });
 
-    elements.accountList.addEventListener('click', (e) => {
-        const matk = e.target.getAttribute('data-matk');
-        if (e.target.classList.contains('edit')) {
-            const account = accounts.find(acc => acc.MaTK === matk);
-            if (account) openAccountModal('edit', account);
-        } else if (e.target.classList.contains('delete')) {
-            openDeleteModal(matk);
-        }
-    });
+    if (accountForm) {
+        accountForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const account = {
+                MaTK: document.getElementById('maTK').value,
+                TenDangNhap: document.getElementById('tenDangNhap').value,
+                MatKhau: document.getElementById('matKhau').value || accounts.find(a => a.MaTK === document.getElementById('maTK').value)?.MatKhau,
+                VaiTro: document.getElementById('vaiTro').value,
+                HoTen: document.getElementById('hoTen').value,
+                Email: document.getElementById('email').value,
+                Sdt: document.getElementById('sdt').value
+            };
 
-    elements.accountForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const account = {
-            MaTK: document.getElementById('matk').value,
-            TenDangNhap: document.getElementById('tendangnhap').value,
-            MatKhau: document.getElementById('matkhau').value || '',
-            VaiTro: document.getElementById('vaitro').value,
-            HoTen: document.getElementById('hoten').value,
-            Email: document.getElementById('email').value,
-            SoDienThoai: document.getElementById('sodienthoai').value
-        };
+            const existingIndex = accounts.findIndex(a => a.MaTK === account.MaTK);
+            if (existingIndex >= 0) {
+                accounts[existingIndex] = account;
+            } else {
+                accounts.push(account);
+            }
 
-        const existingIndex = accounts.findIndex(acc => acc.MaTK === account.MaTK);
-        if (existingIndex >= 0) {
-            accounts[existingIndex] = { ...accounts[existingIndex], ...account, MatKhau: accounts[existingIndex].MatKhau || account.MatKhau };
-        } else {
-            accounts.push(account);
-        }
+            filterAccounts();
+            accountModal?.classList.add('hidden');
+        });
+    }
 
-        filterAccounts();
-        elements.accountModal.classList.add('hidden');
-    });
+    if (filterVaiTro) filterVaiTro.addEventListener('change', filterAccounts);
+    if (searchAccount) searchAccount.addEventListener('input', filterAccounts);
 
-    elements.searchInput.addEventListener('input', filterAccounts);
-    elements.filterVaiTro.addEventListener('change', filterAccounts);
-
+    // Render dữ liệu mẫu
     renderAccounts(accounts);
 });

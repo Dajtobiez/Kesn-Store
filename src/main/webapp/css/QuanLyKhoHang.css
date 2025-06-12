@@ -1,4 +1,4 @@
-/* CƠ BẢN */
+/* ---------- CƠ BẢN ---------- */
 .container {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -15,7 +15,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* BẢNG */
+/* ---------- BẢNG ---------- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -37,7 +37,7 @@ tr:hover {
     background-color: #f9fafb;
 }
 
-/* NÚT HÀNH ĐỘNG */
+/* ---------- NÚT HÀNH ĐỘNG ---------- */
 .action-button {
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -48,23 +48,22 @@ tr:hover {
 .action-button.edit {
     background-color: #3b82f6;
     color: #fff;
-    margin-right: 0.5rem;
 }
 
 .action-button.edit:hover {
     background-color: #2563eb;
 }
 
-.action-button.delete, .action-button.delete-product {
+.action-button.delete {
     background-color: #ef4444;
     color: #fff;
 }
 
-.action-button.delete:hover, .action-button.delete-product:hover {
+.action-button.delete:hover {
     background-color: #dc2626;
 }
 
-/* MODAL */
+/* ---------- MODAL ---------- */
 .modal {
     position: fixed;
     top: 0;
@@ -83,9 +82,7 @@ tr:hover {
     padding: 1.5rem;
     border-radius: 8px;
     width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
+    max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -108,7 +105,7 @@ tr:hover {
     display: none;
 }
 
-/* INPUT & SELECT */
+/* ---------- INPUT & SELECT ---------- */
 input, select {
     border: 1px solid #d1d5db;
     border-radius: 4px;
@@ -121,18 +118,19 @@ input:focus, select:focus {
     outline: none;
 }
 
-/* NÚT THÊM/THỐNG KÊ */
-button.bg-blue-600 background-color: #3b82f6;
+/* ---------- NÚT THÊM ---------- */
+button.bg-blue-600 {
+    background-color: #3b82f6;
 }
 
 button.bg-blue-600:hover {
     background-color: #2563eb;
 }
 
-button.bg-gray {
+button.bg-gray-500 {
     background-color: #6b7280;
 }
 
-button.bg-gray:hover {
+button.bg-gray-500:hover {
     background-color: #4b5563;
 }

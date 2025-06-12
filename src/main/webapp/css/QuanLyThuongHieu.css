@@ -1,4 +1,3 @@
-/* CƠ BẢN */
 .container {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -15,7 +14,6 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* BẢNG */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -37,7 +35,6 @@ tr:hover {
     background-color: #f9fafb;
 }
 
-/* NÚT HÀNH ĐỘNG */
 .action-button {
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -55,16 +52,15 @@ tr:hover {
     background-color: #2563eb;
 }
 
-.action-button.delete, .action-button.delete-product {
+.action-button.delete {
     background-color: #ef4444;
     color: #fff;
 }
 
-.action-button.delete:hover, .action-button.delete-product:hover {
+.action-button.delete:hover {
     background-color: #dc2626;
 }
 
-/* MODAL */
 .modal {
     position: fixed;
     top: 0;
@@ -80,17 +76,17 @@ tr:hover {
 
 .modal-content {
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 1.25rem;
     border-radius: 8px;
     width: 90%;
     max-width: 600px;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content input,
-.modal-content select {
+.modal-content textarea {
     border: 1px solid #d1d5db;
     border-radius: 4px;
     padding: 0.5rem;
@@ -99,7 +95,7 @@ tr:hover {
 }
 
 .modal-content input:focus,
-.modal-content select:focus {
+.modal-content textarea:focus {
     border-color: #3b82f6;
     outline: none;
 }
@@ -108,31 +104,30 @@ tr:hover {
     display: none;
 }
 
-/* INPUT & SELECT */
-input, select {
+input, textarea {
     border: 1px solid #d1d5db;
     border-radius: 4px;
     padding: 0.5rem;
     transition: border-color 0.3s ease;
 }
 
-input:focus, select:focus {
+input:focus, textarea:focus {
     border-color: #3b82f6;
     outline: none;
 }
 
-/* NÚT THÊM/THỐNG KÊ */
-button.bg-blue-600 background-color: #3b82f6;
+button.bg-blue-600 {
+    background-color: #3b82f6;
 }
 
 button.bg-blue-600:hover {
     background-color: #2563eb;
 }
 
-button.bg-gray {
+button.bg-gray-500 {
     background-color: #6b7280;
 }
 
-button.bg-gray:hover {
+button.bg-gray-500:hover {
     background-color: #4b5563;
 }

@@ -3,186 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý Tài khoản - KesnStore</title>
+    <title>Quản lý Tài khoản</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/QuanLyTaiKhoan.css">
-    <script defer src="js/QuanLyTaiKhoan.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/QuanLyTaiKhoan.css">
 </head>
-<body class="bg-white font-sans">
-    <!-- Phần đầu trang -->
-    <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
-        <a href="/" class="mb-2 md:mb-0">
-            <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
-        </a>
-        <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
-            <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
-                <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
-            </div>
-            <div class="flex items-center space-x-2 w-full md:w-auto">
-                <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
-                <div class="flex space-x-2">
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+            <a href="/" class="mb-2 md:mb-0">
+                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+            </a>
+            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
                 </div>
-            </div>
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
+                    <div class="flex space-x-2">
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 0 00-6.364 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+    <div class="p-4">
+        <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+        <nav>
+            <ul class="space-y-2">
+                <li>
+                    <a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-box w-5 h-5 mr-2"></i>
+                        <span>Quản lý sản phẩm</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-chart-bar w-5 h-5 mr-2"></i>
+                        <span>Dashboard thống kê</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyKhoHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-warehouse w-5 h-5 mr-2"></i>
+                        <span>Quản lý kho hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-shopping-cart w-5 h-5 mr-2"></i>
+                        <span>Quản lý đơn hàng</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-file-invoice w-5 h-5 mr-2"></i>
+                        <span>Quản lý hóa đơn</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyTaiKhoan.html" class="flex items-center p-2 bg-gray-700 rounded">
+                        <i class="fas fa-users w-5 h-5 mr-2"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-star w-5 h-5 mr-2"></i>
+                        <span>Quản lý đánh giá</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-tags w-5 h-5 mr-2"></i>
+                        <span>Quản lý thương hiệu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                        <i class="fas fa-headset w-5 h-5 mr-2"></i>
+                        <span>Quản lý yêu cầu hỗ trợ</span>
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </header>
+    </div>
+</aside>
+            <!-- Main Content -->
+            <div class="ml-64 p-6 w-full">
+                <h1 class="text-3xl font-bold mb-6">Quản lý Tài khoản</h1>
+                <p class="text-gray-600 mb-6">Theo dõi và quản lý tài khoản của quản trị viên.</p>
 
-    <div class="container mx-auto p-6 md:p-8">
-        <div class="main-container bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-            <h1 class="text-2xl font-bold mb-2">Quản lý Tài khoản</h1>
-            <p class="text-sm text-gray-600 mb-6">Theo dõi và quản lý tài khoản của quản trị viên, nhân viên và khách hàng.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Tổng tài khoản</h3>
-                    <p class="text-2xl font-bold text-blue-600">50</p>
-                    <p class="text-xs text-gray-500">Cập nhật: 06/06/2025</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Số quản trị viên</h3>
-                    <p class="text-2xl font-bold text-blue-600">5</p>
-                    <p class="text-xs text-gray-500">Quản lý hệ thống</p>
-                </div>
-                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-                    <h3 class="text-sm font-semibold text-gray-600">Số khách hàng</h3>
-                    <p class="text-2xl font-bold text-blue-600">40</p>
-                    <p class="text-xs text-gray-500">Người mua hàng</p>
-                </div>
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6">
-                <h3 class="text-sm font-semibold mb-4">Tìm kiếm & Lọc</h3>
-                <div class="flex flex-col md:flex-row gap-4">
-                    <input type="text" id="search-account" placeholder="Tìm kiếm theo Mã tài khoản hoặc Tên đăng nhập" class="border rounded px-2 py-1 text-sm flex-1">
-                    <select id="filter-vai-tro" class="border rounded px-2 py-1 text-sm">
-                        <option value="">Tất cả vai trò</option>
-                        <option value="Quản trị viên">Quản trị viên</option>
-                        <option value="Nhân viên">Nhân viên</option>
-                        <option value="Khách hàng">Khách hàng</option>
-                    </select>
-                    <button id="add-account" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Thêm tài khoản</button>
-                </div>
-            </div>
-
-            <div class="bg-white border border-gray-200 rounded-lg overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="p-3 text-sm font-semibold">STT</th>
-                            <th class="p-3 text-sm font-semibold">Mã tài khoản</th>
-                            <th class="p-3 text-sm font-semibold">Tên đăng nhập</th>
-                            <th class="p-3 text-sm font-semibold">Vai trò</th>
-                            <th class="p-3 text-sm font-semibold">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="account-list"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="account-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2 id="modal-title" class="text-xl font-bold mb-2">Thêm tài khoản</h2>
-                <form id="account-form">
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mã tài khoản:</label>
-                        <input type="text" id="matk" class="w-full border rounded px-2 py-1 text-sm" required>
+                <!-- Thống kê -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Tổng tài khoản</h3>
+                        <p class="text-2xl font-bold">50</p>
+                        <p class="text-sm text-gray-500">Cập nhật: 06/06/2025</p>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Tên đăng nhập:</label>
-                        <input type="text" id="tendangnhap" class="w-full border rounded px-2 py-1 text-sm" required>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Số quản trị viên</h3>
+                        <p class="text-2xl font-bold">5</p>
+                        <p class="text-sm text-gray-500">Quản lý hệ thống</p>
                     </div>
-                    <div id="password-field" class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Mật khẩu:</label>
-                        <input type="password" id="matkhau" class="w-full border rounded px-2 py-1 text-sm" required>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Số khách hàng</h3>
+                        <p class="text-2xl font-bold">40</p>
+                        <p class="text-sm text-gray-500">Người mua hàng</p>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Vai trò:</label>
-                        <select id="vaitro" class="w-full border rounded px-2 py-1 text-sm" required>
+                </div>
+
+                <!-- Tìm kiếm & Lọc -->
+                <div class="main-container mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Tìm kiếm & Lọc</h3>
+                    <div class="flex flex-col md:flex-row md:space-x-4">
+                        <input type="text" id="search-account" placeholder="Tìm kiếm mã tài khoản, tên đăng nhập..." class="border rounded px-2 py-1 text-sm flex-1">
+                        <select id="filter-vaitro" class="mb-2 md:mb-0 w-full md:w-auto">
+                            <option value="">Tất cả vai trò</option>
                             <option value="Quản trị viên">Quản trị viên</option>
                             <option value="Nhân viên">Nhân viên</option>
                             <option value="Khách hàng">Khách hàng</option>
                         </select>
+                        <button id="add-account" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Thêm tài khoản</button>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Họ và tên:</label>
-                        <input type="text" id="hoten" class="w-full border rounded px-2 py-1 text-sm" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Email:</label>
-                        <input type="email" id="email" class="w-full border rounded px-2 py-1 text-sm" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-sm font-semibold mb-1">Số điện thoại:</label>
-                        <input type="tel" id="sodienthoai" class="w-full border rounded px-2 py-1 text-sm" required>
-                    </div>
-                    <div class="flex gap-3">
-                        <button type="button" id="cancel-modal" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Hủy</button>
-                        <button type="submit" class="bg-blue-600 text-white rounded px-4 py-1 text-sm hover:bg-blue-700">Lưu</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
 
-        <div id="delete-modal" class="modal hidden">
-            <div class="modal-content">
-                <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
-                <p class="text-sm text-gray-600 mb-4">Bạn có chắc chắn muốn xóa tài khoản này?</p>
-                <div class="flex gap-3">
-                    <button id="cancel-delete" class="bg-gray-300 text-gray-700 rounded px-4 py-1 text-sm hover:bg-gray-400">Hủy</button>
-                    <button id="confirm-delete" class="bg-red-600 text-white rounded px-4 py-1 text-sm hover:bg-red-700">Xóa</button>
+                <!-- Table -->
+                <div class="main-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã tài khoản</th>
+                                <th>Tên đăng nhập</th>
+                                <th>Vai trò</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="account-list">
+                            <!-- Dữ liệu sẽ được render bởi JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal Thêm -->
+                <div id="account-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="text-xl font-bold mb-4">Thêm tài khoản</h2>
+                        <form id="account-form">
+                            <div class="mb-4">
+                                <label class="block mb-1">Mã tài khoản:</label>
+                                <input type="text" id="maTK" class="w-full" placeholder="Nhập mã tài khoản" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Tên đăng nhập:</label>
+                                <input type="text" id="tenDangNhap" class="w-full" placeholder="Nhập tên đăng nhập" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Mật khẩu:</label>
+                                <input type="password" id="matKhau" class="w-full" placeholder="Nhập mật khẩu" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Vai trò:</label>
+                                <select id="vaiTro" class="w-full" required>
+                                    <option value="Quản trị viên">Quản trị viên</option>
+                                    <option value="Khách hàng">Khách hàng</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Họ và tên:</label>
+                                <input type="text" id="hoTen" class="w-full" placeholder="Nhập họ và tên">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Email:</label>
+                                <input type="email" id="email" class="w-full" placeholder="Nhập email">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1">Số điện thoại:</label>
+                                <input type="text" id="sdt" class="w-full" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div class="flex justify-end space-x-2">
+                                <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal Xóa -->
+                <div id="delete-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 class="text-xl font-bold mb-4">Xác nhận xóa</h2>
+                        <p class="mb-4">Bạn có chắc chắn muốn xóa tài khoản này?</p>
+                        <div class="flex justify-end space-x-2">
+                            <button id="cancel-delete" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                            <button id="confirm-delete" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Xóa</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="bg-gray-100 text-gray-700 mt-16">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">GIÚP ĐỠ</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Tình trạng đơn hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Vận chuyển & giao hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Trả hàng</a></li>
-                    <li><a href="#" class="hover:text-black">Chính sách bảo hành</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">VỀ CHÚNG TÔI</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Tin tức</a></li>
-                    <li><a href="#" class="hover:text-black">Tuyển dụng</a></li>
-                    <li><a href="#" class="hover:text-black">Hợp tác</a></li>
-                    <li><a href="#" class="hover:text-black">Cửa hàng</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">TÀI KHOẢN</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-black">Đăng nhập</a></li>
-                    <li><a href="#" class="hover:text-black">Đăng ký</a></li>
-                    <li><a href="#" class="hover:text-black">Danh sách yêu thích</a></li>
-                    <li><a href="#" class="hover:text-black">Theo dõi đơn hàng</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="font-semibold text-gray-900 mb-3">KẾT NỐI</h3>
-                <div class="flex space-x-4 text-xl">
-                    <a href="#" class="text-gray-500 hover:text-black"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-black"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="border-t border-gray-200 text-center py-4 text-xs text-gray-500">
-            © 2025 KesnStore. Design by Dajtobiez.
-        </div>
-    </footer>
+    <script src="js/QuanLyTaiKhoan.js"></script>
 </body>
 </html>
