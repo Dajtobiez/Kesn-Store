@@ -115,20 +115,29 @@
                         <a href="forgotpass.html" class="link-btn">Quên mật khẩu</a>
                     </div>
                     <button type="submit" class="login-btn mb-3">Đăng nhập</button>
-                    <button class="signup-btn mb-3" onclick="window.location.href='register.html'">
-                        Đăng ký
+                    <button type="submit" class="signup-btn mb-3">
+                        <a href="register.html">Đăng ký</a>
                     </button>
 
                     <!-- BẮT ĐẦU: Google Sign-In -->
-                    <div class="text-center m-2 p-2 rounded-lg"><strong>Phương Thức Đăng Nhập Khác</strong></div>
+                     <div class="text-center m-2 p-2 rounded-lg"><strong>Phương Thức Đăng Nhập Khác</strong></div>
 
-                    <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-context="signin"
-                        data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
+                    <div id="g_id_onload"
+                        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                        data-context="signin"
+                        data-ux_mode="popup"
+                        data-callback="handleCredentialResponse"
+                        data-auto_prompt="false">
                     </div>
 
                     <div class="mb-3">
-                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
-                            data-text="signin_with" data-size="large" data-logo_alignment="left">
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-shape="rectangular"
+                            data-theme="outline"
+                            data-text="signin_with"
+                            data-size="large"
+                            data-logo_alignment="left">
                         </div>
                     </div>
                     <!-- KẾT THÚC: Google Sign-In -->
