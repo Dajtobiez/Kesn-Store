@@ -1,102 +1,159 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Kesn Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
-        .login-container { 
-            max-width: 400px; 
-            margin: 50px auto; 
-            padding: 20px; 
+        a {
+            text-decoration: none;
+            color: white;
         }
-        .logo { 
-            max-width: 200px; 
-            height: auto; 
-            margin-bottom: 20px; 
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
         }
-        .form-control { 
-            border-radius: 20px; 
-            padding: 10px; 
+
+        .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
         }
-        .login-btn { 
-            background: #000; 
-            color: #fff; 
-            padding: 10px 30px; 
-            border: none; 
-            border-radius: 25px; 
-            width: 100%; 
+
+        .form-control {
+            border-radius: 20px;
+            padding: 10px;
         }
-        .login-btn:hover { 
-            background: #333; 
+
+        .login-btn {
+            background: #000000;
+            color: #fff;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            transition: all 0.3s ease;
         }
-        .link-btn { 
-            color: #000; 
-            text-decoration: none; 
+
+        .login-btn:hover {
+            background: #444;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        .link-btn:hover { 
-            text-decoration: underline; 
+
+        .signup-btn {
+            background: #000;
+            color: #fff;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            width: 100%;
+            transition: all 0.3s ease;
         }
-        .input-group-text { 
-            background: transparent; 
-            border: none; 
+
+        .signup-btn:hover {
+            background: #444;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
-        .error-message { 
-            color: red; 
-            font-size: 0.9em; 
-            display: none; 
+
+        .link-btn {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+
+        .input-group-text {
+            background: transparent;
+            border: none;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            display: none;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="login-container">
                 <div class="text-center">
-                    <img src="/images/KesnStore.png" alt="Kesn Store Logo" class="logo">
+                    <img src="img/logo.jpg" alt="Kesn Store Logo" class="logo">
                     <h2 class="mb-4">ĐĂNG NHẬP</h2>
                 </div>
                 <form th:action="@{/login}" method="post" onsubmit="return validateLogin()">
-                    <div th:if="${param.error}" class="alert alert-danger text-center">
-                        Sai email/số điện thoại hoặc mật khẩu
-                    </div>
                     <div class="mb-3">
                         <label for="loginInput" class="form-label">Nhập email hoặc số điện thoại *</label>
                         <input type="text" class="form-control" id="loginInput" name="loginInput" value="" required>
-                        <div id="loginInputError" class="error-message">Vui lòng nhập email hoặc số điện thoại hợp lệ</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Nhập mật khẩu *</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="password" name="password" value="" required>
-                            <span class="input-group-text toggle-password">
-                                <i class="bi bi-eye"></i>
-                            </span>
+                        <div id="loginInputError" class="error-message">Vui lòng nhập email hoặc số điện thoại hợp lệ
                         </div>
                     </div>
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Nhập mật khẩu *</label>
+                        <input type="password" class="form-control pr-5" id="password" name="password" required>
+                        <span class="toggle-password" style="position:absolute; top:45px; right:15px; cursor:pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div>
+
                     <div class="mb-3 d-flex justify-content-between">
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="remember">
                             <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
                         </div>
-                        <a href="/forgotpass" class="link-btn">Quên mật khẩu</a>
+                        <a href="forgotpass.html" class="link-btn">Quên mật khẩu</a>
                     </div>
                     <button type="submit" class="login-btn mb-3">Đăng nhập</button>
-                    <div class="text-center">
-                        <a href="/register" class="link-btn">Đăng ký</a>
+                    <button type="submit" class="signup-btn mb-3">
+                        <a href="register.html">Đăng ký</a>
+                    </button>
+
+                    <!-- BẮT ĐẦU: Google Sign-In -->
+                     <div class="text-center m-2 p-2 rounded-lg"><strong>Phương Thức Đăng Nhập Khác</strong></div>
+
+                    <div id="g_id_onload"
+                        data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                        data-context="signin"
+                        data-ux_mode="popup"
+                        data-callback="handleCredentialResponse"
+                        data-auto_prompt="false">
                     </div>
+
+                    <div class="mb-3">
+                        <div class="g_id_signin"
+                            data-type="standard"
+                            data-shape="rectangular"
+                            data-theme="outline"
+                            data-text="signin_with"
+                            data-size="large"
+                            data-logo_alignment="left">
+                        </div>
+                    </div>
+                    <!-- KẾT THÚC: Google Sign-In -->
+
                 </form>
             </div>
         </div>
     </div>
+
     <script>
         function validateLogin() {
             const loginInput = document.getElementById('loginInput').value;
             const loginInputError = document.getElementById('loginInputError');
             const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
             const phonePattern = /^[0-9]{10,11}$/;
-            
+
             if (emailPattern.test(loginInput) || phonePattern.test(loginInput)) {
                 loginInputError.style.display = 'none';
                 return true;
@@ -120,6 +177,32 @@
                 icon.classList.add('bi-eye');
             }
         });
+
+        // BẮT ĐẦU: Google Sign-In callback
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+
+            // Gửi token về server để xác thực
+            fetch('/google-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: response.credential })
+            }).then(res => {
+                if (res.ok) {
+                    window.location.href = '/home'; // Điều hướng sau khi đăng nhập thành công
+                } else {
+                    alert('Đăng nhập Google thất bại');
+                }
+            });
+        }
+        // KẾT THÚC: Google Sign-In callback
     </script>
+
+    <!-- BẮT ĐẦU: Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- KẾT THÚC: Google Sign-In SDK -->
 </body>
+
 </html>
