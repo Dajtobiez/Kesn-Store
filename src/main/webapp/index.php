@@ -9,13 +9,21 @@
   <link rel="stylesheet" href="css/trangchu.css">
 </head>
 <body>
+  <div class="header-extra">
+    <div class="extra-links">
+      <a href="#">Gia nhập</a> |
+      <a href="#">Trợ giúp</a> |
+      <a href="#">Đăng nhập</a>|</i>
+      <a href="#">Đăng ký</a>|</i>
+    </div>
+  </div>
   <div class="header">
     <div class="logo">
       <img src="img/logoxoaphong.png" alt="Kesn Store Logo">
     </div>
     <div class="nav">
-      <a href="#">Trang chủ</a>
-  
+      <a>Sản phẩm mới</a>
+      <a>Giảm giá</a>
       <div class="search-container">
         <i class="fas fa-search search-icon"></i>
         <input type="text" class="search-bar" placeholder="Tìm kiếm sản phẩm">
@@ -127,7 +135,7 @@
     <div class="trend-wrapper">
       <div class="trend-items" id="trendItems">
         <div class="trend-product">
-          <img src="img/giay1.jpg" alt="Nike Air Max">
+          <img src="img/guot.jpg" alt="Nike Air Max">
           <div class="product-details">
             <h3>A'One 'Leo Lights' EP</h3>
             <p>3,239,000 VND</p>
@@ -141,9 +149,9 @@
           </div>
         </div>
         <div class="trend-product">
-          <img src="img/giay3.jpg" alt="Puma RS-X">
+          <img src="img/bla.avif" alt="Puma RS-X">
           <div class="product-details">
-            <h3>Nike Mercurial Vapor 16 Elite</h3>
+            <h3>Nike Mercurial Vapor 1</h3>
             <p>7,319,000 VND</p>
           </div>
         </div>
@@ -168,9 +176,81 @@
             <p>7,349,000 VND</p>
           </div>
         </div>
+        <div class="trend-product">
+          <img src="img/sne.jpg" alt="Vans Old Skool">
+          <div class="product-details">
+            <h3>Vans Old Skool</h3>
+            <p>7,349,000 VND</p>
+          </div>
+        </div>
+        <div class="trend-product">
+          <img src="img/dep.jpg" alt="Vans Old Skool">
+          <div class="product-details">
+            <h3>Vans Old Skool</h3>
+            <p>7,349,000 VND</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+ <div class="model">
+    <div class="section-header">
+      <h2>Người mẫu</h2>
+      <a href="#" class="view-more">Xem thêm</a>
+    </div>
+    <div class="model-wrapper">
+      <div class="model-items" id="modelContainer">
+        <div class="model-item" data-name="Adidas samba og white better scarlet" data-price="3,239,000 VND" data-small-img="img/adidass.jpg">
+          <img src="img/ml1.jpg">
+        </div>
+        <div class="model-item" data-name="Zion 4 PF 'Iridescence'" data-price="4,109,000 VND" data-small-img="img/stussy.jpg">
+          <img src="img/ml2.jpg">
+        </div>
+        <div class="model-item" data-name="Nike Mercurial Vapor 1" data-price="7,319,000 VND" data-small-img="img/nike.jpg">
+          <img src="img/ml3.jpg">
+        </div>
+        <div class="model-item" data-name="Air Jordan 1 Mid" data-price="3,000,000 VND" data-small-img="img/spm.jpg">
+          <img src="img/ml4.jpg">
+        </div>
+        <div class="model-item" data-name="Jordan Air Rev" data-price="7,349,000 VND" data-small-img="img/small_ml5.jpg">
+          <img src="img/ml5.jpg">
+        </div>
+        <div class="model-item" data-name="Vans Old Skool" data-price="7,349,000 VND" data-small-img="img/small_ml6.jpg">
+          <img src="img/ml6.jpg">
+        </div>
+        <div class="model-item" data-name="Vans Old Skool" data-price="7,349,000 VND" data-small-img="img/small_ml7.jpg">
+          <img src="img/ml7.jpg">
+        </div>
+        <div class="model-item" data-name="Vans Old Skool" data-price="7,349,000 VND" data-small-img="img/small_ml8.jpg">
+          <img src="img/ml8.jpg">
+        </div>
+      </div>
+    </div>
+    
+    <div class="popup" id="modelPopup">
+      <div class="popup-content">
+        <span class="close-btn">×</span>
+        <div class="popup-left">
+          <img id="popupLargeImage" src="" alt="Large Image">
+        </div>
+        <div class="popup-right">
+          <div class="popup-right-top">
+            <img id="popupSmallImage" src="" alt="Small Image">
+            <div class="popup-product-info">
+              <h3 id="popupProductName"></h3>
+              <p id="popupProductPrice"></p>
+            </div>
+          </div>
+          <div class="popup-right-bottom">
+            <button class="add-to-cart"><i class="fas fa-shopping-bag"></i>  Giỏ hàng</button>
+            <button class="add-to-favorite"><i class="fas fa-heart"></i>  Yêu thích</button>
+            <button class="add-to-see">Xem sản phẩm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
   <div class="footer">
     <div class="footer-container">
@@ -186,9 +266,9 @@
       <div class="footer-section">
         <h3>Liên hệ</h3>
         <div class="contact-info">
-          <div class="contact-item"><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</div>
+          <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Quận 12</div>
           <div class="contact-item"><i class="fas fa-phone"></i> (+84) 123 456 789</div>
-          <div class="contact-item"><i class="fas fa-envelope"></i> info@kesnstore.com</div>
+          <div class="contact-item"><i class="fas fa-envelope"></i> kesnstore@gmail.com</div>
           <div class="contact-item"><i class="fas fa-globe"></i> www.kesnstore.com</div>
         </div>
       </div>
@@ -249,6 +329,42 @@
 
     setInterval(nextBanner, 2000);
     showBanner(currentBanner);
+
+    // Model Popup
+    const modelItems = document.querySelectorAll('.model-item');
+    const popup = document.getElementById('modelPopup');
+    const popupLargeImage = document.getElementById('popupLargeImage');
+    const popupSmallImage = document.getElementById('popupSmallImage');
+    const popupProductName = document.getElementById('popupProductName');
+    const popupProductPrice = document.getElementById('popupProductPrice');
+    const closeBtn = document.querySelector('.close-btn');
+
+    modelItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const imgSrc = item.querySelector('img').src;
+        const smallImgSrc = item.getAttribute('data-small-img');
+        const productName = item.getAttribute('data-name');
+        const productPrice = item.getAttribute('data-price');
+        
+        popupLargeImage.src = imgSrc;
+        popupSmallImage.src = smallImgSrc;
+        popupProductName.textContent = productName;
+        popupProductPrice.textContent = productPrice;
+        
+        popup.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    // Close popup when clicking outside
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
