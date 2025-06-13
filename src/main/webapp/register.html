@@ -54,17 +54,19 @@
         <div class="row justify-content-center">
             <div class="register-container">
                 <div class="text-center">
-                    <img src="/images/KesnStore.png" alt="Kesn Store Logo" class="logo">
+                    <img src="img/logo.jpg" alt="Kesn Store Logo" class="logo">
                     <h2 class="mb-4">ĐĂNG KÝ</h2>
                 </div>
                 <form th:action="@{/register}" method="post" onsubmit="return validateRegister()">
-                    <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div>
+
+                    <!-- <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div> -->
+
                     <div class="mb-3">
                         <label for="loginInput" class="form-label">Nhập email hoặc số điện thoại *</label>
                         <input type="text" class="form-control" id="loginInput" name="loginInput" value="" required>
                         <div id="loginInputError" class="error-message">Vui lòng nhập email hoặc số điện thoại hợp lệ</div>
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label for="password" class="form-label">Nhập mật khẩu *</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" name="password" value="" required>
@@ -72,24 +74,45 @@
                                 <i class="bi bi-eye"></i>
                             </span>
                         </div>
+                    </div> -->
+
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Nhập mật khẩu *</label>
+                        <input type="password" class="form-control pr-5" id="password" name="password" required>
+                        <span class="toggle-password" style="position:absolute; top:45px; right:15px; cursor:pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
                     </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu *</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="" required>
-                            <span class="input-group-text toggle-password">
-                                <i class="bi bi-eye"></i>
-                            </span>
-                        </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Xác nhận mật khẩu *</label>
+                        <input type="password" class="form-control pr-5" id="password" name="password" required>
+                        <span class="toggle-password" style="position:absolute; top:45px; right:15px; cursor:pointer;">
+                            <i class="bi bi-eye"></i>
+                        </span>
                     </div>
                     <div class="mb-3">
                         <label for="securityAnswer" class="form-label">Hãy ghi gì đó để làm câu hỏi bảo mật *</label>
                         <input type="text" class="form-control" id="securityAnswer" name="securityAnswer" value="" required>
                     </div>
-                    <button type="submit" class="register-btn mb-3">Đăng ký</button>
-                    <div class="text-center">
-                        <a href="/login" class="link-btn">Đăng nhập</a>
+                    <button type="submit" class="register-btn mt-2 mb-3"> Xác Nhận Đăng ký</button>
+                    <button class="register-btn mb-3" onclick="window.location.href='login.html'">
+                        Quay lại trang Đăng Nhập
+                    </button>
+
+                    <!-- BẮT ĐẦU: Google Sign-In -->
+                    <div class="text-center m-2 p-2 rounded-lg"><strong>Phương Thức Đăng Kí Khác</strong></div>
+
+                    <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID" data-context="signin"
+                        data-ux_mode="popup" data-callback="handleCredentialResponse" data-auto_prompt="false">
                     </div>
+
+                    <div class="mb-3">
+                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+                            data-text="signin_with" data-size="large" data-logo_alignment="left">
+                        </div>
+                    </div>
+                    <!-- KẾT THÚC: Google Sign-In -->
                 </form>
             </div>
         </div>
@@ -122,6 +145,32 @@
                 }
             });
         });
+
+         // BẮT ĐẦU: Google Sign-In callback
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+
+            // Gửi token về server để xác thực
+            fetch('/google-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: response.credential })
+            }).then(res => {
+                if (res.ok) {
+                    window.location.href = '/home'; // Điều hướng sau khi đăng nhập thành công
+                } else {
+                    alert('Đăng nhập Google thất bại');
+                }
+            });
+        }
+        // KẾT THÚC: Google Sign-In callback
+    </script>
+
+    <!-- BẮT ĐẦU: Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- KẾT THÚC: Google Sign-In SDK -->
     </script>
 </body>
 </html>
