@@ -1,0 +1,39 @@
+# Maven
+/target/
+/.mvn/
+mvnw
+mvnw.cmd
+*.jar
+*.war
+
+# Java
+*.class
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Tomcat
+Tomcat*/
+work/
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.orig
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+*.properties.local
