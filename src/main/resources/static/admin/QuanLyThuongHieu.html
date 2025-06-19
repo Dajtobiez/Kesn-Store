@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Thương hiệu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/QuanLyThuongHieu.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+            <a href="/" class="mb-2 md:mb-0">
+                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+            </a>
+            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
+                </div>
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <input type="text" placeholder="Tìm kiếm..." class="border rounded-lg px-4 py-2 w-full md:w-auto hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <div class="flex space-x-2">
+                        <svg class="w-6 h-6 text-gray-600 hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+                    <nav>
+                        <ul class="space-y-2">
+                            <li><a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-box w-5 h-5 mr-2"></i><span>Quản lý sản phẩm</span></a></li>
+                            <li><a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-chart-bar w-5 h-5 mr-2"></i><span>Dashboard thống kê</span></a></li>
+                            <li><a href="QuanLyKhoHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-warehouse w-5 h-5 mr-2"></i><span>Quản lý kho hàng</span></a></li>
+                            <li><a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-shopping-cart w-5 h-5 mr-2"></i><span>Quản lý đơn hàng</span></a></li>
+                            <li><a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-file-invoice w-5 h-5 mr-2"></i><span>Quản lý hóa đơn</span></a></li>
+                            <li><a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-users w-5 h-5 mr-2"></i><span>Quản lý tài khoản</span></a></li>
+                            <li><a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-star w-5 h-5 mr-2"></i><span>Quản lý đánh giá</span></a></li>
+                            <li><a href="QuanLyThuongHieu.html" class="flex items-center p-2 bg-gray-700 rounded"><i class="fas fa-tags w-5 h-5 mr-2"></i><span>Quản lý thương hiệu</span></a></li>
+                            <li><a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-headset w-5 h-5 mr-2"></i><span>Quản lý yêu cầu hỗ trợ</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="ml-64 p-6 w-full container">
+                <h1 class="text-3xl font-bold mb-6 text-center md:text-left">Quản lý Thương hiệu</h1>
+                <p class="text-gray-600 mb-6 text-center md:text-left">Quản lý danh sách thương hiệu sản phẩm của cửa hàng giày.</p>
+
+                <!-- Thống kê -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Tổng thương hiệu</h3>
+                        <p class="text-2xl font-bold">10</p>
+                        <p class="text-sm text-gray-500">Cập nhật: 12/06/2025</p>
+                    </div>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Sản phẩm Nike</h3>
+                        <p class="text-2xl font-bold">30</p>
+                        <p class="text-sm text-gray-500">Thương hiệu phổ biến</p>
+                    </div>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Sản phẩm Adidas</h3>
+                        <p class="text-2xl font-bold">25</p>
+                        <p class="text-sm text-gray-500">Thương hiệu phổ biến</p>
+                    </div>
+                </div>
+
+                <!-- Tìm kiếm & Thêm -->
+                <div class="main-container mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Tìm kiếm & Thêm</h3>
+                    <div class="flex flex-col md:flex-row md:space-x-4">
+                        <input type="text" id="search-brand" placeholder="Tìm kiếm mã thương hiệu, tên thương hiệu..." class="border rounded-lg px-4 py-2 text-sm flex-1 hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="add-brand" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full md:w-auto mt-2 md:mt-0">Thêm Thương hiệu</button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="main-container">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th class="p-3">Mã Thương hiệu</th>
+                                <th class="p-3">Tên Thương hiệu</th>
+                                <th class="p-3">Mô tả</th>
+                                <th class="p-3">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="brand-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- Modal -->
+                <div id="brand-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="text-xl font-bold mb-4 text-blue-600">Thêm Thương hiệu</h2>
+                        <form id="brand-form">
+                            <div class="mb-6">
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium">Mã Thương hiệu:</label>
+                                        <input type="text" id="math" class="w-full border rounded-lg px-3 py-2 text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium">Tên Thương hiệu:</label>
+                                        <input type="text" id="tenthuonghieu" class="w-full border rounded-lg px-3 py-2 text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm font-medium">Mô tả:</label>
+                                        <textarea id="mota" class="w-full border rounded-lg px-3 py-2 text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center space-x-3">
+                                <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">Hủy</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/QuanLyThuongHieu.js"></script>
+</body>
+</html>

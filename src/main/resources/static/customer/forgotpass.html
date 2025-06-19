@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kesn Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .forgot-container { 
+            max-width: 400px; 
+            margin: 50px auto; 
+            padding: 20px; 
+        }
+        .logo { 
+            max-width: 200px; 
+            height: auto; 
+            margin-bottom: 20px; 
+        }
+        .form-control { 
+            border-radius: 20px; 
+            padding: 10px; 
+        }
+        .forgot-btn { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 30px; 
+            border: none; 
+            border-radius: 25px; 
+            width: 100%; 
+        }
+        .forgot-btn:hover { 
+            background: #333; 
+        }
+        .link-btn { 
+            color: #000; 
+            text-decoration: none; 
+        }
+        .link-btn:hover { 
+            text-decoration: underline; 
+        }
+        .input-group-text { 
+            background: transparent; 
+            border: none; 
+        }
+        .error-message { 
+            color: red; 
+            font-size: 0.9em; 
+            display: none; 
+        }
+        .register-btn { 
+            background: #000; 
+            color: #fff; 
+            padding: 10px 30px; 
+            border: none; 
+            border-radius: 25px; 
+            width: 100%; 
+        }
+        .register-btn:hover { 
+            background: #333; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="forgot-container">
+                <div class="text-center">
+                    <img src="img/logo.jpg" alt="Kesn Store Logo" class="logo">
+                    <h2 class="mb-4">QUÊN MẬT KHẨU</h2>
+                </div>
+                <form th:action="@{/forgot-password}" method="post" onsubmit="return validateForgot()">
+                    <div class="mb-3">
+                        <label for="loginInput" class="form-label">Nhập email hoặc số điện thoại *</label>
+                        <input type="text" class="form-control" id="loginInput" name="loginInput" value="" required>
+                        <div id="loginInputError" class="error-message">Vui lòng nhập email hoặc số điện thoại hợp lệ</div>
+                    </div>
+                    
+                    <!-- Thêm ô nhập mã xác thực -->
+                    <div class="mb-3">
+                        <label for="verificationCode" class="form-label">Nhập mã xác thực *</label>
+                        <input type="text" class="form-control" id="verificationCode" name="verificationCode" required>
+                        <div id="verificationCodeError" class="error-message">
+                            Mã xác thực phải gồm đúng 6 chữ số.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="securityAnswer" class="form-label">Nhập câu trả lời bảo mật *</label>
+                        <input type="text" class="form-control" id="securityAnswer" name="securityAnswer" value="" required>
+                    </div>
+                    <button type="submit" class="forgot-btn mb-3">Xác nhận</button>
+                    <button class="register-btn mb-3" onclick="window.location.href='login.html'">
+                        Quay lại trang Đăng Nhập
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function validateForgot() {
+            let isValid = true;
+
+            const loginInput = document.getElementById('loginInput').value.trim();
+            const loginInputError = document.getElementById('loginInputError');
+            const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+            const phonePattern = /^[0-9]{10,11}$/;
+
+            const verificationCode = document.getElementById('verificationCode').value.trim();
+            const verificationCodeError = document.getElementById('verificationCodeError');
+            const codePattern = /^\d{6}$/; // chỉ 6 chữ số
+
+            // Validate email/sđt
+            if (emailPattern.test(loginInput) || phonePattern.test(loginInput)) {
+                loginInputError.style.display = 'none';
+            } else {
+                loginInputError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate mã xác thực
+            if (codePattern.test(verificationCode)) {
+                verificationCodeError.style.display = 'none';
+            } else {
+                verificationCodeError.style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
+</body>
+</html>

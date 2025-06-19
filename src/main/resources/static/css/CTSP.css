@@ -1,0 +1,296 @@
+/* ---------- CƠ BẢN ---------- */
+.relative {
+    position: relative;
+}
+
+.container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ---------- HÌNH ẢNH ---------- */
+.thumbnail-scroll {
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.thumbnail-scroll::-webkit-scrollbar {
+    display: none;
+}
+.thumbnail-scroll img {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    opacity: 0.8;
+    width: 100%;
+    height: 50px;
+    object-fit: contain;
+}
+.thumbnail-scroll img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+.main-image {
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    aspect-ratio: 4 / 5;
+    object-fit: contain;
+    background-color: #f9f9f9;
+}
+.main-image:hover {
+    transform: scale(1.02);
+}
+
+.sticky-container {
+    position: sticky;
+    top: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-self: flex-start;
+    margin: 0.5rem 0;
+}
+
+/* ---------- NÚT ---------- */
+.size-button {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.size-button:hover {
+    border-color: #000;
+    background-color: #f3f4f6;
+}
+.size-button.selected {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+}
+
+.action-button {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.action-button.add-to-bag {
+    background-color: #000;
+    color: #fff;
+}
+.action-button.add-to-bag:hover {
+    background-color: #333;
+}
+.action-button.favourite {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+}
+.action-button.favourite:hover {
+    background-color: #f3f4f6;
+}
+
+/* ---------- ĐÁNH GIÁ ---------- */
+.star-rating {
+    display: flex;
+    gap: 2px;
+}
+#reviews-toggle {
+    cursor: pointer;
+}
+#reviews-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+#reviews-content.open {
+    max-height: 500px;
+}
+.review-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 0;
+}
+
+/* ---------- SLIDER - Bạn có thể thích ---------- */
+ .review-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 0;
+}
+
+/* Phần Bạn có thể quan tâm */
+.related-products {
+    padding: 0 0 1rem 0; /* bỏ bớt khoảng dưới */
+    margin-bottom: 0;
+}
+.related-items {
+    position: relative;
+    width: 100%;
+    height: 500px; /* giảm chiều cao để bớt dư thừa */
+    overflow: hidden;
+}
+.related-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 450px;#like-slider {
+    display: flex;
+    flex-wrap: nowrap; /* Ngăn item xuống hàng */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+}
+ border-radius: 50px;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 0;
+    opacity: 0;
+}
+.related-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f9f9f9;
+}
+.related-item.active {
+    opacity: 1;
+    z-index: 99;
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0px 0px 105px -35px rgba(0, 0, 0, 0.75);
+}
+.related-item.prev {
+    z-index: 2;
+    opacity: 0.25;
+    transform: translate(-125%, -50%);
+}
+.related-item.next {
+    z-index: 2;
+    opacity: 0.25;
+    transform: translate(25%, -50%);
+}
+.related-item.prev2 {
+    z-index: 1;
+    opacity: 0.1;
+    transform: translate(-200%, -50%) scale(0.85) rotate(-2deg);
+    border-radius: 50px;
+}
+.related-item.next2 {
+    z-index: 1;
+    opacity: 0.1;
+    transform: translate(100%, -50%) scale(0.85) rotate(2deg);
+    border-radius: 50px;
+}
+/* ---------- NÚT SLIDER ---------- */
+.related-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+}
+.related-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+}
+.related-button:hover {
+    opacity: 1;
+}
+
+/* ---------- SLIDER CUỘN NGANG (nếu có) ---------- */
+#like-slider {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 1rem;
+}
+
+/* ---------- FOOTER ---------- */
+footer a {
+    transition: color 0.3s ease;
+}
+footer {
+    background-color: #f3f4f6; /* bg-gray-100 */
+    color: #374151; /* text-gray-700 */
+    margin-top: 4rem; /* mt-16 */
+}
+
+footer > div:first-child {
+    max-width: 1280px; /* max-w-7xl */
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem; /* px-6 py-10 */
+    display: grid;
+    grid-template-columns: 1fr; /* grid-cols-1 */
+    gap: 2rem; /* gap-8 */
+    font-size: 0.875rem; /* text-sm */
+}
+
+@media (min-width: 768px) {
+    footer > div:first-child {
+        grid-template-columns: repeat(4, 1fr); /* md:grid-cols-4 */
+    }
+}
+
+footer h3 {
+    font-weight: 600; /* font-semibold */
+    color: #111827; /* text-gray-900 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    margin-bottom: 0.5rem; /* space-y-2 */
+}
+
+footer ul li a {
+    color: #374151; /* text-gray-700 */
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    color: #000; /* hover:text-black */
+}
+
+footer .flex {
+    display: flex;
+    gap: 1rem; /* space-x-4 */
+    font-size: 1.25rem; /* text-xl */
+}
+
+footer .flex a {
+    color: #6b7280; /* text-gray-500 */
+}
+
+footer .flex a:hover {
+    color: #000; /* hover:text-black */
+}
+
+footer > div:last-child {
+    border-top: 1px solid #d1d5db; /* border-t border-gray-300 */
+    text-align: center;
+    padding: 1rem 0; /* py-4 */
+    font-size: 0.75rem; /* text-xs */
+    color: #6b7280; /* text-gray-500 */
+}
+
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Hóa đơn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/QuanLyHoaDon.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col min-h-screen">
+        <!-- Phần đầu trang -->
+        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+            <a href="/" class="mb-2 md:mb-0">
+                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+            </a>
+            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
+                </div>
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
+                    <div class="flex space-x-2">
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+                <div class="p-4">
+                    <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+                    <nav>
+                        <ul class="space-y-2">
+                            <li><a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-box w-5 h-5 mr-2"></i><span>Quản lý sản phẩm</span></a></li>
+                            <li><a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-chart-bar w-5 h-5 mr-2"></i><span>Dashboard thống kê</span></a></li>
+                            <li><a href="QuanLyKhoHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-warehouse w-5 h-5 mr-2"></i><span>Quản lý kho hàng</span></a></li>
+                            <li><a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-shopping-cart w-5 h-5 mr-2"></i><span>Quản lý đơn hàng</span></a></li>
+                            <li><a href="QuanLyHoaDon.html" class="flex items-center p-2 bg-gray-700 rounded"><i class="fas fa-file-invoice w-5 h-5 mr-2"></i><span>Quản lý hóa đơn</span></a></li>
+                            <li><a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-users w-5 h-5 mr-2"></i><span>Quản lý tài khoản</span></a></li>
+                            <li><a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-star w-5 h-5 mr-2"></i><span>Quản lý đánh giá</span></a></li>
+                            <li><a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-tags w-5 h-5 mr-2"></i><span>Quản lý thương hiệu</span></a></li>
+                            <li><a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-headset w-5 h-5 mr-2"></i><span>Quản lý yêu cầu hỗ trợ</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="ml-64 p-6 w-full container">
+                <h1 class="text-3xl font-bold mb-6 text-center md:text-left">Quản lý Hóa đơn</h1>
+                <p class="text-gray-600 mb-6 text-center md:text-left">Theo dõi và quản lý các hóa đơn, thanh toán và vận chuyển của cửa hàng giày.</p>
+
+                <!-- Thống kê -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Tổng hóa đơn</h3>
+                        <p class="text-2xl font-bold">50</p>
+                        <p class="text-sm text-gray-500">Cập nhật: 06/06/2025</p>
+                    </div>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Hóa đơn chưa thanh toán</h3>
+                        <p class="text-2xl font-bold">5</p>
+                        <p class="text-sm text-gray-500">Cần xử lý</p>
+                    </div>
+                    <div class="main-container">
+                        <h3 class="text-lg font-semibold">Hóa đơn đang giao</h3>
+                        <p class="text-2xl font-bold">10</p>
+                        <p class="text-sm text-gray-500">Đang vận chuyển</p>
+                    </div>
+                </div>
+
+                <!-- Tìm kiếm & Lọc -->
+                <div class="main-container mb-6">
+                    <h3 class="text-lg font-semibold mb-4">Tìm kiếm & Lọc</h3>
+                    <div class="flex flex-col md:flex-row md:space-x-4">
+                        <input type="text" id="search-invoice" placeholder="Tìm kiếm mã hóa đơn, mã khách hàng..." class="border rounded px-2 py-1 text-sm flex-1">
+                        <select id="filter-trangthai-thanhtoan" class="mb-2 md:mb-0 w-full md:w-auto">
+                            <option value="">Tất cả trạng thái thanh toán</option>
+                            <option value="Đã thanh toán">Đã thanh toán</option>
+                            <option value="Chưa thanh toán">Chưa thanh toán</option>
+                        </select>
+                        <select id="filter-trangthai-vanchuyen" class="mb-2 md:mb-0 w-full md:w-auto">
+                            <option value="">Tất cả trạng thái vận chuyển</option>
+                            <option value="Chờ xử lý">Chờ xử lý</option>
+                            <option value="Đang giao">Đang giao</option>
+                            <option value="Đã giao">Đã giao</option>
+                            <option value="Hủy">Hủy</option>
+                        </select>
+                        <button id="add-invoice" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Thêm hóa đơn</button>
+                        <button id="export-excel" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Xuất Excel</button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="main-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mã Hóa đơn</th>
+                                <th>Mã Khách hàng</th>
+                                <th>Trạng thái Thanh toán</th>
+                                <th>Phương thức Thanh toán</th>
+                                <th>Trạng thái Vận chuyển</th>
+                                <th>Ngày giao dự kiến</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoice-list"></tbody>
+                    </table>
+                </div>
+
+                <!-- Modal -->
+                <div id="invoice-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <h2 id="modal-title" class="text-xl font-bold mb-4 text-blue-600">Thêm Hóa đơn</h2>
+                        <form id="invoice-form">
+                            <div class="mb-4">
+                                <h3 class="text-lg font-semibold mb-2">Thông tin hóa đơn</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block mb-1 text-sm">Mã Hóa đơn:</label>
+                                        <input type="text" id="mahd" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập mã hóa đơn" required>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Mã Khách hàng:</label>
+                                        <input type="text" id="makh" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập mã khách hàng" required>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Trạng thái Thanh toán:</label>
+                                        <select id="trangthai-thanhtoan" class="w-full border rounded px-2 py-1 text-sm" required>
+                                            <option value="Đã thanh toán">Đã thanh toán</option>
+                                            <option value="Chưa thanh toán">Chưa thanh toán</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Phương thức Thanh toán:</label>
+                                        <select id="phuongthuc-thanhtoan" class="w-full border rounded px-2 py-1 text-sm" required>
+                                            <option value="Tiền mặt">Tiền mặt</option>
+                                            <option value="Chuyển khoản">Chuyển khoản</option>
+                                            <option value="Thẻ tín dụng">Thẻ tín dụng</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Trạng thái Vận chuyển:</label>
+                                        <select id="trangthai-vanchuyen" class="w-full border rounded px-2 py-1 text-sm" required>
+                                            <option value="Chờ xử lý">Chờ xử lý</option>
+                                            <option value="Đang giao">Đang giao</option>
+                                            <option value="Đã giao">Đã giao</option>
+                                            <option value="Hủy">Hủy</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Phương thức Vận chuyển:</label>
+                                        <select id="phuongthuc-vanchuyen" class="w-full border rounded px-2 py-1 text-sm" required>
+                                            <option value="Giao hàng nhanh">Giao hàng nhanh</option>
+                                            <option value="Giao hàng tiết kiệm">Giao hàng tiết kiệm</option>
+                                            <option value="Giao hàng tiêu chuẩn">Giao hàng tiêu chuẩn</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block mb-1 text-sm">Ngày giao dự kiến:</label>
+                                        <input type="date" id="ngaygiaodukien" class="w-full border rounded px-2 py-1 text-sm" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <h3 class="text-lg font-semibold mb-2">Chi tiết sản phẩm</h3>
+                                <button type="button" id="add-product" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700 mb-2">Thêm sản phẩm</button>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full border">
+                                        <thead>
+                                            <tr>
+                                                <th class="p-2 text-sm">Tên sản phẩm</th>
+                                                <th class="p-2 text-sm">Màu sắc</th>
+                                                <th class="p-2 text-sm">Kích cỡ</th>
+                                                <th class="p-2 text-sm">Số lượng</th>
+                                                <th class="p-2 text-sm">Giá</th>
+                                                <th class="p-2 text-sm">Hành động</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="product-details"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="flex justify-center space-x-2">
+                                <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal Thêm Sản phẩm -->
+                <div id="product-modal" class="modal hidden">
+                    <div class="modal-content max-w-md">
+                        <h2 class="text-xl font-bold mb-4 text-blue-600">Thêm Sản phẩm</h2>
+                        <form id="product-form">
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Mã Sản phẩm:</label>
+                                <input type="text" id="product-masp" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập mã sản phẩm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Tên Sản phẩm:</label>
+                                <input type="text" id="product-tensp" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập tên sản phẩm" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Mã Màu:</label>
+                                <input type="text" id="product-mamau" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập mã màu" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Tên Màu:</label>
+                                <input type="text" id="product-tenmau" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập tên màu" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Mã Kích cỡ:</label>
+                                <input type="text" id="product-masize" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập mã kích cỡ" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Kích cỡ:</label>
+                                <input type="text" id="product-sosize" class="w-full border rounded px-2 py-1 text-sm" placeholder="Nhập kích cỡ" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Số lượng:</label>
+                                <input type="number" id="product-soluong" class="w-full border rounded px-2 py-1 text-sm" min="1" placeholder="Nhập số lượng" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-1 text-sm">Giá:</label>
+                                <input type="number" id="product-gia" class="w-full border rounded px-2 py-1 text-sm" min="0" placeholder="Nhập giá" required>
+                            </div>
+                            <div class="flex justify-center space-x-2">
+                                <button type="button" id="cancel-product" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Thêm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/QuanLyHoaDon.js"></script>
+</body>
+</html>
