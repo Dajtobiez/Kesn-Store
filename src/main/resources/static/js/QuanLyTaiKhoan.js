@@ -1,170 +1,250 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const accountList = document.getElementById('account-list');
-    const addAccountBtn = document.getElementById('add-account');
-    const accountModal = document.getElementById('account-modal');
-    const cancelModal = document.getElementById('cancel-modal');
-    const accountForm = document.getElementById('account-form');
-    const modalTitle = document.getElementById('modal-title');
-    const filterVaiTro = document.getElementById('filter-vaitro');
-    const searchAccount = document.getElementById('search-account');
-    const deleteModal = document.getElementById('delete-modal');
-    const cancelDelete = document.getElementById('cancel-delete');
-    const confirmDelete = document.getElementById('confirm-delete');
+document.addEventListener('DOMContentLoaded', function() {
+	const accountList = document.getElementById('account-list');
+	const addAccountBtn = document.getElementById('add-account');
+	const accountModal = document.getElementById('account-modal');
+	const cancelModal = document.getElementById('cancel-modal');
+	const accountForm = document.getElementById('account-form');
+	const modalTitle = document.getElementById('modal-title');
+	const filterVaiTro = document.getElementById('filter-vaitro');
+	const searchAccount = document.getElementById('search-account');
+	const deleteModal = document.getElementById('delete-modal');
+	const cancelDelete = document.getElementById('cancel-delete');
+	const confirmDelete = document.getElementById('confirm-delete');
 
-    // Dữ liệu mẫu
-    let accounts = [
-        {
-            MaTK: 'TK001',
-            TenDangNhap: 'admin1',
-            MatKhau: '123456',
-            VaiTro: 'Quản trị viên',
-            HoTen: 'Nguyễn Văn A',
-            Email: 'admin1@example.com',
-            Sdt: '0901234567'
-        },
-        {
-            MaTK: 'TK002',
-            TenDangNhap: 'nhanvien1',
-            MatKhau: '123456',
-            VaiTro: 'Quản trị viên',
-            HoTen: 'Trần Thị B',
-            Email: 'admin2@example.com',
-            Sdt: '0907654321'
-        },
-        {
-            MaTK: 'TK003',
-            TenDangNhap: 'khach1',
-            MatKhau: '123456',
-            VaiTro: 'Khách hàng',
-            HoTen: 'Lê Văn C',
-            Email: 'khach1@example.com',
-            Sdt: '0912345678'
-        }
-    ];
+	let allAccounts = [];
+	let deleteMaTK = null;
+	let currentPage = 1;
+	const pageSize = 10;
 
-    let deleteMaTK = null;
+	function generateMaTK() {
+		const prefix = 'TK';
+		let maxNumber = 0;
+		allAccounts.forEach(acc => {
+			const match = acc.maTK.match(/^TK(\d+)$/);
+			if (match) {
+				const number = parseInt(match[1], 10);
+				if (number > maxNumber) maxNumber = number;
+			}
+		});
+		return prefix + String(maxNumber + 1).padStart(3, '0');
+	}
 
-    // Kiểm tra phần tử
-    if (!accountList) console.error('Không tìm thấy account-list');
-    if (!addAccountBtn) console.error('Không tìm thấy add-account');
-    if (!accountModal) console.error('Không tìm thấy account-modal');
-    if (!cancelModal) console.error('Không tìm thấy cancel-modal');
-    if (!accountForm) console.error('Không tìm thấy account-form');
-    if (!modalTitle) console.error('Không tìm thấy modal-title');
-    if (!filterVaiTro) console.error('Không tìm thấy filter-vaitro');
-    if (!searchAccount) console.error('Không tìm thấy search-account');
-    if (!deleteModal) console.error('Không tìm thấy delete-modal');
-    if (!cancelDelete) console.error('Không tìm thấy cancel-delete');
-    if (!confirmDelete) console.error('Không tìm thấy confirm-delete');
+	function normalizeString(str) {
+		return str.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/\s+/g, "");
+	}
 
-    function renderAccounts(filteredAccounts) {
-        if (!accountList) return;
-        accountList.innerHTML = '';
-        filteredAccounts.forEach((account, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3">${index + 1}</td>
-                <td class="p-3">${account.MaTK}</td>
-                <td class="p-3">${account.TenDangNhap}</td>
-                <td class="p-3">${account.VaiTro}</td>
-                <td class="p-3">
-                    <button class="action-button edit" data-matk="${account.MaTK}">Chỉnh sửa</button>
-                    <button class="action-button delete" data-matk="${account.MaTK}">Xóa</button>
-                </td>
-            `;
-            accountList.appendChild(row);
-        });
-    }
+	async function fetchAccounts() {
+		try {
+			const res = await fetch('/api/accounts');
+			allAccounts = await res.json();
+			filterAccounts();
+			updateStatistics();
+		} catch (error) {
+			console.error('Lỗi khi lấy danh sách tài khoản:', error);
+		}
+	}
 
-    function filterAccounts() {
-        const vaiTro = filterVaiTro?.value;
-        const searchTerm = searchAccount?.value.toLowerCase();
-        let filteredAccounts = accounts;
+	const today = new Date();
+	const formattedDate = today.toLocaleDateString('vi-VN');
+	document.querySelectorAll('.update-date').forEach(el => {
+		el.textContent = `Cập nhật: ${formattedDate}`;
+	});
 
-        if (vaiTro) filteredAccounts = filteredAccounts.filter(a => a.VaiTro === vaiTro);
-        if (searchTerm) {
-            filteredAccounts = filteredAccounts.filter(a => 
-                a.MaTK.toLowerCase().includes(searchTerm) || 
-                a.TenDangNhap.toLowerCase().includes(searchTerm)
-            );
-        }
+	function updateStatistics() {
+		const total = allAccounts.length;
+		const quanTriVien = allAccounts.filter(a => normalizeString(a.vaiTro) === 'quantrivien').length;
+		const khachHang = allAccounts.filter(a => normalizeString(a.vaiTro) === 'khachhang').length;
 
-        renderAccounts(filteredAccounts);
-    }
+		document.querySelectorAll('.main-container')[0].querySelector('p.text-2xl').textContent = total;
+		document.querySelectorAll('.main-container')[1].querySelector('p.text-2xl').textContent = quanTriVien;
+		document.querySelectorAll('.main-container')[2].querySelector('p.text-2xl').textContent = khachHang;
+	}
 
-    function openModal(mode, account = null) {
-        if (!modalTitle || !accountForm || !accountModal) return;
-        modalTitle.textContent = mode === 'add' ? 'Thêm tài khoản' : 'Chỉnh sửa tài khoản';
-        if (mode === 'edit' && account) {
-            document.getElementById('maTK').value = account.MaTK;
-            document.getElementById('maTK').disabled = true;
-            document.getElementById('tenDangNhap').value = account.TenDangNhap;
-            document.getElementById('matKhau').value = '';
-            document.getElementById('vaiTro').value = account.VaiTro;
-            document.getElementById('hoTen').value = account.HoTen;
-            document.getElementById('email').value = account.Email;
-            document.getElementById('sdt').value = account.Sdt;
-        } else {
-            accountForm.reset();
-            document.getElementById('maTK').disabled = false;
-        }
-        accountModal.classList.remove('hidden');
-    }
+	function renderAccounts(filteredAccounts) {
+		if (!accountList) return;
+		const start = (currentPage - 1) * pageSize;
+		const end = start + pageSize;
+		const paginatedAccounts = filteredAccounts.slice(start, end);
+		accountList.innerHTML = '';
+		paginatedAccounts.forEach((account, index) => {
+			const row = document.createElement('tr');
+			row.innerHTML = `
+				<td class="p-3">${start + index + 1}</td>
+				<td class="p-3">${account.maTK}</td>
+				<td class="p-3">${account.tenDangNhap}</td>
+				<td class="p-3">${account.vaiTro}</td>
+				<td class="p-3">
+					<button class="action-button edit" data-matk="${account.maTK}">Chỉnh sửa</button>
+					<button class="action-button delete" data-matk="${account.maTK}">Xóa</button>
+				</td>
+			`;
+			accountList.appendChild(row);
+		});
+		renderPagination(filteredAccounts.length);
+	}
 
-    if (addAccountBtn) addAccountBtn.addEventListener('click', () => openModal('add'));
-    if (cancelModal) cancelModal.addEventListener('click', () => accountModal?.classList.add('hidden'));
+	function renderPagination(totalItems) {
+		const totalPages = Math.ceil(totalItems / pageSize);
+		const pagination = document.getElementById('pagination');
+		const currentPageSpan = document.getElementById('current-page');
+		const prevPageBtn = document.getElementById('prev-page');
+		const nextPageBtn = document.getElementById('next-page');
 
-    if (accountList) {
-        accountList.addEventListener('click', function (e) {
-            const matk = e.target.getAttribute('data-matk');
-            if (e.target.classList.contains('edit')) {
-                const account = accounts.find(a => a.MaTK === matk);
-                if (account) openModal('edit', account);
-            } else if (e.target.classList.contains('delete')) {
-                deleteMaTK = matk;
-                deleteModal?.classList.remove('hidden');
-            }
-        });
-    }
+		if (!pagination || !currentPageSpan || !prevPageBtn || !nextPageBtn) return;
 
-    if (cancelDelete) cancelDelete.addEventListener('click', () => deleteModal?.classList.add('hidden'));
-    if (confirmDelete) confirmDelete.addEventListener('click', () => {
-        if (deleteMaTK) {
-            accounts = accounts.filter(a => a.MaTK !== deleteMaTK);
-            filterAccounts();
-            deleteModal?.classList.add('hidden');
-            deleteMaTK = null;
-        }
-    });
+		currentPageSpan.textContent = `Trang: ${currentPage} / ${totalPages}`;
+		prevPageBtn.disabled = currentPage <= 1;
+		nextPageBtn.disabled = currentPage >= totalPages;
 
-    if (accountForm) {
-        accountForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const account = {
-                MaTK: document.getElementById('maTK').value,
-                TenDangNhap: document.getElementById('tenDangNhap').value,
-                MatKhau: document.getElementById('matKhau').value || accounts.find(a => a.MaTK === document.getElementById('maTK').value)?.MatKhau,
-                VaiTro: document.getElementById('vaiTro').value,
-                HoTen: document.getElementById('hoTen').value,
-                Email: document.getElementById('email').value,
-                Sdt: document.getElementById('sdt').value
-            };
+		prevPageBtn.onclick = () => {
+			if (currentPage > 1) {
+				currentPage--;
+				filterAccounts();
+			}
+		};
 
-            const existingIndex = accounts.findIndex(a => a.MaTK === account.MaTK);
-            if (existingIndex >= 0) {
-                accounts[existingIndex] = account;
-            } else {
-                accounts.push(account);
-            }
+		nextPageBtn.onclick = () => {
+			if (currentPage < totalPages) {
+				currentPage++;
+				filterAccounts();
+			}
+		};
+	}
 
-            filterAccounts();
-            accountModal?.classList.add('hidden');
-        });
-    }
+	function filterAccounts() {
+		const vaiTro = normalizeString(filterVaiTro?.value || "");
+		const searchTerm = normalizeString(searchAccount?.value || "");
+		let filteredAccounts = [...allAccounts];
+		if (vaiTro) {
+			filteredAccounts = filteredAccounts.filter(a => normalizeString(a.vaiTro) === vaiTro);
+		}
+		if (searchTerm) {
+			filteredAccounts = filteredAccounts.filter(a =>
+				normalizeString(a.maTK).includes(searchTerm) ||
+				normalizeString(a.tenDangNhap).includes(searchTerm)
+			);
+		}
+		renderAccounts(filteredAccounts);
+	}
 
-    if (filterVaiTro) filterVaiTro.addEventListener('change', filterAccounts);
-    if (searchAccount) searchAccount.addEventListener('input', filterAccounts);
+	function toggleKhachHangFields() {
+		const vaiTroValue = document.getElementById('vaiTro').value.toLowerCase();
+		const khachHangFields = document.querySelectorAll('.khachhang-field');
+		khachHangFields.forEach(field => {
+			field.style.display = (vaiTroValue === 'khách hàng') ? 'block' : 'none';
+		});
+	}
 
-    // Render dữ liệu mẫu
-    renderAccounts(accounts);
+	function openModal(mode, account = null) {
+		modalTitle.textContent = mode === 'add' ? 'Thêm tài khoản' : 'Chỉnh sửa tài khoản';
+
+		accountForm.reset();
+		document.getElementById('maTK').disabled = true;
+
+		if (mode === 'edit' && account) {
+			document.getElementById('maTK').value = account.maTK;
+			document.getElementById('tenDangNhap').value = account.tenDangNhap || '';
+			document.getElementById('matKhau').value = account.matKhau || '';
+
+			const vaiTroField = document.getElementById('vaiTro');
+			const vaiTroNormalized = account.vaiTro?.toLowerCase().replace(/\s/g, '');
+
+			if (vaiTroNormalized === 'kháchhàng' || vaiTroNormalized === 'khachhang') {
+				vaiTroField.value = 'Khách hàng';
+
+				document.getElementById('hoTen').value = account.hoTen || '';
+				document.getElementById('email').value = account.email || '';
+				document.getElementById('sdt').value = account.sdt || '';
+				document.getElementById('diaChi').value = account.diaChi || '';
+			} else {
+				vaiTroField.value = 'Quản trị viên';
+
+				document.getElementById('hoTen').value = '';
+				document.getElementById('email').value = '';
+				document.getElementById('sdt').value = '';
+				document.getElementById('diaChi').value = '';
+			}
+		} else {
+			document.getElementById('maTK').value = generateMaTK();
+			document.getElementById('vaiTro').value = 'Khách hàng';
+		}
+
+		toggleKhachHangFields();
+
+		const vaiTroSelect = document.getElementById('vaiTro');
+		vaiTroSelect.removeEventListener('change', toggleKhachHangFields);
+		vaiTroSelect.addEventListener('change', toggleKhachHangFields);
+
+		accountModal.classList.remove('hidden');
+	}
+
+
+	addAccountBtn?.addEventListener('click', () => openModal('add'));
+	cancelModal?.addEventListener('click', () => accountModal.classList.add('hidden'));
+
+	accountList?.addEventListener('click', async function(e) {
+		const matk = e.target.getAttribute('data-matk');
+		if (e.target.classList.contains('edit')) {
+			await fetchAccounts(); // Đảm bảo lấy bản mới nhất
+			const account = allAccounts.find(a => a.maTK === matk);
+			if (account) openModal('edit', account);
+		} else if (e.target.classList.contains('delete')) {
+			deleteMaTK = matk;
+			deleteModal.classList.remove('hidden');
+		}
+	});
+
+	cancelDelete?.addEventListener('click', () => deleteModal.classList.add('hidden'));
+
+	confirmDelete?.addEventListener('click', async () => {
+		try {
+			await fetch(`/api/accounts/${deleteMaTK}`, { method: 'DELETE' });
+			await fetchAccounts();
+			deleteModal.classList.add('hidden');
+			deleteMaTK = null;
+		} catch (error) {
+			console.error('Lỗi khi xóa tài khoản:', error);
+		}
+	});
+
+	accountForm?.addEventListener('submit', async function(e) {
+		e.preventDefault();
+		const maTK = document.getElementById('maTK').value;
+		const isEdit = !!allAccounts.find(a => a.maTK === maTK);
+		const account = {
+			maTK,
+			tenDangNhap: document.getElementById('tenDangNhap').value,
+			matKhau: document.getElementById('matKhau').value || (allAccounts.find(a => a.maTK === maTK)?.matKhau ?? ''),
+			vaiTro: document.getElementById('vaiTro').value,
+			hoTen: document.getElementById('hoTen').value,
+			email: document.getElementById('email').value,
+			sdt: document.getElementById('sdt').value,
+			diaChi: document.getElementById('diaChi').value
+		};
+		try {
+			if (isEdit) {
+				await fetch(`/api/accounts/${maTK}`, {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(account)
+				});
+			} else {
+				await fetch(`/api/accounts`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(account)
+				});
+			}
+
+			await fetchAccounts(); // ⬅️ Gọi lại để cập nhật danh sách mới nhất
+			accountModal.classList.add('hidden'); // ⬅️ Đóng modal sau khi cập nhật xong dữ liệu
+		} catch (error) {
+			console.error('Lỗi khi lưu tài khoản:', error);
+		}
+	});
+
+	filterVaiTro?.addEventListener('change', filterAccounts);
+	searchAccount?.addEventListener('input', filterAccounts);
+
+	fetchAccounts();
 });
