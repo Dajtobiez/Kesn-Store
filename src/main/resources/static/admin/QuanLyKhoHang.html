@@ -1,202 +1,127 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý kho hàng</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/QuanLyKhoHang.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý kho hàng</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+  <link rel="stylesheet" href="css/QuanLyKhoHang.css" />
 </head>
 <body class="bg-gray-100">
-    <div class="flex flex-col min-h-screen">
-        <!-- Header (từ QuanLyHoaDon.html) -->
-        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
-            <a href="/" class="mb-2 md:mb-0">
-                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
-            </a>
-            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
-                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
-                </div>
-                <div class="flex items-center space-x-2 w-full md:w-auto">
-                    <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
-                    <div class="flex space-x-2">
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <div class="flex flex-1">
-            <!-- Sidebar (từ QuanLyHoaDon.html) -->
-            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
-    <div class="p-4">
-        <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
-        <nav>
-            <ul class="space-y-2">
-                <li>
-                    <a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-box w-5 h-5 mr-2"></i>
-                        <span>Quản lý sản phẩm</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-chart-bar w-5 h-5 mr-2"></i>
-                        <span>Dashboard thống kê</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyKhoHang.html" class="flex items-center p-2 bg-gray-700 rounded">
-                        <i class="fas fa-warehouse w-5 h-5 mr-2"></i>
-                        <span>Quản lý kho hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-shopping-cart w-5 h-5 mr-2"></i>
-                        <span>Quản lý đơn hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-file-invoice w-5 h-5 mr-2"></i>
-                        <span>Quản lý hóa đơn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-users w-5 h-5 mr-2"></i>
-                        <span>Quản lý tài khoản</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-star w-5 h-5 mr-2"></i>
-                        <span>Quản lý đánh giá</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-tags w-5 h-5 mr-2"></i>
-                        <span>Quản lý thương hiệu</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-headset w-5 h-5 mr-2"></i>
-                        <span>Quản lý yêu cầu hỗ trợ</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
-
-            <!-- Main Content (giữ nguyên từ QuanLyKhoHang.html) -->
-            <div class="ml-64 p-6 w-full container">
-                <h1 class="text-3xl font-bold mb-6">Quản Lý Kho Hàng</h1>
-                <p class="text-gray-600 mb-6">Theo dõi và quản lý tồn kho sản phẩm của cửa hàng.</p>
-
-                <!-- Thống kê -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Tổng sản phẩm</h3>
-                        <p class="text-2xl font-bold">150</p>
-                        <p class="text-sm text-gray-500">Cập nhật: 06/06/2025</p>
-                    </div>
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Sản phẩm sắp hết</h3>
-                        <p class="text-2xl font-bold">12</p>
-                        <p class="text-sm text-gray-500">Dưới 10 đơn vị</p>
-                    </div>
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Danh mục</h3>
-                        <p class="text-2xl font-bold">8</p>
-                        <p class="text-sm text-gray-500">Loại sản phẩm</p>
-                    </div>
-                </div>
-
-                <!-- Tìm kiếm & Lọc -->
-                <div class="main-container mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Tìm kiếm & Lọc</h3>
-                    <div class="flex flex-col md:flex-row md:space-x-4">
-                        <input type="text" id="search-product" placeholder="Tìm kiếm mã sản phẩm, tên sản phẩm..." class="border rounded px-2 py-1 text-sm flex-1">
-                        <select id="filter-danhmuc" class="mb-2 md:mb-0 w-full md:w-auto">
-                            <option value="">Tất cả danh mục</option>
-                            <option value="Giày thể thao">Giày thể thao</option>
-                            <option value="Giày da">Giày da</option>
-                            <option value="Phụ kiện">Phụ kiện</option>
-                        </select>
-                        <select id="filter-trangthai" class="mb-2 md:mb-0 w-full md:w-auto">
-                            <option value="">Tất cả trạng thái</option>
-                            <option value="Sắp hết">Sắp hết (dưới 10)</option>
-                            <option value="Còn hàng">Còn hàng</option>
-                            <option value="Hết hàng">Hết hàng</option>
-                        </select>
-                        <button id="add-product" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Thêm sản phẩm</button>
-                    </div>
-                </div>
-
-                <!-- Table -->
-                <div class="main-container">
-                    <h3 class="text-lg font-semibold mb-4">Danh sách sản phẩm</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã sản phẩm</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Danh mục</th>
-                                <th>Số lượng</th>
-                                <th>Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody id="product-list">
-                            <!-- Dữ liệu sẽ được render bởi JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Modal -->
-                <div id="product-modal" class="modal hidden">
-                    <div class="modal-content">
-                        <h2 id="modal-title" class="text-xl font-bold mb-4">Thêm sản phẩm</h2>
-                        <form id="product-form">
-                            <div class="mb-4">
-                                <label class="block mb-1">Mã sản phẩm:</label>
-                                <input type="text" id="masp" class="w-full" placeholder="Nhập mã sản phẩm" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block mb-1">Tên sản phẩm:</label>
-                                <input type="text" id="tensp" class="w-full" placeholder="Nhập tên sản phẩm" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block mb-1">Danh mục:</label>
-                            <select id="danhmuc" class="w-full" required>
-                                <option value="Giày thể thao">Giày thể thao</option>
-                                <option value="Giày da">Giày da</option>
-                                <option value="Phụ kiện">Phụ kiện</option>
-                            </select>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block mb-1">Số lượng:</label>
-                                <input type="number" id="soluong" class="w-full" placeholder="Nhập số lượng" required>
-                            </div>
-                            <div class="flex justify-end space-x-2">
-                                <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
-                                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  <div class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+      <a href="/" class="mb-2 md:mb-0">
+        <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer" />
+      </a>
+      <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+        <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+          <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
+          <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
+          <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
         </div>
+        <div class="flex items-center space-x-2 w-full md:w-auto">
+          <input id="search-bar" type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black" />
+        </div>
+      </nav>
+    </header>
+
+    <div class="flex flex-1">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+        <div class="p-4">
+          <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+          <nav>
+            <ul class="space-y-2">
+              <li><a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-box w-5 h-5 mr-2"></i>Quản lý sản phẩm</a></li>
+              <li><a href="ThongKeDoanhThu.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-chart-bar w-5 h-5 mr-2"></i>Dashboard thống kê</a></li>
+              <li><a href="QuanLyKhoHang.html" class="flex items-center p-2 bg-gray-700 rounded"><i class="fas fa-warehouse w-5 h-5 mr-2"></i>Quản lý kho hàng</a></li>
+              <li><a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-shopping-cart w-5 h-5 mr-2"></i>Quản lý đơn hàng</a></li>
+              <li><a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-file-invoice w-5 h-5 mr-2"></i>Quản lý hóa đơn</a></li>
+              <li><a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-users w-5 h-5 mr-2"></i>Quản lý tài khoản</a></li>
+              <li><a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-star w-5 h-5 mr-2"></i>Quản lý đánh giá</a></li>
+              <li><a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-tags w-5 h-5 mr-2"></i>Quản lý thương hiệu</a></li>
+              <li><a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded"><i class="fas fa-headset w-5 h-5 mr-2"></i>Quản lý hỗ trợ</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="ml-64 p-6 w-full">
+        <h1 class="text-3xl font-bold mb-6">Quản Lý Kho Hàng</h1>
+        <p class="text-gray-600 mb-6">Theo dõi và quản lý tồn kho sản phẩm của cửa hàng.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="main-container">
+            <h3 class="text-lg font-semibold">Tổng sản phẩm</h3>
+            <p id="total-products" class="text-2xl font-bold">0</p>
+            <p class="text-sm text-gray-500">Cập nhật: <span id="last-update">--/--/----</span></p>
+          </div>
+          <div class="main-container">
+            <h3 class="text-lg font-semibold">Sắp hết hàng</h3>
+            <p id="low-stock-count" class="text-2xl font-bold">0</p>
+            <p class="text-sm text-gray-500">Số sản phẩm dưới 10</p>
+          </div>
+          <div class="main-container">
+            <h3 class="text-lg font-semibold">Danh mục</h3>
+            <p id="category-count" class="text-2xl font-bold">0</p>
+            <p class="text-sm text-gray-500">Loại sản phẩm</p>
+          </div>
+        </div>
+
+        <!-- Bảng sản phẩm -->
+        <div class="main-container mb-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">Danh sách sản phẩm</h3>
+            <button id="add-product" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Thêm sản phẩm</button>
+          </div>
+          <table class="w-full border">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-2 border">Mã sản phẩm</th>
+                <th class="p-2 border">Tên</th>
+                <th class="p-2 border">Danh mục</th>
+                <th class="p-2 border">Số lượng</th>
+                <th class="p-2 border">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="product-list">
+              <!-- Render bằng JS -->
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
-    <script src="js/QuanLyKhoHang.js"></script>
+  </div>
+
+  <!-- Modal -->
+  <div id="product-modal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="modal-content bg-white p-6 rounded shadow-md w-full max-w-xl relative">
+      <h2 id="modal-title" class="text-xl font-bold mb-4">Thêm sản phẩm</h2>
+      <form id="product-form">
+        <div class="mb-4">
+          <label class="block mb-1">Mã sản phẩm:</label>
+          <input type="text" id="masp" class="w-full border rounded px-2 py-1 bg-gray-100" readonly>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Tên sản phẩm:</label>
+          <input type="text" id="tensp" class="w-full border rounded px-2 py-1" required>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Danh mục:</label>
+          <select id="danhmuc" class="w-full border rounded px-2 py-1" required></select>
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" id="cancel-modal" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Hủy</button>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="js/QuanLyKhoHang.js"></script>
 </body>
 </html>

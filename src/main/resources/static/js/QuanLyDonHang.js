@@ -3,128 +3,128 @@ document.addEventListener('DOMContentLoaded', function () {
     const orderModal = document.getElementById('order-modal');
     const cancelModal = document.getElementById('cancel-modal');
     const orderForm = document.getElementById('order-form');
+
+    const searchInput = document.getElementById('search-order');
+    const filterStatus = document.getElementById('filter-trangthai');
+
+    const madonInput = document.getElementById('madh');
+    const makhInput = document.getElementById('makh');
+    const tenkhInput = document.getElementById('tenkh');
+    const ngaydatInput = document.getElementById('ngaydatthang');
+    const tongtienInput = document.getElementById('tongtien');
+    const trangthaiSelect = document.getElementById('trangthai');
     const modalTitle = document.getElementById('modal-title');
-    const filterTrangThai = document.getElementById('filter-trangthai');
-    const searchOrder = document.getElementById('search-order');
+    const productDetails = document.getElementById('product-details');
 
-    let orders = [
-        {
-            MaDH: 'DH001',
-            MaKH: 'KH001',
-            TenKH: 'Nguyễn Văn A',
-            NgayDatHang: '2025-06-01',
-            TongTien: 500000,
-            TrangThai: 'Đang xử lý',
-            ChiTietSanPham: [
-                { MaSP: 'SP001', TenSP: 'Giày Sneaker Nike', MaMau: 'M001', TenMau: 'Đen', MaSize: 'S001', SoSize: '39', SoLuong: 2, Gia: 150000 },
-                { MaSP: 'SP002', TenSP: 'Giày Adidas Running', MaMau: 'M002', TenMau: 'Xanh', MaSize: 'S002', SoSize: '40', SoLuong: 1, Gia: 200000 }
-            ]
-        },
-        {
-            MaDH: 'DH002',
-            MaKH: 'KH002',
-            TenKH: 'Trần Thị B',
-            NgayDatHang: '2025-06-02',
-            TongTien: 1200000,
-            TrangThai: 'Chờ xác nhận',
-            ChiTietSanPham: [
-                { MaSP: 'SP003', TenSP: 'Giày Converse Classic', MaMau: 'M003', TenMau: 'Trắng', MaSize: 'S003', SoSize: '38', SoLuong: 1, Gia: 1200000 }
-            ]
-        }
-    ];
+    let orders = [];
+    let selectedOrderId = null;
 
-    function renderOrders(filteredOrders) {
+    function renderOrders(filtered) {
         orderList.innerHTML = '';
-        filteredOrders.forEach(order => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3">${order.MaDH}</td>
-                <td class="p-3">${order.MaKH}</td>
-                <td class="p-3">${order.TenKH}</td>
-                <td class="p-3">${order.NgayDatHang}</td>
-                <td class="p-3">${order.TongTien.toLocaleString('vi-VN')} VNĐ</td>
-                <td class="p-3">${order.TrangThai}</td>
+        filtered.forEach(order => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="p-3">${order.maDH}</td>
+                <td class="p-3">${order.maKH}</td>
+                <td class="p-3">${order.tenKH || ''}</td>
+                <td class="p-3">${order.ngayDatHang}</td>
+                <td class="p-3">${order.tongTien.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</td>
+                <td class="p-3">${order.trangThai || 'Chờ xác nhận'}</td>
                 <td class="p-3">
-                    <button class="action-button edit" data-madh="${order.MaDH}">Chi tiết</button>
-                </td>
-            `;
-            orderList.appendChild(row);
+                    <button class="edit-order bg-yellow-500 text-white px-2 py-1 rounded" data-id="${order.maDH}">Chi tiết</button>
+                </td>`;
+            orderList.appendChild(tr);
         });
-    }
-
-    function renderProductDetails(products) {
-        const productDetails = document.getElementById('product-details');
-        productDetails.innerHTML = '';
-        products.forEach(product => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-2 text-sm">${product.TenSP}</td>
-                <td class="p-2 text-sm">${product.TenMau}</td>
-                <td class="p-2 text-sm">${product.SoSize}</td>
-                <td class="p-2 text-sm">${product.SoLuong}</td>
-                <td class="p-2 text-sm text-right">${product.Gia.toLocaleString('vi-VN')} VNĐ</td>
-            `;
-            productDetails.appendChild(row);
-        });
-    }
-
-    function openModal(order) {
-        modalTitle.textContent = `Chi tiết Đơn hàng ${order.MaDH}`;
-        document.getElementById('madh').value = order.MaDH;
-        document.getElementById('makh').value = order.MaKH;
-        document.getElementById('tenkh').value = order.TenKH;
-        document.getElementById('ngaydatthang').value = order.NgayDatHang;
-        document.getElementById('tongtien').value = order.TongTien.toLocaleString('vi-VN') + ' VNĐ';
-        document.getElementById('trangthai').value = order.TrangThai;
-        renderProductDetails(order.ChiTietSanPham);
-        orderModal.classList.remove('hidden');
     }
 
     function filterOrders() {
-        const trangThai = filterTrangThai.value;
-        const searchTerm = searchOrder.value.toLowerCase();
-        let filteredOrders = orders;
+        const status = filterStatus.value;
+        const keyword = searchInput.value.toLowerCase();
 
-        if (trangThai) {
-            filteredOrders = filteredOrders.filter(order => order.TrangThai === trangThai);
-        }
-        if (searchTerm) {
-            filteredOrders = filteredOrders.filter(order => 
-                order.MaDH.toLowerCase().includes(searchTerm) || 
-                order.MaKH.toLowerCase().includes(searchTerm) || 
-                order.TenKH.toLowerCase().includes(searchTerm)
-            );
-        }
+        const filtered = orders.filter(o => {
+            const matchKeyword = o.maDH.toLowerCase().includes(keyword) ||
+                o.maKH.toLowerCase().includes(keyword) ||
+                (o.tenKH?.toLowerCase().includes(keyword));
+            const matchStatus = !status || o.trangThai === status;
+            return matchKeyword && matchStatus;
+        });
 
-        renderOrders(filteredOrders);
+        renderOrders(filtered);
     }
 
-    orderList.addEventListener('click', function (e) {
-        if (e.target.classList.contains('edit')) {
-            const madh = e.target.getAttribute('data-madh');
-            const order = orders.find(o => o.MaDH === madh);
-            if (order) openModal(order);
-        }
-    });
+    function openModal(order) {
+        modalTitle.textContent = 'Chi tiết Đơn hàng';
+        madonInput.value = order.maDH;
+        makhInput.value = order.maKH;
+        tenkhInput.value = order.tenKH || '';
+        ngaydatInput.value = order.ngayDatHang;
+        tongtienInput.value = order.tongTien;
+        trangthaiSelect.value = order.trangThai || 'Chờ xác nhận';
 
-    cancelModal.addEventListener('click', () => {
-        orderModal.classList.add('hidden');
-    });
+        productDetails.innerHTML = '';
+        // TODO: nếu có dữ liệu chi tiết đơn hàng, render ở đây
 
-    orderForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const madh = document.getElementById('madh').value;
-        const order = orders.find(o => o.MaDH === madh);
-        if (order) {
-            order.TrangThai = document.getElementById('trangthai').value;
-            filterOrders();
+        selectedOrderId = order.maDH;
+        orderModal.classList.remove('hidden');
+    }
+
+    if (orderList) {
+        orderList.addEventListener('click', function (e) {
+            if (e.target.classList.contains('edit-order')) {
+                const id = e.target.dataset.id;
+                const order = orders.find(o => o.maDH === id);
+                if (order) openModal(order);
+            }
+        });
+    }
+
+    if (cancelModal) {
+        cancelModal.addEventListener('click', () => {
             orderModal.classList.add('hidden');
+            selectedOrderId = null;
+        });
+    }
+
+    if (orderForm) {
+        orderForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const trangThai = trangthaiSelect.value;
+            const updatedOrder = {
+                trangThai: trangThai
+            };
+
+            try {
+                const res = await fetch(`/api/donhang/${selectedOrderId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedOrder)
+                });
+                if (!res.ok) throw new Error('Lỗi khi cập nhật đơn hàng');
+
+                await fetchOrders();
+                orderModal.classList.add('hidden');
+                selectedOrderId = null;
+            } catch (err) {
+                console.error(err);
+                alert('Cập nhật đơn hàng thất bại');
+            }
+        });
+    }
+
+    async function fetchOrders() {
+        try {
+            const res = await fetch('/api/donhang');
+            if (!res.ok) throw new Error('Không thể tải đơn hàng');
+            orders = await res.json();
+            filterOrders();
+        } catch (err) {
+            console.error(err);
         }
-    });
+    }
 
-    filterTrangThai.addEventListener('change', filterOrders);
-    searchOrder.addEventListener('input', filterOrders);
+    searchInput?.addEventListener('input', filterOrders);
+    filterStatus?.addEventListener('change', filterOrders);
 
-    // Khởi tạo
-    renderOrders(orders);
+    fetchOrders();
 });

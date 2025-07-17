@@ -13,4 +13,5 @@ public interface TaiKhoanService {
 
 	void delete(String maTK);
 	
+	boolean existsByTenDangNhap(String tenDangNhap);
 }

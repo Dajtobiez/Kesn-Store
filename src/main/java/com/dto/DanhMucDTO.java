@@ -1,26 +1,30 @@
 package com.dto;
 
 public class DanhMucDTO {
-    private String maDM;
+    private String maDanhMuc;
     private String tenDanhMuc;
-    private String moTa;
-    
-	public String getMaDM() {
-		return maDM;
-	}
-	public void setMaDM(String maDM) {
-		this.maDM = maDM;
-	}
-	public String getTenDanhMuc() {
-		return tenDanhMuc;
-	}
-	public void setTenDanhMuc(String tenDanhMuc) {
-		this.tenDanhMuc = tenDanhMuc;
-	}
-	public String getMoTa() {
-		return moTa;
-	}
-	public void setMoTa(String moTa) {
-		this.moTa = moTa;
-	}   
+
+    public DanhMucDTO() {
+    }
+
+    public DanhMucDTO(String maDanhMuc, String tenDanhMuc) {
+        this.maDanhMuc = maDanhMuc;
+        this.tenDanhMuc = tenDanhMuc;
+    }
+
+    public String getMaDanhMuc() {
+        return maDanhMuc;
+    }
+
+    public void setMaDanhMuc(String maDanhMuc) {
+        this.maDanhMuc = maDanhMuc;
+    }
+
+    public String getTenDanhMuc() {
+        return tenDanhMuc;
+    }
+
+    public void setTenDanhMuc(String tenDanhMuc) {
+        this.tenDanhMuc = tenDanhMuc;
+    }
 }

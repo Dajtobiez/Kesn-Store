@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import com.dto.SanPhamDTO;
+import com.entity.SanPham;
 
 public interface SanPhamService {
 	 // Lấy danh sách tất cả sản phẩm
@@ -21,4 +22,8 @@ public interface SanPhamService {
     void deleteSanPham(String maSP);
     
     String generateNextMaSanPham();
+    
+    List<SanPham> findAll();
+    SanPham save(SanPham sanPham);
+    void delete(String id);
 }

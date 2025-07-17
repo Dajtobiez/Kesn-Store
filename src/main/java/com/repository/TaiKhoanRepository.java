@@ -6,4 +6,6 @@ import com.entity.TaiKhoan;
 
 public interface TaiKhoanRepository extends JpaRepository<TaiKhoan, String>{
 
+	boolean existsByTenDangNhap(String tenDangNhap);
+
 }

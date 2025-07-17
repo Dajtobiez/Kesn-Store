@@ -209,11 +209,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	accountForm?.addEventListener('submit', async function(e) {
 		e.preventDefault();
-		const maTK = document.getElementById('maTK').value;
+
+		const maTK = document.getElementById('maTK').value.trim();
+		const tenDangNhap = document.getElementById('tenDangNhap').value.trim();
 		const isEdit = !!allAccounts.find(a => a.maTK === maTK);
+
+		// 🔍 Kiểm tra trùng tên đăng nhập
+		try {
+			const res = await fetch(`/api/accounts/check-username?username=${encodeURIComponent(tenDangNhap)}`);
+			const exists = await res.json();
+
+			if (!isEdit && exists) {
+				alert("Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.");
+				return;
+			}
+
+			if (isEdit) {
+				const currentAccount = allAccounts.find(a => a.maTK === maTK);
+				if (exists && currentAccount?.tenDangNhap !== tenDangNhap) {
+					alert("Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.");
+					return;
+				}
+			}
+		} catch (error) {
+			console.error('Lỗi kiểm tra tên đăng nhập:', error);
+			alert('Không thể kiểm tra trùng tên đăng nhập.');
+			return;
+		}
+
 		const account = {
 			maTK,
-			tenDangNhap: document.getElementById('tenDangNhap').value,
+			tenDangNhap,
 			matKhau: document.getElementById('matKhau').value || (allAccounts.find(a => a.maTK === maTK)?.matKhau ?? ''),
 			vaiTro: document.getElementById('vaiTro').value,
 			hoTen: document.getElementById('hoTen').value,
@@ -221,25 +247,18 @@ document.addEventListener('DOMContentLoaded', function() {
 			sdt: document.getElementById('sdt').value,
 			diaChi: document.getElementById('diaChi').value
 		};
-		try {
-			if (isEdit) {
-				await fetch(`/api/accounts/${maTK}`, {
-					method: 'PUT',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(account)
-				});
-			} else {
-				await fetch(`/api/accounts`, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(account)
-				});
-			}
 
-			await fetchAccounts(); // ⬅️ Gọi lại để cập nhật danh sách mới nhất
-			accountModal.classList.add('hidden'); // ⬅️ Đóng modal sau khi cập nhật xong dữ liệu
+		try {
+			await fetch(`/api/accounts${isEdit ? `/${maTK}` : ''}`, {
+				method: isEdit ? 'PUT' : 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(account)
+			});
+			await fetchAccounts();
+			accountModal.classList.add('hidden');
 		} catch (error) {
 			console.error('Lỗi khi lưu tài khoản:', error);
+			alert('Không thể lưu tài khoản.');
 		}
 	});
 

@@ -11,5 +11,7 @@ import com.entity.SanPham;
 public interface SanPhamRepository extends JpaRepository<SanPham, String> {
 	
 	Optional<SanPham> findFirstByOrderByMaSPDesc();
+	
+	Optional<SanPham> findByTen(String ten);
 
 }

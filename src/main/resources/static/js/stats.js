@@ -1,146 +1,123 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Dữ liệu mẫu cho bảng giao dịch
-    const transactions = [
-        {
-            MaDonHang: 'DH001',
-            KhachHang: 'Nguyễn Văn A',
-            Ngay: '06/06/2025',
-            SanPham: 'KD18 EIBL EP',
-            SoTien: '4,000,000 VND'
-        },
-        {
-            MaDonHang: 'DH002',
-            KhachHang: 'Trần Thị B',
-            Ngay: '05/06/2025',
-            SanPham: 'Giày thể thao',
-            SoTien: '400,000 VND'
-        },
-        {
-            MaDonHang: 'DH003',
-            KhachHang: 'Lê Văn C',
-            Ngay: '04/06/2025',
-            SanPham: 'KD18 EIBL EP',
-            SoTien: '4,000,000 VND'
-        }
-    ];
+document.addEventListener('DOMContentLoaded', function () {
+  const timeRange = document.getElementById('timeRange');
+  const customRange = document.getElementById('customDateRange');
+  const startDate = document.getElementById('startDate');
+  const endDate = document.getElementById('endDate');
+  const applyBtn = document.getElementById('applyFilter');
 
-    // Initialize Chart.js
-    const ctx = document.getElementById('revenueChart')?.getContext('2d');
-    if (!ctx) {
-        console.error('Không tìm thấy canvas revenueChart');
-        return;
+  let revenueChart;
+
+  async function fetchOverview(from, to) {
+    const res = await fetch(`/api/stats/overview?from=${from}&to=${to}`);
+    const data = await res.json();
+
+    document.getElementById('totalRevenue').textContent = formatCurrency(data.totalRevenue);
+    document.getElementById('totalOrders').textContent = data.totalOrders;
+    document.getElementById('avgOrderValue').textContent = formatCurrency(data.averageOrderValue);
+  }
+
+  async function fetchChartData(from, to) {
+    const res = await fetch(`/api/stats/chart?from=${from}&to=${to}`);
+    const data = await res.json();
+
+    const labels = data.map(item => item.date);
+    const revenues = data.map(item => item.revenue);
+
+    if (revenueChart) {
+      revenueChart.destroy();
     }
-    const revenueChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['01/06', '02/06', '03/06', '04/06', '05/06', '06/06'],
-            datasets: [{
-                label: 'Doanh thu (VND)',
-                data: [200000000, 250000000, 300000000, 280000000, 320000000, 350000000],
-                borderColor: '#2563eb',
-                backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                fill: true,
-                tension: 0.4
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            return (value / 1000000) + 'M';
-                        }
-                    }
-                }
-            }
-        }
+
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    revenueChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: 'Doanh thu (VND)',
+          data: revenues,
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
     });
+  }
 
-    // Render giao dịch
-    const transactionList = document.getElementById('transaction-list');
-    function renderTransactions(trans) {
-        if (!transactionList) {
-            console.error('Không tìm thấy transaction-list');
-            return;
-        }
-        transactionList.innerHTML = '';
-        trans.forEach(transaction => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3">${transaction.MaDonHang}</td>
-                <td class="p-3">${transaction.KhachHang}</td>
-                <td class="p-3">${transaction.Ngay}</td>
-                <td class="p-3">${transaction.SanPham}</td>
-                <td class="p-3">${transaction.SoTien}</td>
-            `;
-            transactionList.appendChild(row);
-        });
+  async function fetchRecentTransactions() {
+    const res = await fetch('/api/stats/recent-transactions');
+    const data = await res.json();
+
+    const tbody = document.getElementById('transaction-list');
+    tbody.innerHTML = '';
+    data.forEach(tran => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="border px-2 py-1">${tran.maDonHang}</td>
+        <td class="border px-2 py-1">${tran.tenKhachHang}</td>
+        <td class="border px-2 py-1">${tran.ngay}</td>
+        <td class="border px-2 py-1">${tran.tenSanPham}</td>
+        <td class="border px-2 py-1">${formatCurrency(tran.tongTien)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  function formatCurrency(value) {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(value);
+  }
+
+  function getDateRange(option) {
+    const today = new Date();
+    let fromDate, toDate;
+
+    switch (option) {
+      case 'today':
+        fromDate = toDate = today;
+        break;
+      case '7days':
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 6);
+        toDate = today;
+        break;
+      case '30days':
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 29);
+        toDate = today;
+        break;
+      case 'custom':
+        fromDate = new Date(startDate.value);
+        toDate = new Date(endDate.value);
+        break;
     }
 
-    // Handle time range filter
-    const timeRange = document.getElementById('timeRange');
-    const customDateRange = document.getElementById('customDateRange');
-    const applyFilter = document.getElementById('applyFilter');
+    const format = date => date.toISOString().split('T')[0];
+    return {
+      from: format(fromDate),
+      to: format(toDate)
+    };
+  }
 
-    if (timeRange) {
-        timeRange.addEventListener('change', () => {
-            if (timeRange.value === 'custom') {
-                customDateRange?.classList.remove('hidden');
-            } else {
-                customDateRange?.classList.add('hidden');
-                updateChart(timeRange.value);
-            }
-        });
+  function updateAll() {
+    const { from, to } = getDateRange(timeRange.value);
+    fetchOverview(from, to);
+    fetchChartData(from, to);
+    fetchRecentTransactions();
+  }
+
+  timeRange.addEventListener('change', () => {
+    if (timeRange.value === 'custom') {
+      customRange.classList.remove('hidden');
+    } else {
+      customRange.classList.add('hidden');
     }
+  });
 
-    if (applyFilter) {
-        applyFilter.addEventListener('click', () => {
-            if (timeRange.value === 'custom') {
-                const startDate = document.getElementById('startDate').value;
-                const endDate = document.getElementById('endDate').value;
-                if (startDate && endDate) {
-                    updateChart('custom', startDate, endDate);
-                } else {
-                    alert('Vui lòng chọn ngày bắt đầu và ngày kết thúc');
-                }
-            }
-        });
-    }
+  applyBtn.addEventListener('click', () => {
+    updateAll();
+  });
 
-    function updateChart(range, startDate, endDate) {
-        let labels = [];
-        let data = [];
-
-        if (range === 'today') {
-            labels = ['Hôm nay'];
-            data = [350000000];
-        } else if (range === '7days') {
-            labels = ['30/05', '31/05', '01/06', '02/06', '03/06', '04/06', '05/06'];
-            data = [200000000, 220000000, 250000000, 270000000, 300000000, 320000000, 350000000];
-        } else if (range === '30days') {
-            labels = ['07/05', '14/05', '21/05', '28/05', '04/06'];
-            data = [1000000000, 1100000000, 1200000000, 1250000000, 1300000000];
-        } else if (range === 'custom' && startDate && endDate) {
-            const start = new Date(startDate);
-            const end = new Date(endDate);
-            const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-            labels = [];
-            data = [];
-            for (let i = 0; i <= days; i++) {
-                const date = new Date(start);
-                date.setDate(start.getDate() + i);
-                labels.push(date.toLocaleDateString('vi-VN'));
-                data.push(Math.floor(Math.random() * 100000000) + 200000000);
-            }
-        }
-
-        revenueChart.data.labels = labels;
-        revenueChart.data.datasets[0].data = data;
-        revenueChart.update();
-    }
-
-    // Render dữ liệu mẫu ban đầu
-    renderTransactions(transactions);
+  updateAll(); // Khởi động ban đầu
 });

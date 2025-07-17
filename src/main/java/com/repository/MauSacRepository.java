@@ -8,5 +8,7 @@ import com.entity.MauSac;
 
 public interface MauSacRepository extends JpaRepository<MauSac, String> {
 
-	MauSac findByTenMau(String tenMau);
+	Optional<MauSac> findByTenMau(String tenMau);
+	
+
 }

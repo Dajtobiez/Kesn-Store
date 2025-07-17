@@ -1,8 +1,4 @@
-// QuanLySanPham.js - Version đã tối ưu, loại bỏ trùng lặp, fix lỗi JSON, fetch và hiển thị đầy đủ sản phẩm
-
 document.addEventListener('DOMContentLoaded', function() {
-
-
 	const productList = document.getElementById('product-list');
 	const addProductBtn = document.getElementById('add-product');
 	const productModal = document.getElementById('product-modal');

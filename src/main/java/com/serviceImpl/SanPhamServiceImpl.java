@@ -98,9 +98,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 		if (sp.getDanhMuc() != null) {
 			DanhMucDTO dm = new DanhMucDTO();
-			dm.setMaDM(sp.getDanhMuc().getMaDM());
+			dm.setMaDanhMuc(null);
 			dm.setTenDanhMuc(sp.getDanhMuc().getTenDanhMuc());
-			dm.setMoTa(sp.getDanhMuc().getMoTa());
+			dm.setMaDanhMuc(null);
 			dto.setDanhMuc(dm);
 		}
 
@@ -143,54 +143,78 @@ public class SanPhamServiceImpl implements SanPhamService {
 		return dto;
 	}
 
-		private SanPham convertToEntity(SanPhamDTO dto) {
-		    SanPham entity = new SanPham();
-		    entity.setMaSP(dto.getMaSP());
-		    entity.setTen(dto.getTen());
-		    //entity.setAnh(dto.getAnh());
+	private SanPham convertToEntity(SanPhamDTO dto) {
+	    SanPham entity = new SanPham();
+	    entity.setMaSP(dto.getMaSP());
+	    entity.setTen(dto.getTen());
+	    // entity.setAnh(dto.getAnh());
 
-		    // Gán danh mục
-		    if (dto.getDanhMuc() != null && dto.getDanhMuc().getTenDanhMuc() != null) {
-		        DanhMuc dm = danhMucRepo.findByTenDanhMuc(dto.getDanhMuc().getTenDanhMuc());
-		        if (dm == null) throw new RuntimeException("Không tìm thấy danh mục: " + dto.getDanhMuc().getTenDanhMuc());
-		        entity.setDanhMuc(dm);
-		    }
+	    // Gán danh mục
+	    if (dto.getDanhMuc() != null && dto.getDanhMuc().getTenDanhMuc() != null) {
+	        String tenDM = dto.getDanhMuc().getTenDanhMuc();
+	        DanhMuc dm = danhMucRepo.findByTenDanhMuc(tenDM)
+	            .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục: " + tenDM));
+	        entity.setDanhMuc(dm);
+	    }
 
-		    // Gán thương hiệu
-		    if (dto.getThuongHieu() != null && dto.getThuongHieu().getTenThuongHieu() != null) {
-		        ThuongHieu th = thuongHieuRepo.findByTenThuongHieu(dto.getThuongHieu().getTenThuongHieu());
-		        if (th == null) throw new RuntimeException("Không tìm thấy thương hiệu: " + dto.getThuongHieu().getTenThuongHieu());
-		        entity.setThuongHieu(th);
-		    }
+	    // Gán thương hiệu
+	    if (dto.getThuongHieu() != null && dto.getThuongHieu().getTenThuongHieu() != null) {
+	        String tenTH = dto.getThuongHieu().getTenThuongHieu();
+	        ThuongHieu th = thuongHieuRepo.findByTenThuongHieu(tenTH)
+	            .orElseThrow(() -> new RuntimeException("Không tìm thấy thương hiệu: " + tenTH));
+	        entity.setThuongHieu(th);
+	    }
 
-		    // Gán chi tiết sản phẩm (màu và size)
-		    List<ChiTietSanPham> chiTietList = new ArrayList<>();
-		    if (dto.getChiTiet() != null) {
-		        for (MauDTO mauDTO : dto.getChiTiet()) {
-		            // Tìm màu theo tên
-		            MauSac mau = mauSacRepo.findByTenMau(mauDTO.getTenMau());
-		            if (mau == null) throw new RuntimeException("Không tìm thấy màu: " + mauDTO.getTenMau());
+	    // Gán chi tiết sản phẩm (màu và size)
+	    List<ChiTietSanPham> chiTietList = new ArrayList<>();
+	    if (dto.getChiTiet() != null) {
+	        for (MauDTO mauDTO : dto.getChiTiet()) {
+	            // Tìm màu theo tên
+	            String tenMau = mauDTO.getTenMau();
+	            MauSac mau = mauSacRepo.findByTenMau(tenMau)
+	                .orElseThrow(() -> new RuntimeException("Không tìm thấy màu: " + tenMau));
 
-		            // Lặp size
-		            for (SizeDTO sizeDTO : mauDTO.getSizes()) {
-		                Size size = sizeRepo.findBySoSize(sizeDTO.getSoSize());
-		                if (size == null) throw new RuntimeException("Không tìm thấy size: " + sizeDTO.getSoSize());
+	            // Lặp qua các size
+	            for (SizeDTO sizeDTO : mauDTO.getSizes()) {
+	                String soSize = sizeDTO.getSoSize();
+	                Size size = sizeRepo.findBySoSize(soSize)
+	                    .orElseThrow(() -> new RuntimeException("Không tìm thấy size: " + soSize));
 
-		                ChiTietSanPham ct = new ChiTietSanPham();
-		                ct.setMauSac(mau);
-		                ct.setSize(size);
-		                ct.setGia(sizeDTO.getGia());
-		                ct.setSoLuong(sizeDTO.getSoLuong());
-		                ct.setSanPham(entity);
+	                ChiTietSanPham ct = new ChiTietSanPham();
+	                ct.setMauSac(mau);
+	                ct.setSize(size);
+	                ct.setGia(sizeDTO.getGia());
+	                ct.setSoLuong(sizeDTO.getSoLuong());
+	                ct.setSanPham(entity);
 
-		                chiTietList.add(ct);
-		            }
-		        }
-		    }
+	                chiTietList.add(ct);
+	            }
+	        }
+	    }
 
-		    entity.setChiTiet(chiTietList);
-		    return entity;
-		}
+	    entity.setChiTiet(chiTietList);
+	    return entity;
+	}
 
 
+    private final SanPhamRepository repository;
+
+    public SanPhamServiceImpl(SanPhamRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public List<SanPham> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public SanPham save(SanPham sanPham) {
+        return repository.save(sanPham);
+    }
+
+    @Override
+    public void delete(String id) {
+        repository.deleteById(id);
+    }	
 }

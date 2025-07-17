@@ -1,173 +1,309 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thống Kê Doanh Thu</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/QuanLyKhoHang.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thống Kê Doanh Thu</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/QuanLyKhoHang.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
-    <div class="flex flex-col min-h-screen">
-        <!-- Header -->
-        <header class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
-            <a href="/" class="mb-2 md:mb-0">
-                <img src="images/logo.png" alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
-            </a>
-            <nav class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
-                <div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản phẩm</a>
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới thiệu</a>
-                    <a href="#" class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên hệ</a>
-                </div>
-                <div class="flex items-center space-x-2 w-full md:w-auto">
-                    <input type="text" placeholder="Tìm kiếm..." class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
-                    <div class="flex space-x-2">
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 0 00-6.364 0z"></path></svg>
-                        <svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                </div>
-            </nav>
-        </header>
+	<div class="flex flex-col min-h-screen">
+		<!-- Header -->
+		<header
+			class="bg-white shadow p-4 flex justify-between items-center flex-col md:flex-row">
+			<a href="/" class="mb-2 md:mb-0"> <img src="images/logo.png"
+				alt="Logo ShoeShop" class="h-10 md:h-12 cursor-pointer">
+			</a>
+			<nav
+				class="flex items-center space-x-4 flex-col md:flex-row w-full md:w-auto">
+				<div class="flex space-x-4 mb-2 md:mb-0 w-full md:w-auto">
+					<a href="#"
+						class="text-gray-600 hover:text-black w-full md:w-auto text-center">Sản
+						phẩm</a> <a href="#"
+						class="text-gray-600 hover:text-black w-full md:w-auto text-center">Giới
+						thiệu</a> <a href="#"
+						class="text-gray-600 hover:text-black w-full md:w-auto text-center">Liên
+						hệ</a>
+				</div>
+				<div class="flex items-center space-x-2 w-full md:w-auto">
+					<input type="text" placeholder="Tìm kiếm..."
+						class="border rounded px-2 py-1 w-full md:w-auto hover:border-black focus:outline-none focus:ring-2 focus:ring-black">
+					<div class="flex space-x-2">
+						<svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none"
+							stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+								stroke-linejoin="round" stroke-width="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+						<svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none"
+							stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+								stroke-linejoin="round" stroke-width="2"
+								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+						<svg class="w-6 h-6 text-gray-600 hover:text-black" fill="none"
+							stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+								stroke-linejoin="round" stroke-width="2"
+								d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-        <div class="flex flex-1">
-            <!-- Sidebar -->
-            <aside class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
-    <div class="p-4">
-        <h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
-        <nav>
-            <ul class="space-y-2">
-                <li>
-                    <a href="QuanLySanPham.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-box w-5 h-5 mr-2"></i>
-                        <span>Quản lý sản phẩm</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="ThongKeDoanhThu.html" class="flex items-center p-2 bg-gray-700 rounded">
-                        <i class="fas fa-chart-bar w-5 h-5 mr-2"></i>
-                        <span>Dashboard thống kê</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyKhoHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-warehouse w-5 h-5 mr-2"></i>
-                        <span>Quản lý kho hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyDonHang.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-shopping-cart w-5 h-5 mr-2"></i>
-                        <span>Quản lý đơn hàng</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyHoaDon.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-file-invoice w-5 h-5 mr-2"></i>
-                        <span>Quản lý hóa đơn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyTaiKhoan.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-users w-5 h-5 mr-2"></i>
-                        <span>Quản lý tài khoản</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyDanhGia.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-star w-5 h-5 mr-2"></i>
-                        <span>Quản lý đánh giá</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyThuongHieu.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-tags w-5 h-5 mr-2"></i>
-                        <span>Quản lý thương hiệu</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="QuanLyHoTro.html" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                        <i class="fas fa-headset w-5 h-5 mr-2"></i>
-                        <span>Quản lý yêu cầu hỗ trợ</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</aside>
+		<div class="flex flex-1">
+			<!-- Sidebar -->
+			<aside
+				class="w-64 bg-gray-800 text-white h-screen fixed top-0 left-0 overflow-y-auto">
+				<div class="p-4">
+					<h2 class="text-2xl font-bold mb-6">🧑‍💼 Admin</h2>
+					<nav>
+						<ul class="space-y-2">
+							<li><a href="QuanLySanPham.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-box w-5 h-5 mr-2"></i><span>Quản lý sản
+										phẩm</span></a></li>
+							<li><a href="ThongKeDoanhThu.html"
+								class="flex items-center p-2 bg-gray-700 rounded"><i
+									class="fas fa-chart-bar w-5 h-5 mr-2"></i><span>Dashboard
+										thống kê</span></a></li>
+							<li><a href="QuanLyKhoHang.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-warehouse w-5 h-5 mr-2"></i><span>Quản lý
+										kho hàng</span></a></li>
+							<li><a href="QuanLyDonHang.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-shopping-cart w-5 h-5 mr-2"></i><span>Quản
+										lý đơn hàng</span></a></li>
+							<li><a href="QuanLyHoaDon.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-file-invoice w-5 h-5 mr-2"></i><span>Quản
+										lý hóa đơn</span></a></li>
+							<li><a href="QuanLyTaiKhoan.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-users w-5 h-5 mr-2"></i><span>Quản lý tài
+										khoản</span></a></li>
+							<li><a href="QuanLyDanhGia.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-star w-5 h-5 mr-2"></i><span>Quản lý đánh
+										giá</span></a></li>
+							<li><a href="QuanLyThuongHieu.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-tags w-5 h-5 mr-2"></i><span>Quản lý
+										thương hiệu</span></a></li>
+							<li><a href="QuanLyHoTro.html"
+								class="flex items-center p-2 hover:bg-gray-700 rounded"><i
+									class="fas fa-headset w-5 h-5 mr-2"></i><span>Quản lý
+										yêu cầu hỗ trợ</span></a></li>
+						</ul>
+					</nav>
+				</div>
+			</aside>
 
-            <!-- Main Content -->
-            <div class="ml-64 p-6 w-full container">
-                <h1 class="text-3xl font-bold mb-6">Thống Kế Doanh Thu</h1>
-                <p class="text-gray-600 mb-6">Xem tổng quan doanh thu và chi tiết giao dịch của cửa hàng.</p>
+			<!-- Main content -->
+			<main class="flex-1 p-6 space-y-6 ml-64">
+				<!-- Tổng quan -->
+				<section class="grid grid-cols-3 gap-4">
+					<div class="bg-white p-4 rounded shadow">
+						<h2 class="text-lg font-semibold">Tổng doanh thu</h2>
+						<p class="text-2xl font-bold mt-2" id="totalRevenue">0₫</p>
+					</div>
+					<div class="bg-white p-4 rounded shadow">
+						<h2 class="text-lg font-semibold">Số đơn hàng</h2>
+						<p class="text-2xl font-bold mt-2" id="totalOrders">0</p>
+					</div>
+					<div class="bg-white p-4 rounded shadow">
+						<h2 class="text-lg font-semibold">Giá trị trung bình</h2>
+						<p class="text-2xl font-bold mt-2" id="avgOrderValue">0₫</p>
+					</div>
+				</section>
 
-                <!-- Thống kê -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Tổng doanh thu</h3>
-                        <p class="text-2xl font-bold">1,250,000,000 VND</p>
-                        <p class="text-sm text-gray-500">Tăng 15% so với tháng trước</p>
-                    </div>
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Số đơn hàng</h3>
-                        <p class="text-2xl font-bold">320</p>
-                        <p class="text-sm text-gray-500">Tăng 10% so với tháng trước</p>
-                    </div>
-                    <div class="main-container">
-                        <h3 class="text-lg font-semibold">Giá trị đơn trung bình</h3>
-                        <p class="text-2xl font-bold">3,906,250 VND</p>
-                        <p class="text-sm text-gray-500">Giảm 5% so với tháng trước</p>
-                    </div>
-                </div>
+				<!-- Bộ lọc -->
+				<section class="bg-white p-4 rounded shadow flex items-center gap-4">
+					<label for="timeRange" class="font-semibold">Lọc theo:</label> <select
+						id="timeRange" class="border rounded px-2 py-1">
+						<option value="today">Hôm nay</option>
+						<option value="7days" selected>7 ngày qua</option>
+						<option value="30days">30 ngày qua</option>
+						<option value="custom">Tùy chọn ngày</option>
+					</select>
 
-                <!-- Lọc theo thời gian -->
-                <div class="main-container mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Lọc theo thời gian</h3>
-                    <div class="flex flex-col md:flex-row md:space-x-4">
-                        <select id="timeRange" class="mb-2 md:mb-0 w-full md:w-auto">
-                            <option value="today">Hôm nay</option>
-                            <option value="7days">7 ngày qua</option>
-                            <option value="30days">30 ngày qua</option>
-                            <option value="custom">Tùy chỉnh</option>
-                        </select>
-                        <div id="customDateRange" class="hidden flex flex-col md:flex-row md:space-x-2 mb-2 md:mb-0">
-                            <input type="date" id="startDate" class="border rounded px-2 py-1 w-full md:w-auto">
-                            <input type="date" id="endDate" class="border rounded px-2 py-1 w-full md:w-auto">
-                        </div>
-                        <button id="applyFilter" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full md:w-auto">Áp dụng</button>
-                    </div>
-                </div>
+					<div id="customDateRange" class="flex items-center gap-2 hidden">
+						<input type="date" id="startDate" class="border rounded px-2 py-1" />
+						<span>đến</span> <input type="date" id="endDate"
+							class="border rounded px-2 py-1" />
+					</div>
+					<button id="applyFilter"
+						class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Áp
+						dụng</button>
+				</section>
 
-                <!-- Biểu đồ -->
-                <div class="main-container mb-6">
-                    <h3 class="text-lg font-semibold mb-4">Biểu đồ doanh thu</h3>
-                    <canvas id="revenueChart"></canvas>
-                </div>
+				<!-- Biểu đồ -->
+				<section class="bg-white p-4 rounded shadow">
+					<h2 class="text-lg font-semibold mb-4">Biểu đồ doanh thu</h2>
+					<canvas id="revenueChart" height="100"></canvas>
+				</section>
 
-                <!-- Giao dịch -->
-                <div class="main-container">
-                    <h3 class="text-lg font-semibold mb-4">Giao dịch gần đây</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Mã đơn hàng</th>
-                                <th>Khách hàng</th>
-                                <th>Ngày</th>
-                                <th>Sản phẩm</th>
-                                <th>Số tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody id="transaction-list">
-                            <!-- Dữ liệu sẽ được render bởi JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/stats.js"></script>
+				<!-- Giao dịch gần đây -->
+				<section class="bg-white p-4 rounded shadow">
+					<h2 class="text-lg font-semibold mb-4">Giao dịch gần đây</h2>
+					<table class="w-full table-auto border">
+						<thead class="bg-gray-100">
+							<tr>
+								<th class="border px-2 py-1 text-left">Mã đơn</th>
+								<th class="border px-2 py-1 text-left">Khách hàng</th>
+								<th class="border px-2 py-1 text-left">Ngày</th>
+								<th class="border px-2 py-1 text-left">Sản phẩm</th>
+								<th class="border px-2 py-1 text-left">Số tiền</th>
+							</tr>
+						</thead>
+						<tbody id="transaction-list">
+							<!-- Giao dịch sẽ được thêm ở đây -->
+						</tbody>
+					</table>
+				</section>
+			</main>
+		</div>
+	</div>
+	<script src="js/stats.js"></script>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const timeRange = document.getElementById('timeRange');
+  const customRange = document.getElementById('customDateRange');
+  const startDate = document.getElementById('startDate');
+  const endDate = document.getElementById('endDate');
+  const applyBtn = document.getElementById('applyFilter');
+  let revenueChart;
+
+  function formatCurrency(value) {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(value);
+  }
+
+  function getDateRange(option) {
+    const today = new Date();
+    let fromDate, toDate;
+
+    switch (option) {
+      case 'today':
+        fromDate = toDate = today;
+        break;
+      case '7days':
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 6);
+        toDate = today;
+        break;
+      case '30days':
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 29);
+        toDate = today;
+        break;
+      case 'custom':
+        fromDate = new Date(startDate.value);
+        toDate = new Date(endDate.value);
+        break;
+    }
+
+    const format = date => date.toISOString().split('T')[0];
+    return {
+      from: format(fromDate),
+      to: format(toDate)
+    };
+  }
+
+  async function fetchOverview(from, to) {
+    const res = await fetch(`/api/stats/overview?from=${from}&to=${to}`);
+    const data = await res.json();
+    document.getElementById('totalRevenue').textContent = formatCurrency(data.totalRevenue);
+    document.getElementById('totalOrders').textContent = data.totalOrders;
+    document.getElementById('avgOrderValue').textContent = formatCurrency(data.averageOrderValue);
+  }
+
+  async function fetchChartData(from, to) {
+    try {
+      const res = await fetch(`/api/stats/chart?from=${from}&to=${to}`);
+      const data = await res.json();
+      const labels = data.map(item => item.date);
+      const revenues = data.map(item => item.revenue);
+
+      if (revenueChart) revenueChart.destroy();
+
+      const ctx = document.getElementById('revenueChart').getContext('2d');
+      revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Doanh thu (VND)',
+            data: revenues,
+            fill: true,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: value => new Intl.NumberFormat('vi-VN').format(value)
+              }
+            }
+          }
+        }
+      });
+    } catch (err) {
+      console.error("Lỗi biểu đồ:", err);
+    }
+  }
+
+  async function fetchRecentTransactions() {
+    const res = await fetch('/api/stats/recent-transactions');
+    const data = await res.json();
+    const tbody = document.getElementById('transaction-list');
+    tbody.innerHTML = '';
+    data.forEach(tran => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="border px-2 py-1">${tran.maDonHang}</td>
+        <td class="border px-2 py-1">${tran.tenKhachHang}</td>
+        <td class="border px-2 py-1">${tran.ngay}</td>
+        <td class="border px-2 py-1">${tran.tenSanPham}</td>
+        <td class="border px-2 py-1">${formatCurrency(tran.tongTien)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  function updateAll() {
+    const { from, to } = getDateRange(timeRange.value);
+    fetchOverview(from, to);
+    fetchChartData(from, to);
+    fetchRecentTransactions();
+  }
+
+  timeRange.addEventListener('change', () => {
+    if (timeRange.value === 'custom') {
+      customRange.classList.remove('hidden');
+    } else {
+      customRange.classList.add('hidden');
+    }
+  });
+
+  applyBtn.addEventListener('click', () => {
+    updateAll();
+  });
+
+  updateAll(); // Khởi động lần đầu
+});
+</script>
 </body>
 </html>

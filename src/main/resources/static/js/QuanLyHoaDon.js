@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const invoiceList = document.getElementById('invoice-list');
     const invoiceModal = document.getElementById('invoice-modal');
@@ -9,222 +10,181 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterTrangThaiVanChuyen = document.getElementById('filter-trangthai-vanchuyen');
     const searchInvoice = document.getElementById('search-invoice');
     const exportExcel = document.getElementById('export-excel');
-    const addProduct = document.getElementById('add-product');
-    const productModal = document.getElementById('product-modal');
-    const productForm = document.getElementById('product-form');
-    const cancelProduct = document.getElementById('cancel-product');
+    const btnPrev = document.getElementById('prev-page');
+    const btnNext = document.getElementById('next-page');
+    const currentPageSpan = document.getElementById('current-page');
 
-    let invoices = [
-        {
-            MaHD: 'HD001',
-            MaKH: 'KH001',
-            TrangThaiThanhToan: 'Đã thanh toán',
-            PhuongThucThanhToan: 'Chuyển khoản',
-            TrangThaiVanChuyen: 'Đã giao',
-            PhuongThucVanChuyen: 'Giao hàng nhanh',
-            NgayGiaoDuKien: '2025-06-05',
-            ChiTietSanPham: [
-                { MaSP: 'SP001', TenSP: 'Giày Sneaker Nike', MaMau: 'M001', TenMau: 'Đen', MaSize: 'S001', SoSize: '39', SoLuong: 2, Gia: 150000 },
-                { MaSP: 'SP002', TenSP: 'Giày Adidas Running', MaMau: 'M002', TenMau: 'Xanh', MaSize: 'S002', SoSize: '40', SoLuong: 1, Gia: 200000 }
-            ]
-        },
-        {
-            MaHD: 'HD002',
-            MaKH: 'KH002',
-            TrangThaiThanhToan: 'Chưa thanh toán',
-            PhuongThucThanhToan: 'Tiền mặt',
-            TrangThaiVanChuyen: 'Đang giao',
-            PhuongThucVanChuyen: 'Giao hàng tiết kiệm',
-            NgayGiaoDuKien: '2025-06-06',
-            ChiTietSanPham: [
-                { MaSP: 'SP003', TenSP: 'Giày Converse Classic', MaMau: 'M003', TenMau: 'Trắng', MaSize: 'S003', SoSize: '38', SoLuong: 1, Gia: 1200000 }
-            ]
-        }
-    ];
+	// File: QuanLyHoaDon.js
 
-    let tempProducts = [];
+	let invoices = [];
+	let currentPage = 1;
+	let pageSize = 10;
+	let editingInvoiceId = null;
+	let currentProducts = [];
 
-    function renderInvoices(filteredInvoices) {
-        invoiceList.innerHTML = '';
-        filteredInvoices.forEach(invoice => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3">${invoice.MaHD}</td>
-                <td class="p-3">${invoice.MaKH}</td>
-                <td class="p-3">${invoice.TrangThaiThanhToan}</td>
-                <td class="p-3">${invoice.PhuongThucThanhToan}</td>
-                <td class="p-3">${invoice.TrangThaiVanChuyen}</td>
-                <td class="p-3">${invoice.NgayGiaoDuKien}</td>
-                <td class="p-3">
-                    <button class="action-button edit" data-mahd="${invoice.MaHD}">Chỉnh sửa</button>
-                    <button class="action-button delete" data-mahd="${invoice.MaHD}">Xóa</button>
-                </td>
-            `;
-            invoiceList.appendChild(row);
-        });
-    }
+	// Gọi API load toàn bộ danh sách hóa đơn
+	async function fetchInvoices() {
+	  try {
+	    const response = await fetch("/api/hoadon");
+	    if (!response.ok) throw new Error("Không thể lấy dữ liệu hóa đơn");
+	    invoices = await response.json();
+	    filterInvoices();
+	    updateStatistics();
+	  } catch (error) {
+	    console.error("Lỗi khi tải hóa đơn:", error);
+	  }
+	}
 
-    function renderProductDetails(products) {
-        const productDetails = document.getElementById('product-details');
-        productDetails.innerHTML = '';
-        products.forEach((product, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-2">${product.TenSP}</td>
-                <td class="p-2">${product.TenMau}</td>
-                <td class="p-2">${product.SoSize}</td>
-                <td class="p-2">${product.SoLuong}</td>
-                <td class="p-2">${product.Gia.toLocaleString('vi-VN')} VNĐ</td>
-                <td class="p-2">
-                    <button class="action-button delete-product" data-index="${index}">Xóa</button>
-                </td>
-            `;
-            productDetails.appendChild(row);
-        });
-    }
+	// Cập nhật thống kê
+	function updateStatistics() {
+	  document.getElementById("total-invoices").textContent = invoices.length;
+	  document.getElementById("unpaid-invoices").textContent = invoices.filter(i => i.trangThaiThanhToan === "Chưa thanh toán").length;
+	  document.getElementById("shipping-invoices").textContent = invoices.filter(i => i.trangThaiGiaoHang === "Đang giao").length;
+	  const today = new Date().toISOString().split("T")[0];
+	  document.getElementById("update-date").textContent = today;
+	}
 
-    function openInvoiceModal(invoice = null) {
-        tempProducts = invoice ? [...invoice.ChiTietSanPham] : [];
-        if (invoice) {
-            modalTitle.textContent = `Chỉnh sửa Hóa đơn ${invoice.MaHD}`;
-            document.getElementById('mahd').value = invoice.MaHD;
-            document.getElementById('mahd').disabled = true;
-            document.getElementById('makh').value = invoice.MaKH;
-            document.getElementById('trangthai-thanhtoan').value = invoice.TrangThaiThanhToan;
-            document.getElementById('phuongthuc-thanhtoan').value = invoice.PhuongThucThanhToan;
-            document.getElementById('trangthai-vanchuyen').value = invoice.TrangThaiVanChuyen;
-            document.getElementById('phuongthuc-vanchuyen').value = invoice.PhuongThucVanChuyen;
-            document.getElementById('ngaygiaodukien').value = invoice.NgayGiaoDuKien;
-        } else {
-            modalTitle.textContent = 'Thêm Hóa đơn';
-            document.getElementById('mahd').value = '';
-            document.getElementById('mahd').disabled = false;
-            document.getElementById('makh').value = '';
-            document.getElementById('trangthai-thanhtoan').value = 'Chưa thanh toán';
-            document.getElementById('phuongthuc-thanhtoan').value = 'Tiền mặt';
-            document.getElementById('trangthai-vanchuyen').value = 'Chờ xử lý';
-            document.getElementById('phuongthuc-vanchuyen').value = 'Giao hàng tiêu chuẩn';
-            document.getElementById('ngaygiaodukien').value = '';
-        }
-        renderProductDetails(tempProducts);
-        invoiceModal.classList.remove('hidden');
-    }
+	// Hiển thị danh sách hóa đơn phân trang
+	function displayInvoices(data) {
+	  const start = (currentPage - 1) * pageSize;
+	  const paginatedData = data.slice(start, start + pageSize);
+	  const tbody = document.getElementById("invoice-list");
+	  tbody.innerHTML = "";
+	  for (const hd of paginatedData) {
+	    const row = document.createElement("tr");
+	    row.innerHTML = `
+	      <td>${hd.maHD}</td>
+	      <td>${hd.maKH}</td>
+	      <td>${hd.trangThaiThanhToan}</td>
+	      <td>${hd.phuongThucThanhToan}</td>
+	      <td>${hd.trangThaiGiaoHang}</td>
+	      <td>${hd.ngayGiaoDuKien}</td>
+	      <td>
+	        <button class="text-blue-500" onclick="openInvoiceModal('${hd.maHD}')">Sửa</button>
+	        <button class="text-red-500 ml-2" onclick="deleteInvoice('${hd.maHD}')">Xóa</button>
+	      </td>
+	    `;
+	    tbody.appendChild(row);
+	  }
+	  document.getElementById("current-page").textContent = `Trang: ${currentPage} / ${Math.ceil(data.length / pageSize)}`;
+	}
 
-    function filterInvoices() {
-        const trangThaiThanhToan = filterTrangThaiThanhToan.value;
-        const trangThaiVanChuyen = filterTrangThaiVanChuyen.value;
-        const searchTerm = searchInvoice.value.toLowerCase();
-        let filteredInvoices = invoices;
+	// Lọc hóa đơn theo trạng thái
+	function filterInvoices() {
+	  const keyword = document.getElementById("search-invoice").value.toLowerCase();
+	  const statusThanhToan = document.getElementById("filter-trangthai-thanhtoan").value;
+	  const statusVanChuyen = document.getElementById("filter-trangthai-vanchuyen").value;
 
-        if (trangThaiThanhToan) {
-            filteredInvoices = filteredInvoices.filter(invoice => invoice.TrangThaiThanhToan === trangThaiThanhToan);
-        }
-        if (trangThaiVanChuyen) {
-            filteredInvoices = filteredInvoices.filter(invoice => invoice.TrangThaiVanChuyen === trangThaiVanChuyen);
-        }
-        if (searchTerm) {
-            filteredInvoices = filteredInvoices.filter(invoice => 
-                invoice.MaHD.toLowerCase().includes(searchTerm) || 
-                invoice.MaKH.toLowerCase().includes(searchTerm)
-            );
-        }
+	  const filtered = invoices.filter(hd => {
+	    return (
+	      (hd.maHD.toLowerCase().includes(keyword) || hd.maKH.toLowerCase().includes(keyword)) &&
+	      (statusThanhToan === "" || hd.trangThaiThanhToan === statusThanhToan) &&
+	      (statusVanChuyen === "" || hd.trangThaiGiaoHang === statusVanChuyen)
+	    );
+	  });
 
-        renderInvoices(filteredInvoices);
-    }
+	  displayInvoices(filtered);
+	}
 
-    addInvoice.addEventListener('click', () => openInvoiceModal());
+	// Modal thêm/sửa hóa đơn
+	function openInvoiceModal(maHD) {
+	  document.getElementById("invoice-modal").classList.remove("hidden");
+	  document.getElementById("modal-title").textContent = maHD ? "Sửa Hóa đơn" : "Thêm Hóa đơn";
 
-    invoiceList.addEventListener('click', function (e) {
-        if (e.target.classList.contains('edit')) {
-            const mahd = e.target.getAttribute('data-mahd');
-            const invoice = invoices.find(inv => inv.MaHD === mahd);
-            if (invoice) openInvoiceModal(invoice);
-        } else if (e.target.classList.contains('delete')) {
-            const mahd = e.target.getAttribute('data-mahd');
-            invoices = invoices.filter(inv => inv.MaHD !== mahd);
-            filterInvoices();
-        }
-    });
+	  const hd = invoices.find(i => i.maHD === maHD);
+	  if (hd) {
+	    document.getElementById("mahd").value = hd.maHD;
+	    document.getElementById("makh").value = hd.maKH;
+	    document.getElementById("trangthai-thanhtoan").value = hd.trangThaiThanhToan;
+	    document.getElementById("phuongthuc-thanhtoan").value = hd.phuongThucThanhToan;
+	    document.getElementById("trangthai-vanchuyen").value = hd.trangThaiGiaoHang;
+	    document.getElementById("phuongthuc-vanchuyen").value = hd.phuongThucGiaoHang;
+	    document.getElementById("ngaygiaodukien").value = hd.ngayGiaoDuKien;
+	    editingInvoiceId = maHD;
+	  } else {
+	    document.getElementById("invoice-form").reset();
+	    editingInvoiceId = null;
+	  }
+	  currentProducts = [];
+	  renderProductDetails();
+	}
 
-    cancelModal.addEventListener('click', () => {
-        invoiceModal.classList.add('hidden');
-    });
+	function closeInvoiceModal() {
+	  document.getElementById("invoice-modal").classList.add("hidden");
+	}
 
-    invoiceForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const invoice = {
-            MaHD: document.getElementById('mahd').value,
-            MaKH: document.getElementById('makh').value,
-            TrangThaiThanhToan: document.getElementById('trangthai-thanhtoan').value,
-            PhuongThucThanhToan: document.getElementById('phuongthuc-thanhtoan').value,
-            TrangThaiVanChuyen: document.getElementById('trangthai-vanchuyen').value,
-            PhuongThucVanChuyen: document.getElementById('phuongthuc-vanchuyen').value,
-            NgayGiaoDuKien: document.getElementById('ngaygiaodukien').value,
-            ChiTietSanPham: [...tempProducts]
-        };
+	function renderProductDetails() {
+	  const tbody = document.getElementById("product-details");
+	  tbody.innerHTML = "";
+	  for (let i = 0; i < currentProducts.length; i++) {
+	    const p = currentProducts[i];
+	    const row = document.createElement("tr");
+	    row.innerHTML = `
+	      <td class="p-2 text-sm">${p.tenSP}</td>
+	      <td class="p-2 text-sm">${p.tenMau}</td>
+	      <td class="p-2 text-sm">${p.soSize}</td>
+	      <td class="p-2 text-sm">${p.soLuong}</td>
+	      <td class="p-2 text-sm">${p.gia}</td>
+	      <td class="p-2 text-sm"><button onclick="removeProduct(${i})" class="text-red-500">Xóa</button></td>
+	    `;
+	    tbody.appendChild(row);
+	  }
+	}
 
-        const existingInvoice = invoices.find(inv => inv.MaHD === invoice.MaHD);
-        if (existingInvoice) {
-            Object.assign(existingInvoice, invoice);
-        } else {
-            invoices.push(invoice);
-        }
+	function removeProduct(index) {
+	  currentProducts.splice(index, 1);
+	  renderProductDetails();
+	}
 
-        filterInvoices();
-        invoiceModal.classList.add('hidden');
-    });
+	// Thêm sản phẩm vào danh sách chi tiết hóa đơn
+	function openProductModal() {
+	  document.getElementById("product-modal").classList.remove("hidden");
+	  document.getElementById("product-form").reset();
+	}
 
-    addProduct.addEventListener('click', () => {
-        productModal.classList.remove('hidden');
-    });
+	function closeProductModal() {
+	  document.getElementById("product-modal").classList.add("hidden");
+	}
 
-    cancelProduct.addEventListener('click', () => {
-        productModal.classList.add('hidden');
-    });
+	document.getElementById("product-form").addEventListener("submit", function (e) {
+	  e.preventDefault();
+	  const product = {
+	    maSP: document.getElementById("product-masp").value,
+	    tenSP: document.getElementById("product-tensp").value,
+	    maMau: document.getElementById("product-mamau").value,
+	    tenMau: document.getElementById("product-tenmau").value,
+	    maSize: document.getElementById("product-masize").value,
+	    soSize: document.getElementById("product-sosize").value,
+	    soLuong: +document.getElementById("product-soluong").value,
+	    gia: +document.getElementById("product-gia").value,
+	  };
+	  currentProducts.push(product);
+	  renderProductDetails();
+	  closeProductModal();
+	});
 
-    productForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const product = {
-            MaSP: document.getElementById('product-masp').value,
-            TenSP: document.getElementById('product-tensp').value,
-            MaMau: document.getElementById('product-mamau').value,
-            TenMau: document.getElementById('product-tenmau').value,
-            MaSize: document.getElementById('product-masize').value,
-            SoSize: document.getElementById('product-sosize').value,
-            SoLuong: parseInt(document.getElementById('product-soluong').value),
-            Gia: parseInt(document.getElementById('product-gia').value)
-        };
-        tempProducts.push(product);
-        renderProductDetails(tempProducts);
-        productModal.classList.add('hidden');
-        productForm.reset();
-    });
+	document.getElementById("cancel-modal").addEventListener("click", closeInvoiceModal);
+	document.getElementById("cancel-product").addEventListener("click", closeProductModal);
+	document.getElementById("add-invoice").addEventListener("click", () => openInvoiceModal(null));
+	document.getElementById("add-product").addEventListener("click", openProductModal);
+	document.getElementById("search-invoice").addEventListener("input", filterInvoices);
+	document.getElementById("filter-trangthai-thanhtoan").addEventListener("change", filterInvoices);
+	document.getElementById("filter-trangthai-vanchuyen").addEventListener("change", filterInvoices);
 
-    document.getElementById('product-details').addEventListener('click', function (e) {
-        if (e.target.classList.contains('delete-product')) {
-            const index = e.target.getAttribute('data-index');
-            tempProducts.splice(index, 1);
-            renderProductDetails(tempProducts);
-        }
-    });
+	document.getElementById("prev-page").addEventListener("click", () => {
+	  if (currentPage > 1) {
+	    currentPage--;
+	    filterInvoices();
+	  }
+	});
 
-    exportExcel.addEventListener('click', () => {
-        let csv = 'Mã Hóa đơn,Mã Khách hàng,Trạng thái Thanh toán,Phương thức Thanh toán,Trạng thái Vận chuyển,Phương thức Vận chuyển,Ngày giao dự kiến\n';
-        invoices.forEach(inv => {
-            csv += `${inv.MaHD},${inv.MaKH},${inv.TrangThaiThanhToan},${inv.PhuongThucThanhToan},${inv.TrangThaiVanChuyen},${inv.PhuongThucVanChuyen},${inv.NgayGiaoDuKien}\n`;
-        });
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'invoices.csv';
-        a.click();
-        window.URL.revokeObjectURL(url);
-    });
+	document.getElementById("next-page").addEventListener("click", () => {
+	  const maxPage = Math.ceil(invoices.length / pageSize);
+	  if (currentPage < maxPage) {
+	    currentPage++;
+	    filterInvoices();
+	  }
+	});
 
-    filterTrangThaiThanhToan.addEventListener('change', filterInvoices);
-    filterTrangThaiVanChuyen.addEventListener('change', filterInvoices);
-    searchInvoice.addEventListener('input', filterInvoices);
-
-    renderInvoices(invoices);
+	fetchInvoices();
 });

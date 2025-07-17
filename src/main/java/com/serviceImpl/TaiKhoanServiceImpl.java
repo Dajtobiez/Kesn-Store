@@ -150,5 +150,8 @@ public class TaiKhoanServiceImpl implements TaiKhoanService {
 	    return normalized.equals("khachhang") || normalized.equals("kháchhàng");
 	}
 
-
+	@Override
+	public boolean existsByTenDangNhap(String tenDangNhap) {
+	    return repo.existsByTenDangNhap(tenDangNhap);
+	}
 }

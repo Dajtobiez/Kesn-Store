@@ -1,22 +1,28 @@
 package com.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "DanhMuc")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class DanhMuc {
 
     @Id
-    @Column(name = "MaDM", length = 10)
-    private String maDM;
-
-    @Column(name = "TenDanhMuc", length = 50, nullable = false)
+    private String maDanhMuc;
     private String tenDanhMuc;
 
-    @Column(name = "MoTa", columnDefinition = "TEXT")
-    private String moTa;
+    public String getMaDanhMuc() {
+        return maDanhMuc;
+    }
+
+    public void setMaDanhMuc(String maDanhMuc) {
+        this.maDanhMuc = maDanhMuc;
+    }
+
+    public String getTenDanhMuc() {
+        return tenDanhMuc;
+    }
+
+    public void setTenDanhMuc(String tenDanhMuc) {
+        this.tenDanhMuc = tenDanhMuc;
+    }
 }

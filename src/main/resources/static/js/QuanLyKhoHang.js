@@ -1,157 +1,133 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const productList = document.getElementById('product-list');
-    const addProductBtn = document.getElementById('add-product');
-    const productModal = document.getElementById('product-modal');
-    const cancelModal = document.getElementById('cancel-modal');
-    const productForm = document.getElementById('product-form');
-    const modalTitle = document.getElementById('modal-title');
-    const filterDanhMuc = document.getElementById('filter-danhmuc');
-    const filterTrangThai = document.getElementById('filter-trangthai');
-    const searchProduct = document.getElementById('search-product');
+document.addEventListener("DOMContentLoaded", () => {
+    const API_SANPHAM = "http://localhost:8080/api/sanpham";
+    const API_DANHMUC = "http://localhost:8080/api/danhmuc";
 
-    // Kiểm tra các phần tử cần thiết
-    if (!productList) console.error('Không tìm thấy phần tử với id="product-list"');
-    if (!addProductBtn) console.error('Không tìm thấy phần tử với id="add-product"');
-    if (!productModal) console.error('Không tìm thấy phần tử với id="product-modal"');
-    if (!cancelModal) console.error('Không tìm thấy phần tử với id="cancel-modal"');
-    if (!productForm) console.error('Không tìm thấy phần tử với id="product-form"');
-    if (!modalTitle) console.error('Không tìm thấy phần tử với id="modal-title"');
-    if (!filterDanhMuc) console.error('Không tìm thấy phần tử với id="filter-danhmuc"');
-    if (!filterTrangThai) console.error('Không tìm thấy phần tử với id="filter-trangthai"');
-    if (!searchProduct) console.error('Không tìm thấy phần tử với id="search-product"');
+    const productList = document.getElementById("product-list");
+    const totalProducts = document.getElementById("total-products");
+    const lowStockCount = document.getElementById("low-stock-count");
+    const categoryCount = document.getElementById("category-count");
+    const danhMucSelect = document.getElementById("danhmuc");
+    const modal = document.getElementById("product-modal");
+    const cancelModalBtn = document.getElementById("cancel-modal");
+    const form = document.getElementById("product-form");
 
-    let products = [
-        {
-            MaSP: 'SP001',
-            TenSP: 'KD18 EIBL EP',
-            DanhMuc: 'Giày thể thao',
-            SoLuong: 50
-        },
-        {
-            MaSP: 'SP002',
-            TenSP: 'Giày da nam',
-            DanhMuc: 'Giày da',
-            SoLuong: 8
-        },
-        {
-            MaSP: 'SP003',
-            TenSP: 'Dây giày phản quang',
-            DanhMuc: 'Phụ kiện',
-            SoLuong: 0
+    // ===== Mở modal và gọi mã mới =====
+    document.getElementById("add-product").addEventListener("click", async () => {
+        modal.classList.remove("hidden");
+        form.reset();
+        try {
+            const res = await fetch(`${API_SANPHAM}/generate-code`);
+            const maMoi = await res.text();
+            document.getElementById("masp").value = maMoi;
+            await loadDanhMuc();
+        } catch (err) {
+            console.error("Lỗi lấy mã sản phẩm hoặc danh mục:", err);
         }
-    ];
+    });
 
-    function renderProducts(filteredProducts) {
-        if (!productList) return;
-        productList.innerHTML = '';
-        filteredProducts.forEach(product => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td class="p-3">${product.MaSP}</td>
-                <td class="p-3">${product.TenSP}</td>
-                <td class="p-3">${product.DanhMuc}</td>
-                <td class="p-3">${product.SoLuong}</td>
-                <td class="p-3">
-                    <button class="action-button edit" data-masp="${product.MaSP}">Chỉnh sửa</button>
-                    <button class="action-button delete" data-masp="${product.MaSP}">Xóa</button>
-                </td>
-            `;
-            productList.appendChild(row);
-        });
-    }
+    cancelModalBtn.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
 
-    function filterProducts() {
-        const danhMuc = filterDanhMuc?.value;
-        const trangThai = filterTrangThai?.value;
-        const searchTerm = searchProduct?.value.toLowerCase();
-        let filteredProducts = products;
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const dto = {
+            maSP: document.getElementById("masp").value,
+            ten: document.getElementById("tensp").value,
+            danhMuc: {
+                tenDanhMuc: document.getElementById("danhmuc").value
+            },
+            chiTiet: [] // Không nhập màu-size ở modal này
+        };
 
-        if (danhMuc) {
-            filteredProducts = filteredProducts.filter(prod => prod.DanhMuc === danhMuc);
-        }
-        if (trangThai) {
-            filteredProducts = filteredProducts.filter(prod => {
-                if (trangThai === 'Sắp hết') return prod.SoLuong > 0 && prod.SoLuong < 10;
-                if (trangThai === 'Còn hàng') return prod.SoLuong >= 10;
-                if (trangThai === 'Hết hàng') return prod.SoLuong === 0;
-                return true;
+        try {
+            const res = await fetch(API_SANPHAM, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(dto)
             });
-        }
-        if (searchTerm) {
-            filteredProducts = filteredProducts.filter(prod => 
-                prod.MaSP.toLowerCase().includes(searchTerm) || 
-                prod.TenSP.toLowerCase().includes(searchTerm)
-            );
-        }
-
-        renderProducts(filteredProducts);
-    }
-
-    function openModal(mode, product = null) {
-        if (!modalTitle || !productForm || !productModal) return;
-        modalTitle.textContent = mode === 'add' ? 'Thêm sản phẩm' : 'Chỉnh sửa sản phẩm';
-        if (mode === 'edit' && product) {
-            document.getElementById('masp').value = product.MaSP;
-            document.getElementById('masp').disabled = true;
-            document.getElementById('tensp').value = product.TenSP;
-            document.getElementById('danhmuc').value = product.DanhMuc;
-            document.getElementById('soluong').value = product.SoLuong;
-        } else {
-            productForm.reset();
-            document.getElementById('masp').disabled = false;
-        }
-        productModal.classList.remove('hidden');
-    }
-
-    if (addProductBtn) {
-        addProductBtn.addEventListener('click', () => openModal('add'));
-    }
-
-    if (cancelModal) {
-        cancelModal.addEventListener('click', () => {
-            if (productModal) productModal.classList.add('hidden');
-        });
-    }
-
-    if (productList) {
-        productList.addEventListener('click', function (e) {
-            const masp = e.target.getAttribute('data-masp');
-            if (e.target.classList.contains('edit')) {
-                const product = products.find(prod => prod.MaSP === masp);
-                if (product) openModal('edit', product);
-            } else if (e.target.classList.contains('delete')) {
-                products = products.filter(prod => prod.MaSP !== masp);
-                filterProducts();
-            }
-        });
-    }
-
-    if (productForm) {
-        productForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const product = {
-                MaSP: document.getElementById('masp').value,
-                TenSP: document.getElementById('tensp').value,
-                DanhMuc: document.getElementById('danhmuc').value,
-                SoLuong: parseInt(document.getElementById('soluong').value)
-            };
-
-            const existingIndex = products.findIndex(prod => prod.MaSP === product.MaSP);
-            if (existingIndex >= 0) {
-                products[existingIndex] = product;
+            if (res.ok) {
+                alert("✔️ Thêm sản phẩm thành công!");
+                modal.classList.add("hidden");
+                await loadSanPham();
             } else {
-                products.push(product);
+                alert("❌ Thêm sản phẩm thất bại!");
             }
+        } catch (err) {
+            console.error("Lỗi gửi sản phẩm:", err);
+        }
+    });
 
-            filterProducts();
-            if (productModal) productModal.classList.add('hidden');
-        });
+    async function loadDanhMuc() {
+        try {
+            const res = await fetch(API_DANHMUC);
+            const data = await res.json();
+            danhMucSelect.innerHTML = data.map(dm =>
+                `<option value="${dm.tenDanhMuc}">${dm.tenDanhMuc}</option>`
+            ).join("");
+            categoryCount.innerText = data.length;
+        } catch (err) {
+            console.error("Lỗi load danh mục:", err);
+        }
     }
 
-    if (filterDanhMuc) filterDanhMuc.addEventListener('change', filterProducts);
-    if (filterTrangThai) filterTrangThai.addEventListener('change', filterProducts);
-    if (searchProduct) searchProduct.addEventListener('input', filterProducts);
+    async function loadSanPham() {
+        try {
+            const res = await fetch(API_SANPHAM);
+            const data = await res.json();
 
-    // Khởi tạo
-    renderProducts(products);
+            productList.innerHTML = "";
+            let total = 0, lowStock = 0;
+            const danhMucSet = new Set();
+
+            data.forEach(sp => {
+                const sl = sp.chiTiet?.reduce((sum, mau) =>
+                    sum + (mau.sizes?.reduce((s, sz) => s + sz.soLuong, 0) || 0), 0) || 0;
+
+                total++;
+                if (sl < 10) lowStock++;
+                if (sp.danhMuc?.tenDanhMuc) danhMucSet.add(sp.danhMuc.tenDanhMuc);
+
+                const row = document.createElement("tr");
+                row.classList.add("border-b");
+                row.innerHTML = `
+                    <td class="p-2 border">${sp.maSP}</td>
+                    <td class="p-2 border">${sp.ten}</td>
+                    <td class="p-2 border">${sp.danhMuc?.tenDanhMuc || "—"}</td>
+                    <td class="p-2 border">${sl}</td>
+                    <td class="p-2 border">
+                        <button class="text-red-600 hover:underline" onclick="deleteProduct('${sp.maSP}')">Xoá</button>
+                    </td>
+                `;
+                productList.appendChild(row);
+            });
+
+            totalProducts.innerText = total;
+            lowStockCount.innerText = lowStock;
+            categoryCount.innerText = danhMucSet.size;
+            document.getElementById("last-update").innerText = new Date().toLocaleDateString('vi-VN');
+        } catch (err) {
+            console.error("Lỗi load sản phẩm:", err);
+        }
+    }
+
+    // Hàm xoá sản phẩm
+    window.deleteProduct = async (maSP) => {
+        if (!confirm("Bạn có chắc chắn muốn xoá sản phẩm này?")) return;
+        try {
+            const res = await fetch(`${API_SANPHAM}/${maSP}`, { method: "DELETE" });
+            if (res.ok) {
+                alert("✔️ Đã xoá sản phẩm");
+                await loadSanPham();
+            } else {
+                alert("❌ Xoá thất bại");
+            }
+        } catch (err) {
+            console.error("Lỗi xoá:", err);
+        }
+    };
+
+    // 🚀 Gọi hàm khởi động
+    loadSanPham();
+    loadDanhMuc();
 });
